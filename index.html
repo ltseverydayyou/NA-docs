@@ -57,6 +57,30 @@
   .unused { display: none !important; }
   .pills, .pill { display: none !important; }
   #commands-container table { margin-bottom: 16px; }
+
+  @media (max-width: 600px) {
+    .header-inner {
+      flex-wrap: wrap;
+      padding: 12px 14px;
+    }
+    nav {
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    nav a {
+      font-size: 12px;
+      padding: 4px 6px;
+    }
+    #commands-container table {
+      display: block;
+      overflow-x: auto;
+    }
+    #commands-container table thead th,
+    #commands-container table td {
+      white-space: nowrap;
+    }
+  }
 </style>
 </head>
 <body>
