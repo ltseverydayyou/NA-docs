@@ -20,66 +20,140 @@
     --danger: #ff4b6b;
   }
   * { box-sizing: border-box; }
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
   body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
   header { border-bottom: 1px solid var(--border-subtle); background: var(--panel); position: sticky; top: 0; z-index: 20; }
   .header-inner { max-width: 1120px; margin: 0 auto; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand-icon img { width: 32px; height: 32px; border-radius: 8px; }
-  .brand-text-main { font-weight: 600; letter-spacing: 0.04em; font-size: 17px; }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .brand-icon img { width: 32px; height: 32px; border-radius: 8px; flex: 0 0 auto; }
+  .brand-text-main { font-weight: 600; letter-spacing: 0.04em; font-size: 17px; line-height: 1.1; }
   .brand-text-sub { font-size: 11px; color: var(--text-muted); }
+
   nav { display: flex; gap: 10px; flex-wrap: wrap; }
-  nav a { font-size: 13px; padding: 6px 10px; border-radius: 999px; text-decoration: none; color: var(--text-muted); border: 1px solid transparent; background: transparent; transition: 0.16s ease; }
+  nav a { font-size: 13px; padding: 6px 10px; border-radius: 999px; text-decoration: none; color: var(--text-muted); border: 1px solid transparent; background: transparent; transition: 0.16s ease; white-space: nowrap; }
   nav a:hover { color: var(--text); border-color: var(--accent); background: var(--accent-soft); }
+
   main { max-width: 1120px; margin: 18px auto 40px auto; padding: 0 16px 40px 16px; display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 18px; }
   @media (max-width: 900px) { main { grid-template-columns: minmax(0, 1fr); } }
-  .card { background: var(--panel); border-radius: 18px; padding: 16px 18px; border: 1px solid var(--border-subtle); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.02); }
-  .card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
-  .card-title { font-size: 17px; font-weight: 600; }
-  .card-tag { font-size: 11px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--accent-strong); background: var(--accent-soft); color: var(--accent); }
-  .card-body { font-size: 14px; color: var(--text-muted); }
+
+  .card { background: var(--panel); border-radius: 18px; padding: 16px 18px; border: 1px solid var(--border-subtle); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.02); min-width: 0; }
+  .card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; min-width: 0; }
+  .card-title { font-size: 17px; font-weight: 600; min-width: 0; }
+  .card-tag { font-size: 11px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--accent-strong); background: var(--accent-soft); color: var(--accent); flex: 0 0 auto; }
+  .card-body { font-size: 14px; color: var(--text-muted); min-width: 0; }
+
   h2 { font-size: 18px; margin: 16px 0 6px 0; color: var(--text); }
   h3 { font-size: 15px; margin: 14px 0 4px 0; color: var(--text); }
   p { margin: 4px 0 8px 0; line-height: 1.5; }
   .muted { color: var(--text-muted); font-size: 13px; }
+
   code { font-family: "JetBrains Mono", monospace; background: var(--code-bg); padding: 2px 5px; border-radius: 4px; font-size: 12px; }
-  pre { background: var(--code-bg); border-radius: 10px; padding: 10px 12px; overflow-x: auto; font-size: 12px; line-height: 1.45; border: 1px solid #181818; }
+  pre { background: var(--code-bg); border-radius: 10px; padding: 10px 12px; overflow-x: auto; font-size: 12px; line-height: 1.45; border: 1px solid #181818; max-width: 100%; }
   pre code { background: transparent; padding: 0; }
+
   ul.workflow-list { list-style: decimal; padding-left: 20px; margin: 4px 0 10px 0; color: var(--text-muted); }
   ul.workflow-list li { margin-bottom: 4px; }
   .sub-bullet { list-style: disc; padding-left: 18px; margin-top: 2px; }
+
   table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
   th, td { border: 1px solid #2a2a2a; padding: 4px 6px; text-align: left; vertical-align: top; }
   th { background: #1f1f1f; font-weight: 600; font-size: 12px; color: var(--text); }
   tbody tr:nth-child(odd) { background: #121212; }
   tbody tr:nth-child(even) { background: #171717; }
+
   .badge-cat { font-size: 11px; padding: 2px 6px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-strong); }
   .badge-danger { font-size: 11px; padding: 2px 6px; border-radius: 999px; background: rgba(255, 75, 107, 0.14); color: var(--danger); border: 1px solid rgba(255, 75, 107, 0.6); }
+
   .unused { display: none !important; }
   .pills, .pill { display: none !important; }
   #commands-container table { margin-bottom: 16px; }
 
+  #commands-container,
+  #patched-container {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #commands-container table,
+  #patched-container table {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  #commands-container thead th,
+  #commands-container td,
+  #patched-container thead th,
+  #patched-container td {
+    white-space: nowrap;
+  }
+
   @media (max-width: 600px) {
     .header-inner {
-      flex-wrap: wrap;
-      padding: 12px 14px;
+      padding: 10px 12px;
+      gap: 10px;
+      flex-wrap: nowrap;
+      align-items: center;
     }
+
+    .brand-icon img {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+    }
+
+    .brand-text-main {
+      font-size: 15px;
+      line-height: 1.1;
+    }
+
+    .brand-text-sub {
+      display: none;
+    }
+
     nav {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       gap: 6px;
-      flex-wrap: wrap;
       justify-content: flex-start;
+      scrollbar-width: none;
+      max-width: 60vw;
     }
+
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+
     nav a {
+      flex: 0 0 auto;
       font-size: 12px;
-      padding: 4px 6px;
+      padding: 4px 8px;
     }
-    #commands-container table {
-      display: block;
+
+    #commands-container,
+    #patched-container {
       overflow-x: auto;
     }
-    #commands-container table thead th,
-    #commands-container table td {
+
+    #commands-container table,
+    #patched-container table {
+      width: max-content;
+      min-width: 100%;
+    }
+
+    #commands-container thead th,
+    #commands-container td,
+    #patched-container thead th,
+    #patched-container td {
       white-space: nowrap;
     }
+  }
+
+  @media (max-width: 600px) and (orientation: portrait) {
+    .header-inner { padding: 8px 10px; }
   }
 </style>
 </head>
@@ -109,11 +183,11 @@
     <div class="card" id="about">
       <div class="card-header"><div class="card-title">Overview</div><div class="card-tag">Docs</div></div>
       <div class="card-body">
-        <p><span class="highlight">Nameless Admin</span> is an easy‑to‑use admin script that works in all Roblox games. giving you new tools to play with:</p>
+        <p><span class="highlight">Nameless Admin</span> is an easy-to-use admin script that works in all Roblox games. giving you new tools to play with:</p>
         <ul class="workflow-list">
           <li><strong>698</strong> core commands covering movement, visuals and utility.</li>
-          <li>Mobile‑friendly UI and controls.</li>
-          <li>Plugin system (<code>.na</code> and Infinite Yield‑style <code>.iy</code>).</li>
+          <li>Mobile-friendly UI and controls.</li>
+          <li>Plugin system (<code>.na</code> and Infinite Yield-style <code>.iy</code>).</li>
           <li>Settings, fast flags, themes and more.</li>
         </ul>
         <p class="muted">This page documents how it loads, how commands are processed, and provides a structured list of commands extracted directly from <code>Source.lua</code>. Patched commands are listed separately.</p>
@@ -254,8 +328,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
         </p>
         <h3>Safety tips</h3>
         <ul class="workflow-list">
-          <li>Be careful with commands that interact with remote events, such as <code>fireremotes</code>, <code>remotespy</code>, <code>cobaltspy</code> or <code>turtlespy</code>; anti‑cheat systems might notice them.</li>
-          <li>Don’t use risky commands in games with strong anti‑cheat.</li>
+          <li>Be careful with commands that interact with remote events, such as <code>fireremotes</code>, <code>remotespy</code>, <code>cobaltspy</code> or <code>turtlespy</code>; anti-cheat systems might notice them.</li>
+          <li>Don’t use risky commands in games with strong anti-cheat.</li>
           <li>Keep a backup of your config and plugins so you can restore your settings if something breaks.</li>
         </ul>
       </div>
@@ -296,11 +370,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
         <h3>Calling other commands</h3>
         <p>You can invoke other commands from your plugin using helpers such as:</p>
         <pre><code>runCommand("fly 50")
-runCommand("tp", "me", "player")
+runCommand("to", "random")
 runCommand({"noclip"})</code></pre>
         <p>If you're new to making plugins, start with the example files below. These templates (like <code>hello.na</code> and <code>example.iy</code>) show how to define your own commands—you can edit them to build your own NA plugin. They're not a catalogue of finished plugins.</p>
-        <ul id="plugin-list" class="workflow-list">
-        </ul>
+        <ul id="plugin-list" class="workflow-list"></ul>
         <p>Put <code>.na</code> files into <code>Nameless-Admin/Plugins</code> and <code>.iy</code> files into <code>Nameless-Admin/PluginsIY</code>. Then reload or execute the loader; your new commands will appear automatically.</p>
       </div>
     </div>
