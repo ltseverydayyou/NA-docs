@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nameless Admin Documentation (BW)</title>
+<title>Nameless Admin Documentation</title>
+
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
+
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:title" content="Nameless Admin Documentation">
+<meta property="og:description" content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nameless Admin Documentation">
+<meta name="twitter:description" content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
+
 <style>
   :root {
     --bg: #0a0a0a;
@@ -20,36 +34,173 @@
     --danger: #ff4b6b;
   }
   * { box-sizing: border-box; }
-  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
-  body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
 
-  header { border-bottom: 1px solid var(--border-subtle); background: var(--panel); position: sticky; top: 0; z-index: 20; }
-  .header-inner { max-width: 1120px; margin: 0 auto; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .brand-icon img { width: 32px; height: 32px; border-radius: 8px; flex: 0 0 auto; }
-  .brand-text-main { font-weight: 600; letter-spacing: 0.04em; font-size: 17px; line-height: 1.1; }
-  .brand-text-sub { font-size: 11px; color: var(--text-muted); }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-  nav { display: flex; gap: 10px; flex-wrap: wrap; }
-  nav a { font-size: 13px; padding: 6px 10px; border-radius: 999px; text-decoration: none; color: var(--text-muted); border: 1px solid transparent; background: transparent; transition: 0.16s ease; white-space: nowrap; }
-  nav a:hover { color: var(--text); border-color: var(--accent); background: var(--accent-soft); }
+  header {
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--panel);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    background-image: linear-gradient(to bottom, rgba(10,10,10,0.96), rgba(10,10,10,0.9));
+  }
+  .header-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(-12px);
+    animation: slideDown 0.42s ease-out forwards;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .brand-icon img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex: 0 0 auto;
+  }
+  .brand-text-main {
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-size: 17px;
+    line-height: 1.1;
+  }
+  .brand-text-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
 
-  main { max-width: 1120px; margin: 18px auto 40px auto; padding: 0 16px 40px 16px; display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 18px; }
+  nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  nav a {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    background: transparent;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    white-space: nowrap;
+  }
+  nav a:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+  }
+
+  main {
+    max-width: 1120px;
+    margin: 18px auto 40px auto;
+    padding: 0 16px 40px 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+    gap: 18px;
+  }
   @media (max-width: 900px) { main { grid-template-columns: minmax(0, 1fr); } }
 
-  .card { background: var(--panel); border-radius: 18px; padding: 16px 18px; border: 1px solid var(--border-subtle); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.02); min-width: 0; }
-  .card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; min-width: 0; }
-  .card-title { font-size: 17px; font-weight: 600; min-width: 0; }
-  .card-tag { font-size: 11px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--accent-strong); background: var(--accent-soft); color: var(--accent); flex: 0 0 auto; }
-  .card-body { font-size: 14px; color: var(--text-muted); min-width: 0; }
+  .card {
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 55%), var(--panel);
+    border-radius: 18px;
+    padding: 16px 18px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.02);
+    min-width: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeUp 0.45s ease-out forwards;
+  }
+  main .card:nth-of-type(1) { animation-delay: 0.06s; }
+  main .card:nth-of-type(2) { animation-delay: 0.09s; }
+  main .card:nth-of-type(3) { animation-delay: 0.12s; }
+  main .card:nth-of-type(4) { animation-delay: 0.15s; }
+
+  #commands .card,
+  #patched .card,
+  #discord .card {
+    animation-delay: 0.18s;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+    min-width: 0;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 600;
+    min-width: 0;
+  }
+  .card-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--accent-strong);
+    background: var(--accent-soft);
+    color: var(--accent);
+    flex: 0 0 auto;
+  }
+  .card-body {
+    font-size: 14px;
+    color: var(--text-muted);
+    min-width: 0;
+  }
 
   h2 { font-size: 18px; margin: 16px 0 6px 0; color: var(--text); }
   h3 { font-size: 15px; margin: 14px 0 4px 0; color: var(--text); }
   p { margin: 4px 0 8px 0; line-height: 1.5; }
   .muted { color: var(--text-muted); font-size: 13px; }
 
-  code { font-family: "JetBrains Mono", monospace; background: var(--code-bg); padding: 2px 5px; border-radius: 4px; font-size: 12px; }
-  pre { background: var(--code-bg); border-radius: 10px; padding: 10px 12px; overflow-x: auto; font-size: 12px; line-height: 1.45; border: 1px solid #181818; max-width: 100%; }
+  code {
+    font-family: "JetBrains Mono", monospace;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  pre {
+    background: var(--code-bg);
+    border-radius: 10px;
+    padding: 10px 12px;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.45;
+    border: 1px solid #181818;
+    max-width: 100%;
+  }
   pre code { background: transparent; padding: 0; }
 
   ul.workflow-list { list-style: decimal; padding-left: 20px; margin: 4px 0 10px 0; color: var(--text-muted); }
@@ -76,18 +227,102 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-
   #commands-container table,
   #patched-container table {
     width: max-content;
     min-width: 100%;
   }
-
   #commands-container thead th,
   #commands-container td,
   #patched-container thead th,
   #patched-container td {
     white-space: nowrap;
+  }
+
+  a.link {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+    transition: border-color 0.18s ease, color 0.18s ease;
+  }
+  a.link:hover {
+    border-bottom-color: rgba(255,255,255,0.55);
+    color: #ffffff;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--accent-strong);
+    background: var(--accent-soft);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .btn:hover {
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.22);
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 12px 24px rgba(0,0,0,0.7);
+  }
+
+  .dc-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    margin-top: 8px;
+  }
+  .dc-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #0f0f0f;
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+  .dc-ico img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .dc-meta {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .dc-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dc-stats {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .dc-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
   }
 
   @media (max-width: 600px) {
@@ -97,22 +332,18 @@
       flex-wrap: nowrap;
       align-items: center;
     }
-
     .brand-icon img {
       width: 28px;
       height: 28px;
       border-radius: 7px;
     }
-
     .brand-text-main {
       font-size: 15px;
       line-height: 1.1;
     }
-
     .brand-text-sub {
       display: none;
     }
-
     nav {
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -122,28 +353,21 @@
       scrollbar-width: none;
       max-width: 60vw;
     }
-
-    nav::-webkit-scrollbar {
-      display: none;
-    }
-
+    nav::-webkit-scrollbar { display: none; }
     nav a {
       flex: 0 0 auto;
       font-size: 12px;
       padding: 4px 8px;
     }
-
     #commands-container,
     #patched-container {
       overflow-x: auto;
     }
-
     #commands-container table,
     #patched-container table {
       width: max-content;
       min-width: 100%;
     }
-
     #commands-container thead th,
     #commands-container td,
     #patched-container thead th,
@@ -175,9 +399,11 @@
       <a href="#commands">Commands</a>
       <a href="#patched">Patched</a>
       <a href="#plugins">Plugins</a>
+      <a href="#discord">Discord</a>
     </nav>
   </div>
 </header>
+
 <main>
   <section>
     <div class="card" id="about">
@@ -193,6 +419,7 @@
         <p class="muted">This page documents how it loads, how commands are processed, and provides a structured list of commands extracted directly from <code>Source.lua</code>. Patched commands are listed separately.</p>
       </div>
     </div>
+
     <div class="card" id="getting-started">
       <div class="card-header"><div class="card-title">Getting Started</div><div class="card-tag">Setup</div></div>
       <div class="card-body">
@@ -227,6 +454,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
         </ul>
       </div>
     </div>
+
     <div class="card" id="architecture">
       <div class="card-header"><div class="card-title">How Nameless Admin Works</div><div class="card-tag">Architecture</div></div>
       <div class="card-body">
@@ -273,6 +501,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
         </ol>
       </div>
     </div>
+
     <div class="card" id="selectors">
       <div class="card-header"><div class="card-title">Selecting players</div><div class="card-tag">Targets</div></div>
       <div class="card-body">
@@ -312,7 +541,29 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
       </div>
     </div>
   </section>
+
   <aside>
+    <div class="card" id="discord">
+      <div class="card-header"><div class="card-title">Discord</div><div class="card-tag">Community</div></div>
+      <div class="card-body">
+        <p class="muted">Join the server for updates, support, plugins and announcements.</p>
+        <div class="dc-wrap">
+          <div class="dc-ico"><img id="dc-ico" alt=""></div>
+          <div class="dc-meta">
+            <div class="dc-name" id="dc-name">Loading server info...</div>
+            <div class="dc-stats">
+              <span id="dc-mem"></span>
+              <span id="dc-onl"></span>
+            </div>
+          </div>
+        </div>
+        <div class="dc-row">
+          <a class="btn" href="https://discord.gg/zzjYhtMGFD" target="_blank" rel="noopener noreferrer">Join Discord</a>
+          <a class="link" href="https://discord.gg/zzjYhtMGFD" target="_blank" rel="noopener noreferrer">discord.gg/zzjYhtMGFD</a>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-header"><div class="card-title">Quick Reference</div><div class="card-tag">Cheat sheet</div></div>
       <div class="card-body">
@@ -334,6 +585,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
         </ul>
       </div>
     </div>
+
     <div class="card" id="plugins">
       <div class="card-header"><div class="card-title">Plugin API (very short)</div><div class="card-tag">Plugins</div></div>
       <div class="card-body">
@@ -379,6 +631,7 @@ runCommand({"noclip"})</code></pre>
     </div>
   </aside>
 </main>
+
 <section id="commands" style="max-width:1120px;margin:0 auto 40px auto;padding:0 16px;">
   <div class="card">
     <div class="card-header"><div class="card-title">Commands Reference</div><div class="card-tag">Core</div></div>
@@ -388,6 +641,7 @@ runCommand({"noclip"})</code></pre>
     </div>
   </div>
 </section>
+
 <section id="patched" style="max-width:1120px;margin:0 auto 40px auto;padding:0 16px;">
   <div class="card">
     <div class="card-header"><div class="card-title">Patched Commands</div><div class="card-tag">Patched</div></div>
@@ -397,97 +651,153 @@ runCommand({"noclip"})</code></pre>
     </div>
   </div>
 </section>
+
 <script>
 (async function() {
-  const commandsURL = 'https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json';
+  const INV = "zzjYhtMGFD";
+  const INV_URL = "https://discord.com/api/v9/invites/" + encodeURIComponent(INV) + "?with_counts=true&with_expiration=true";
+
+  const setTxt = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = v || "";
+  };
+  const setImg = (id, src) => {
+    const el = document.getElementById(id);
+    if (el) el.src = src;
+  };
+
+  try {
+    const r = await fetch(INV_URL, { mode: "cors" });
+    if (r.ok) {
+      const j = await r.json();
+      const g = j.guild || null;
+      const name = g && g.name ? g.name : "Discord Server";
+      const mem = typeof j.approximate_member_count === "number" ? j.approximate_member_count : null;
+      const onl = typeof j.approximate_presence_count === "number" ? j.approximate_presence_count : null;
+
+      setTxt("dc-name", name);
+      setTxt("dc-mem", mem != null ? mem.toLocaleString() + " members" : "");
+      setTxt("dc-onl", onl != null ? onl.toLocaleString() + " online" : "");
+
+      if (g && g.id && g.icon) {
+        const ico = "https://cdn.discordapp.com/icons/" + g.id + "/" + g.icon + ".png?size=96";
+        setImg("dc-ico", ico);
+      } else {
+        setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
+      }
+    } else {
+      setTxt("dc-name", "Join the Discord server");
+      setTxt("dc-mem", "");
+      setTxt("dc-onl", "");
+      setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
+    }
+  } catch (e) {
+    setTxt("dc-name", "Join the Discord server");
+    setTxt("dc-mem", "");
+    setTxt("dc-onl", "");
+    setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
+  }
+
+  const commandsURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json";
   try {
     const resp = await fetch(commandsURL);
     const data = await resp.json();
     const commands = data.commands || [];
     const patched = data.patched_commands || [];
-    const container = document.getElementById('commands-container');
+    const container = document.getElementById("commands-container");
+
     if (commands.length) {
-      const table = document.createElement('table');
-      const thead = document.createElement('thead');
-      const headRow = document.createElement('tr');
-      ['Command','Aliases','Arguments','Description'].forEach(label => {
-        const th = document.createElement('th');
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const headRow = document.createElement("tr");
+      ["Command", "Aliases", "Arguments", "Description"].forEach(label => {
+        const th = document.createElement("th");
         th.textContent = label;
         headRow.appendChild(th);
       });
       thead.appendChild(headRow);
       table.appendChild(thead);
-      const tbody = document.createElement('tbody');
-      const sorted = [...commands].sort((a, b) => a.name.localeCompare(b.name));
+
+      const tbody = document.createElement("tbody");
+      const sorted = [...commands].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
       sorted.forEach(cmd => {
-        const tr = document.createElement('tr');
-        const tdName = document.createElement('td');
-        tdName.innerHTML = `<code>${cmd.name}</code>`;
-        const tdAliases = document.createElement('td');
+        const tr = document.createElement("tr");
+
+        const tdName = document.createElement("td");
+        tdName.innerHTML = "<code>" + (cmd.name || "") + "</code>";
+
+        const tdAliases = document.createElement("td");
         if (cmd.aliases && cmd.aliases.length) {
-          tdAliases.innerHTML = `<code>${cmd.aliases.join(', ')}</code>`;
+          tdAliases.innerHTML = "<code>" + cmd.aliases.join(", ") + "</code>";
         } else {
-          tdAliases.textContent = '';
+          tdAliases.textContent = "";
         }
-        const tdArgs = document.createElement('td');
-        tdArgs.textContent = cmd.args || '';
-        const tdDesc = document.createElement('td');
-        tdDesc.textContent = cmd.desc || '';
+
+        const tdArgs = document.createElement("td");
+        tdArgs.textContent = cmd.args || "";
+
+        const tdDesc = document.createElement("td");
+        tdDesc.textContent = cmd.desc || "";
+
         tr.appendChild(tdName);
         tr.appendChild(tdAliases);
         tr.appendChild(tdArgs);
         tr.appendChild(tdDesc);
         tbody.appendChild(tr);
       });
+
       table.appendChild(tbody);
       container.appendChild(table);
     }
-    const patchedContainer = document.getElementById('patched-container');
+
+    const patchedContainer = document.getElementById("patched-container");
     if (patchedContainer) {
       if (patched.length) {
-        const ul = document.createElement('ul');
-        ul.style.listStyle = 'disc';
-        ul.style.paddingLeft = '20px';
+        const ul = document.createElement("ul");
+        ul.style.listStyle = "disc";
+        ul.style.paddingLeft = "20px";
         patched.forEach(cmd => {
-          const li = document.createElement('li');
-          li.innerHTML = `<code>${cmd.name}</code>: ${cmd.desc || ''}`;
+          const li = document.createElement("li");
+          li.innerHTML = "<code>" + (cmd.name || "") + "</code>: " + (cmd.desc || "");
           ul.appendChild(li);
         });
         patchedContainer.appendChild(ul);
       } else {
-        patchedContainer.textContent = 'No patched commands.';
+        patchedContainer.textContent = "No patched commands.";
       }
     }
   } catch (e) {
-    console.error('Unable to load commands.json', e);
+    console.error("Unable to load commands.json", e);
   }
+
   try {
-    const res = await fetch('https://api.github.com/repos/ltseverydayyou/Nameless-Admin/contents/NAplugins');
+    const res = await fetch("https://api.github.com/repos/ltseverydayyou/Nameless-Admin/contents/NAplugins");
     if (res.ok) {
       const files = await res.json();
-      const listElem = document.getElementById('plugin-list');
+      const listElem = document.getElementById("plugin-list");
       for (const file of files) {
-        if (file.type === 'file' && (file.name.endsWith('.na') || file.name.endsWith('.iy'))) {
+        if (file.type === "file" && (file.name.endsWith(".na") || file.name.endsWith(".iy"))) {
           try {
             const fileResp = await fetch(file.download_url);
             const content = await fileResp.text();
-            const blob = new Blob([content], { type: 'text/plain' });
+            const blob = new Blob([content], { type: "text/plain" });
             const url = URL.createObjectURL(blob);
-            const li = document.createElement('li');
-            const a = document.createElement('a');
+            const li = document.createElement("li");
+            const a = document.createElement("a");
             a.href = url;
             a.textContent = file.name;
             a.download = file.name;
+            a.className = "link";
             li.appendChild(a);
             listElem.appendChild(li);
           } catch (err) {
-            console.error('Error downloading plugin', file.name, err);
+            console.error("Error downloading plugin", file.name, err);
           }
         }
       }
     }
   } catch (e) {
-    console.error('Unable to load plugin list', e);
+    console.error("Unable to load plugin list", e);
   }
 })();
 </script>
