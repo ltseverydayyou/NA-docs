@@ -1,596 +1,805 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nameless Admin Documentation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nameless Admin Documentation</title>
 
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
+  <link rel="icon" type="image/png"
+    href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
+  <link rel="apple-touch-icon"
+    href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
 
-<meta name="theme-color" content="#0a0a0a">
-<meta property="og:title" content="Nameless Admin Documentation">
-<meta property="og:description" content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Nameless Admin Documentation">
-<meta name="twitter:description" content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Nameless Admin Documentation">
+  <meta property="og:description"
+    content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
+  <meta property="og:type" content="website">
+  <meta property="og:image"
+    content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nameless Admin Documentation">
+  <meta name="twitter:description"
+    content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
+  <meta name="twitter:image"
+    content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
 
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --bg-alt: #101010;
-    --panel: #181818;
-    --panel-soft: #1f1f1f;
-    --accent: #ffffff;
-    --accent-soft: rgba(255, 255, 255, 0.15);
-    --accent-strong: rgba(255, 255, 255, 0.35);
-    --text: #f5f5f5;
-    --text-muted: #b5b5b5;
-    --border-subtle: #2a2a2a;
-    --code-bg: #0f0f0f;
-    --danger: #ff4b6b;
-  }
-  * { box-sizing: border-box; }
-  html, body { width: 100%; max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-alt: #101010;
+      --panel: #181818;
+      --panel-soft: #1f1f1f;
+      --accent: #ffffff;
+      --accent-soft: rgba(255, 255, 255, 0.15);
+      --accent-strong: rgba(255, 255, 255, 0.35);
+      --text: #f5f5f5;
+      --text-muted: #b5b5b5;
+      --border-subtle: #2a2a2a;
+      --code-bg: #0f0f0f;
+      --danger: #ff4b6b;
+    }
 
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  header {
-    border-bottom: 1px solid var(--border-subtle);
-    background: var(--panel);
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    backdrop-filter: blur(10px);
-    background-image: linear-gradient(to bottom, rgba(10,10,10,0.96), rgba(10,10,10,0.9));
-  }
-  .header-inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 14px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    opacity: 0;
-    transform: translateY(-12px);
-    animation: slideDown 0.42s ease-out forwards;
-  }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-  .brand-icon img {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    flex: 0 0 auto;
-  }
-  .brand-text-main {
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    font-size: 17px;
-    line-height: 1.1;
-  }
-  .brand-text-sub {
-    font-size: 11px;
-    color: var(--text-muted);
-  }
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
 
-  nav {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  nav a {
-    font-size: 13px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    text-decoration: none;
-    color: var(--text-muted);
-    border: 1px solid transparent;
-    background: transparent;
-    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
-    white-space: nowrap;
-  }
-  nav a:hover {
-    color: var(--text);
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    transform: translateY(-1px);
-  }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-  main {
-    max-width: 1120px;
-    margin: 18px auto 40px auto;
-    padding: 0 16px 40px 16px;
-    display: grid;
-    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
-    gap: 18px;
-  }
-  @media (max-width: 900px) { main { grid-template-columns: minmax(0, 1fr); } }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
 
-  .card {
-    background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 55%), var(--panel);
-    border-radius: 18px;
-    padding: 16px 18px;
-    border: 1px solid var(--border-subtle);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.02);
-    min-width: 0;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeUp 0.45s ease-out forwards;
-  }
-  main .card:nth-of-type(1) { animation-delay: 0.06s; }
-  main .card:nth-of-type(2) { animation-delay: 0.09s; }
-  main .card:nth-of-type(3) { animation-delay: 0.12s; }
-  main .card:nth-of-type(4) { animation-delay: 0.15s; }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  #commands .card,
-  #patched .card,
-  #discord .card {
-    animation-delay: 0.18s;
-  }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 8px;
-    min-width: 0;
-  }
-  .card-title {
-    font-size: 17px;
-    font-weight: 600;
-    min-width: 0;
-  }
-  .card-tag {
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--accent-strong);
-    background: var(--accent-soft);
-    color: var(--accent);
-    flex: 0 0 auto;
-  }
-  .card-body {
-    font-size: 14px;
-    color: var(--text-muted);
-    min-width: 0;
-  }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  h2 { font-size: 18px; margin: 16px 0 6px 0; color: var(--text); }
-  h3 { font-size: 15px; margin: 14px 0 4px 0; color: var(--text); }
-  p { margin: 4px 0 8px 0; line-height: 1.5; }
-  .muted { color: var(--text-muted); font-size: 13px; }
+    header {
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--panel);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.9));
+    }
 
-  code {
-    font-family: "JetBrains Mono", monospace;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 4px;
-    font-size: 12px;
-  }
-  pre {
-    background: var(--code-bg);
-    border-radius: 10px;
-    padding: 10px 12px;
-    overflow-x: auto;
-    font-size: 12px;
-    line-height: 1.45;
-    border: 1px solid #181818;
-    max-width: 100%;
-  }
-  pre code { background: transparent; padding: 0; }
-
-  ul.workflow-list { list-style: decimal; padding-left: 20px; margin: 4px 0 10px 0; color: var(--text-muted); }
-  ul.workflow-list li { margin-bottom: 4px; }
-  .sub-bullet { list-style: disc; padding-left: 18px; margin-top: 2px; }
-
-  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
-  th, td { border: 1px solid #2a2a2a; padding: 4px 6px; text-align: left; vertical-align: top; }
-  th { background: #1f1f1f; font-weight: 600; font-size: 12px; color: var(--text); }
-  tbody tr:nth-child(odd) { background: #121212; }
-  tbody tr:nth-child(even) { background: #171717; }
-
-  .badge-cat { font-size: 11px; padding: 2px 6px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-strong); }
-  .badge-danger { font-size: 11px; padding: 2px 6px; border-radius: 999px; background: rgba(255, 75, 107, 0.14); color: var(--danger); border: 1px solid rgba(255, 75, 107, 0.6); }
-
-  .unused { display: none !important; }
-  .pills, .pill { display: none !important; }
-  #commands-container table { margin-bottom: 16px; }
-
-  #commands-container,
-  #patched-container {
-    display: block;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  #commands-container table,
-  #patched-container table {
-    width: max-content;
-    min-width: 100%;
-  }
-  #commands-container thead th,
-  #commands-container td,
-  #patched-container thead th,
-  #patched-container td {
-    white-space: nowrap;
-  }
-
-  a.link {
-    color: var(--text);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.18);
-    transition: border-color 0.18s ease, color 0.18s ease;
-  }
-  a.link:hover {
-    border-bottom-color: rgba(255,255,255,0.55);
-    color: #ffffff;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--accent-strong);
-    background: var(--accent-soft);
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13px;
-    line-height: 1;
-    white-space: nowrap;
-    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-  }
-  .btn:hover {
-    border-color: var(--accent);
-    background: rgba(255,255,255,0.22);
-    transform: translateY(-1px);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 12px 24px rgba(0,0,0,0.7);
-  }
-
-  .dc-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    margin-top: 8px;
-  }
-  .dc-ico {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: #0f0f0f;
-    border: 1px solid var(--border-subtle);
-    overflow: hidden;
-    flex: 0 0 auto;
-  }
-  .dc-ico img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .dc-meta {
-    min-width: 0;
-    flex: 1 1 auto;
-  }
-  .dc-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .dc-stats {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 2px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .dc-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-  }
-
-  @media (max-width: 600px) {
     .header-inner {
-      padding: 10px 12px;
-      gap: 10px;
-      flex-wrap: nowrap;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+      gap: 16px;
+      opacity: 0;
+      transform: translateY(-12px);
+      animation: slideDown 0.42s ease-out forwards;
     }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
     .brand-icon img {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      flex: 0 0 auto;
     }
+
     .brand-text-main {
-      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 17px;
       line-height: 1.1;
     }
+
     .brand-text-sub {
-      display: none;
+      font-size: 11px;
+      color: var(--text-muted);
     }
+
     nav {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      gap: 6px;
-      justify-content: flex-start;
-      scrollbar-width: none;
-      max-width: 60vw;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    nav::-webkit-scrollbar { display: none; }
+
     nav a {
-      flex: 0 0 auto;
-      font-size: 12px;
-      padding: 4px 8px;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      background: transparent;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      white-space: nowrap;
     }
+
+    nav a:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 18px auto 40px auto;
+      padding: 0 16px 40px 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 55%), var(--panel);
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.02);
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 0.45s ease-out forwards;
+    }
+
+    main .card:nth-of-type(1) {
+      animation-delay: 0.06s;
+    }
+
+    main .card:nth-of-type(2) {
+      animation-delay: 0.09s;
+    }
+
+    main .card:nth-of-type(3) {
+      animation-delay: 0.12s;
+    }
+
+    main .card:nth-of-type(4) {
+      animation-delay: 0.15s;
+    }
+
+    #commands .card,
+    #patched .card,
+    #discord .card {
+      animation-delay: 0.18s;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      min-width: 0;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      min-width: 0;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-strong);
+      background: var(--accent-soft);
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      min-width: 0;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 16px 0 6px 0;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 15px;
+      margin: 14px 0 4px 0;
+      color: var(--text);
+    }
+
+    p {
+      margin: 4px 0 8px 0;
+      line-height: 1.5;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    code {
+      font-family: "JetBrains Mono", monospace;
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 10px;
+      padding: 10px 12px;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.45;
+      border: 1px solid #181818;
+      max-width: 100%;
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+    }
+
+    ul.workflow-list {
+      list-style: decimal;
+      padding-left: 20px;
+      margin: 4px 0 10px 0;
+      color: var(--text-muted);
+    }
+
+    ul.workflow-list li {
+      margin-bottom: 4px;
+    }
+
+    .sub-bullet {
+      list-style: disc;
+      padding-left: 18px;
+      margin-top: 2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    th,
+    td {
+      border: 1px solid #2a2a2a;
+      padding: 4px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #1f1f1f;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #121212;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #171717;
+    }
+
+    .badge-cat {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-strong);
+    }
+
+    .badge-danger {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(255, 75, 107, 0.14);
+      color: var(--danger);
+      border: 1px solid rgba(255, 75, 107, 0.6);
+    }
+
+    .unused {
+      display: none !important;
+    }
+
+    .pills,
+    .pill {
+      display: none !important;
+    }
+
+    #commands-container table {
+      margin-bottom: 16px;
+    }
+
     #commands-container,
     #patched-container {
+      display: block;
+      max-width: 100%;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
+
     #commands-container table,
     #patched-container table {
       width: max-content;
       min-width: 100%;
     }
+
     #commands-container thead th,
     #commands-container td,
     #patched-container thead th,
     #patched-container td {
       white-space: nowrap;
     }
-  }
 
-  @media (max-width: 600px) and (orientation: portrait) {
-    .header-inner { padding: 8px 10px; }
-  }
-</style>
+    a.link {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      transition: border-color 0.18s ease, color 0.18s ease;
+    }
+
+    a.link:hover {
+      border-bottom-color: rgba(255, 255, 255, 0.55);
+      color: #ffffff;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-strong);
+      background: var(--accent-soft);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      line-height: 1;
+      white-space: nowrap;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 12px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    .dc-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      margin-top: 8px;
+    }
+
+    .dc-ico {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #0f0f0f;
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .dc-ico img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .dc-meta {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .dc-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .dc-stats {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .dc-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        padding: 10px 12px;
+        gap: 10px;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+
+      .brand-icon img {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+      }
+
+      .brand-text-main {
+        font-size: 15px;
+        line-height: 1.1;
+      }
+
+      .brand-text-sub {
+        display: none;
+      }
+
+      nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 6px;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        max-width: 60vw;
+      }
+
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      nav a {
+        flex: 0 0 auto;
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      #commands-container,
+      #patched-container {
+        overflow-x: auto;
+      }
+
+      #commands-container table,
+      #patched-container table {
+        width: max-content;
+        min-width: 100%;
+      }
+
+      #commands-container thead th,
+      #commands-container td,
+      #patched-container thead th,
+      #patched-container td {
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 600px) and (orientation: portrait) {
+      .header-inner {
+        padding: 8px 10px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div class="header-inner">
-    <div class="brand">
-      <div class="brand-icon"><img src="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png" alt="NA icon"></div>
-      <div>
-        <div class="brand-text-main">Nameless Admin</div>
-        <div class="brand-text-sub">continuation by ltseverydayyou</div>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon"><img
+            src="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png"
+            alt="NA icon"></div>
+        <div>
+          <div class="brand-text-main">Nameless Admin</div>
+          <div class="brand-text-sub">continuation by ltseverydayyou</div>
+        </div>
       </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#getting-started">Getting started</a>
+        <a href="#architecture">How it works</a>
+        <a href="#selectors">Selecting players</a>
+        <a href="#commands">Commands</a>
+        <a href="#patched">Patched</a>
+        <a href="#plugins">Plugins</a>
+        <a href="#discord">Discord</a>
+      </nav>
     </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#getting-started">Getting started</a>
-      <a href="#architecture">How it works</a>
-      <a href="#selectors">Selecting players</a>
-      <a href="#commands">Commands</a>
-      <a href="#patched">Patched</a>
-      <a href="#plugins">Plugins</a>
-      <a href="#discord">Discord</a>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<main>
-  <section>
-    <div class="card" id="about">
-      <div class="card-header"><div class="card-title">Overview</div><div class="card-tag">Docs</div></div>
-      <div class="card-body">
-        <p><span class="highlight">Nameless Admin</span> is an easy-to-use admin script that works in all Roblox games. giving you new tools to play with:</p>
-        <ul class="workflow-list">
-          <li><strong>698</strong> core commands covering movement, visuals and utility.</li>
-          <li>Mobile-friendly UI and controls.</li>
-          <li>Plugin system (<code>.na</code> and Infinite Yield-style <code>.iy</code>).</li>
-          <li>Settings, fast flags, themes and more.</li>
-        </ul>
-        <p class="muted">This page documents how it loads, how commands are processed, and provides a structured list of commands extracted directly from <code>Source.lua</code>. Patched commands are listed separately.</p>
+  <main>
+    <section>
+      <div class="card" id="about">
+        <div class="card-header">
+          <div class="card-title">Overview</div>
+          <div class="card-tag">Docs</div>
+        </div>
+        <div class="card-body">
+          <p><span class="highlight">Nameless Admin</span> is an easy-to-use admin script that works in all Roblox
+            games. giving you new tools to play with:</p>
+          <ul class="workflow-list">
+            <li><strong><span id="cmd-count">999</span></strong> core commands covering movement, visuals and utility.
+            </li>
+            <li>Mobile-friendly UI and controls.</li>
+            <li>Plugin system (<code>.na</code> and Infinite Yield-style <code>.iy</code>).</li>
+            <li>Settings, fast flags, themes and more.</li>
+          </ul>
+          <p class="muted">This page documents how it loads, how commands are processed, and provides a structured list
+            of commands extracted directly from <code>Source.lua</code>. Patched commands are listed separately.</p>
+        </div>
       </div>
-    </div>
 
-    <div class="card" id="getting-started">
-      <div class="card-header"><div class="card-title">Getting Started</div><div class="card-tag">Setup</div></div>
-      <div class="card-body">
-        <h2>Loading Nameless Admin</h2>
-        <p>Use the latest official loader from the GitHub repository:</p>
-        <pre><code>-- Main (stable)
+      <div class="card" id="getting-started">
+        <div class="card-header">
+          <div class="card-title">Getting Started</div>
+          <div class="card-tag">Setup</div>
+        </div>
+        <div class="card-body">
+          <h2>Loading Nameless Admin</h2>
+          <p>Use the latest official loader from the GitHub repository:</p>
+          <pre><code>-- Main (stable)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
 
 -- Testing build
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua"))()</code></pre>
-        <h3>Plugin folders</h3>
-        <p>Create these folders in your executor’s <code>Workspace</code>:</p>
-        <ul class="workflow-list">
-          <li><code>Nameless-Admin/Plugins</code> for <code>.na</code> plugins</li>
-          <li><code>Nameless-Admin/PluginsIY</code> for Infinite-Yield-style <code>.iy</code> plugins</li>
-        </ul>
-        <p>After you put your plugin files into these folders and run the loader, Nameless Admin will find and load them automatically. You'll see which plugins it finds printed in the console.</p>
-        <h3>Basic usage</h3>
-        <ul class="workflow-list">
-          <li>Press the prefix key (the default is <code>;</code>) to open the command bar.</li>
-          <li>Type a command like <code>fly 3</code>, <code>noclip</code> or <code>view random</code> and see what happens.</li>
-          <li>To run several commands at once, separate them with a single backslash. For example: <code>fly 50&#92;goto random&#92;dex</code> will make you fly, then teleport to a random player and finally open the Dex explorer.</li>
-          <li>Start typing a command and press <code>TAB</code> to complete it, or tap one of the suggestions in the autofill list.</li>
-          <li>Use the UI tabs for:
-            <ul class="sub-bullet">
-              <li>Commands browser / search</li>
-              <li>Settings and FFlags</li>
-              <li>ESP / visual tools</li>
-              <li>Plugins and integrations</li>
-            </ul>
-          </li>
-        </ul>
+          <h3>Plugin folders</h3>
+          <p>Create these folders in your executor’s <code>Workspace</code>:</p>
+          <ul class="workflow-list">
+            <li><code>Nameless-Admin/Plugins</code> for <code>.na</code> plugins</li>
+            <li><code>Nameless-Admin/PluginsIY</code> for Infinite-Yield-style <code>.iy</code> plugins</li>
+          </ul>
+          <p>After you put your plugin files into these folders and run the loader, Nameless Admin will find and load
+            them automatically. You'll see which plugins it finds printed in the console.</p>
+          <h3>Basic usage</h3>
+          <ul class="workflow-list">
+            <li>Press the prefix key (the default is <code>;</code>) to open the command bar.</li>
+            <li>Type a command like <code>fly 3</code>, <code>noclip</code> or <code>view random</code> and see what
+              happens.</li>
+            <li>To run several commands at once, separate them with a single backslash. For example:
+              <code>fly 50&#92;goto random&#92;dex</code> will make you fly, then teleport to a random player and
+              finally open the Dex explorer.</li>
+            <li>Start typing a command and press <code>TAB</code> to complete it, or tap one of the suggestions in the
+              autofill list.</li>
+            <li>Use the UI tabs for:
+              <ul class="sub-bullet">
+                <li>Commands browser / search</li>
+                <li>Settings and FFlags</li>
+                <li>ESP / visual tools</li>
+                <li>Plugins and integrations</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="card" id="architecture">
-      <div class="card-header"><div class="card-title">How Nameless Admin Works</div><div class="card-tag">Architecture</div></div>
-      <div class="card-body">
-        <h2>High-Level Architecture</h2>
-        <p>At a high level, Nameless Admin is split into:</p>
-        <ul class="workflow-list">
-          <li><strong>Loader</strong> – the entrypoint (<code>Source.lua</code>) that sets up services, shared state, and loads the rest of the modules.</li>
-          <li><strong>Core systems</strong> – command registry, parser, scheduler/jobs, network helpers, mobile/PC detection, etc.</li>
-          <li><strong>UI layer</strong> – the main UI and windows (themes, settings, command list, ESP, tools, etc.).</li>
-          <li><strong>Plugin layer</strong> – loads <code>.na</code> and <code>.iy</code> plugins and merges their commands into the registry.</li>
-          <li><strong>Integrations & utilities</strong> – notifications, logging, webhooks, FFlags, save/load systems, and various helper tools.</li>
-        </ul>
-        <h3>Command execution pipeline</h3>
-        <ol class="workflow-list">
-          <li><strong>Input</strong>
-            <ul class="sub-bullet">
-              <li>Player opens the command bar or uses chat prefix.</li>
-              <li>Types something like <code>infinitejump</code>.</li>
-            </ul>
-          </li>
-          <li><strong>Parsing</strong>
-            <ul class="sub-bullet">
-              <li>The input string is tokenized into command + args.</li>
-              <li>Aliases are resolved, and fuzzy matching is sometimes used when the name is close.</li>
-            </ul>
-          </li>
-          <li><strong>Lookup</strong>
-            <ul class="sub-bullet">
-              <li>The command registry is searched (core commands + plugin commands).</li>
-              <li>Permissions / safety checks run if needed.</li>
-            </ul>
-          </li>
-          <li><strong>Execution</strong>
-            <ul class="sub-bullet">
-              <li>The registered function is invoked with parsed arguments and the local player.</li>
-              <li>Underlying helpers handle movement, camera, ESP, remote firing, etc.</li>
-            </ul>
-          </li>
-          <li><strong>Feedback</strong>
-            <ul class="sub-bullet">
-              <li>Notifications, console logs, and UI indicators show the result or errors.</li>
-            </ul>
-          </li>
-        </ol>
+      <div class="card" id="architecture">
+        <div class="card-header">
+          <div class="card-title">How Nameless Admin Works</div>
+          <div class="card-tag">Architecture</div>
+        </div>
+        <div class="card-body">
+          <h2>High-Level Architecture</h2>
+          <p>At a high level, Nameless Admin is split into:</p>
+          <ul class="workflow-list">
+            <li><strong>Loader</strong> – the entrypoint (<code>Source.lua</code>) that sets up services, shared state,
+              and loads the rest of the modules.</li>
+            <li><strong>Core systems</strong> – command registry, parser, scheduler/jobs, network helpers, mobile/PC
+              detection, etc.</li>
+            <li><strong>UI layer</strong> – the main UI and windows (themes, settings, command list, ESP, tools, etc.).
+            </li>
+            <li><strong>Plugin layer</strong> – loads <code>.na</code> and <code>.iy</code> plugins and merges their
+              commands into the registry.</li>
+            <li><strong>Integrations & utilities</strong> – notifications, logging, webhooks, FFlags, save/load systems,
+              and various helper tools.</li>
+          </ul>
+          <h3>Command execution pipeline</h3>
+          <ol class="workflow-list">
+            <li><strong>Input</strong>
+              <ul class="sub-bullet">
+                <li>Player opens the command bar or uses chat prefix.</li>
+                <li>Types something like <code>infinitejump</code>.</li>
+              </ul>
+            </li>
+            <li><strong>Parsing</strong>
+              <ul class="sub-bullet">
+                <li>The input string is tokenized into command + args.</li>
+                <li>Aliases are resolved, and fuzzy matching is sometimes used when the name is close.</li>
+              </ul>
+            </li>
+            <li><strong>Lookup</strong>
+              <ul class="sub-bullet">
+                <li>The command registry is searched (core commands + plugin commands).</li>
+                <li>Permissions / safety checks run if needed.</li>
+              </ul>
+            </li>
+            <li><strong>Execution</strong>
+              <ul class="sub-bullet">
+                <li>The registered function is invoked with parsed arguments and the local player.</li>
+                <li>Underlying helpers handle movement, camera, ESP, remote firing, etc.</li>
+              </ul>
+            </li>
+            <li><strong>Feedback</strong>
+              <ul class="sub-bullet">
+                <li>Notifications, console logs, and UI indicators show the result or errors.</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
       </div>
-    </div>
 
-    <div class="card" id="selectors">
-      <div class="card-header"><div class="card-title">Selecting players</div><div class="card-tag">Targets</div></div>
-      <div class="card-body">
-        <p>You don't have to type someone's full name. Use these shortcuts to pick players:</p>
-        <ul class="workflow-list">
-          <li><code>all</code> – everyone in the server.</li>
-          <li><code>others</code> – everyone except you.</li>
-          <li><code>me</code> – just you.</li>
-          <li><code>random</code> – one random player.</li>
-          <li><code>npc</code> – non-player characters.</li>
-          <li><code>seated</code> – players who are sitting.</li>
-          <li><code>stood</code> – players who are standing.</li>
-          <li><code>nearest</code> – the closest player to you.</li>
-          <li><code>farthest</code> – the farthest player from you.</li>
-          <li><code>dead</code> – players with no health.</li>
-          <li><code>alive</code> – players who are alive.</li>
-          <li><code>friends</code> – your Roblox friends.</li>
-          <li><code>nonfriends</code> – everyone who isn’t your friend.</li>
-          <li><code>team</code> – players on your team.</li>
-          <li><code>nonteam</code> – players not on your team.</li>
-          <li><code>r15</code> – players using the R15 rig.</li>
-          <li><code>r6</code> – players using the R6 rig.</li>
-          <li><code>invisible</code> – players whose avatars are invisible.</li>
-          <li><code>bacon</code> – default “bacon hair” style characters.</li>
-          <li><code>slenders</code> – tall slender characters.</li>
-          <li><code>short</code> – shorter characters.</li>
-          <li><code>#&lt;number&gt;</code> – picks that many random players.</li>
-          <li><code>%&lt;team name&gt;</code> – players whose team starts with those letters.</li>
-          <li><code>allies</code> – same as <code>team</code>.</li>
-          <li><code>enemies</code> – same as <code>nonteam</code>.</li>
-          <li><code>age&lt;days&gt;</code> – players with an account age equal or less than that many days.</li>
-          <li><code>group&lt;id&gt;</code> – players in a specific group.</li>
-          <li><code>rad&lt;studs&gt;</code> – players within a distance around you.</li>
-          <li><code>cursor</code> – the player under your mouse cursor.</li>
-        </ul>
-        <p>These shortcuts make commands like <code>goto</code> and <code>view</code> simpler. For example, <code>goto random</code> takes you to a random player and <code>view allies</code> lets you watch your teammates.</p>
+      <div class="card" id="selectors">
+        <div class="card-header">
+          <div class="card-title">Selecting players</div>
+          <div class="card-tag">Targets</div>
+        </div>
+        <div class="card-body">
+          <p>You don't have to type someone's full name. Use these shortcuts to pick players:</p>
+          <ul class="workflow-list">
+            <li><code>all</code> – everyone in the server.</li>
+            <li><code>others</code> – everyone except you.</li>
+            <li><code>me</code> – just you.</li>
+            <li><code>random</code> – one random player.</li>
+            <li><code>npc</code> – non-player characters.</li>
+            <li><code>seated</code> – players who are sitting.</li>
+            <li><code>stood</code> – players who are standing.</li>
+            <li><code>nearest</code> – the closest player to you.</li>
+            <li><code>farthest</code> – the farthest player from you.</li>
+            <li><code>dead</code> – players with no health.</li>
+            <li><code>alive</code> – players who are alive.</li>
+            <li><code>friends</code> – your Roblox friends.</li>
+            <li><code>nonfriends</code> – everyone who isn’t your friend.</li>
+            <li><code>team</code> – players on your team.</li>
+            <li><code>nonteam</code> – players not on your team.</li>
+            <li><code>r15</code> – players using the R15 rig.</li>
+            <li><code>r6</code> – players using the R6 rig.</li>
+            <li><code>invisible</code> – players whose avatars are invisible.</li>
+            <li><code>bacon</code> – default “bacon hair” style characters.</li>
+            <li><code>slenders</code> – tall slender characters.</li>
+            <li><code>short</code> – shorter characters.</li>
+            <li><code>#&lt;number&gt;</code> – picks that many random players.</li>
+            <li><code>%&lt;team name&gt;</code> – players whose team starts with those letters.</li>
+            <li><code>allies</code> – same as <code>team</code>.</li>
+            <li><code>enemies</code> – same as <code>nonteam</code>.</li>
+            <li><code>age&lt;days&gt;</code> – players with an account age equal or less than that many days.</li>
+            <li><code>group&lt;id&gt;</code> – players in a specific group.</li>
+            <li><code>rad&lt;studs&gt;</code> – players within a distance around you.</li>
+            <li><code>cursor</code> – the player under your mouse cursor.</li>
+          </ul>
+          <p>These shortcuts make commands like <code>goto</code> and <code>view</code> simpler. For example,
+            <code>goto random</code> takes you to a random player and <code>view allies</code> lets you watch your
+            teammates.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <aside>
-    <div class="card" id="discord">
-      <div class="card-header"><div class="card-title">Discord</div><div class="card-tag">Community</div></div>
-      <div class="card-body">
-        <p class="muted">Join the server for updates, support, plugins and announcements.</p>
-        <div class="dc-wrap">
-          <div class="dc-ico"><img id="dc-ico" alt=""></div>
-          <div class="dc-meta">
-            <div class="dc-name" id="dc-name">Loading server info...</div>
-            <div class="dc-stats">
-              <span id="dc-mem"></span>
-              <span id="dc-onl"></span>
+    <aside>
+      <div class="card" id="discord">
+        <div class="card-header">
+          <div class="card-title">Discord</div>
+          <div class="card-tag">Community</div>
+        </div>
+        <div class="card-body">
+          <p class="muted">Join the server for updates, support, plugins and announcements.</p>
+          <div class="dc-wrap">
+            <div class="dc-ico"><img id="dc-ico" alt=""></div>
+            <div class="dc-meta">
+              <div class="dc-name" id="dc-name">Loading server info...</div>
+              <div class="dc-stats">
+                <span id="dc-mem"></span>
+                <span id="dc-onl"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="dc-row">
-          <a class="btn" href="https://discord.gg/zzjYhtMGFD" target="_blank" rel="noopener noreferrer">Join Discord</a>
-          <a class="link" href="https://discord.gg/zzjYhtMGFD" target="_blank" rel="noopener noreferrer">discord.gg/zzjYhtMGFD</a>
+          <div class="dc-row">
+            <a class="btn" href="https://discord.gg/zzjYhtMGFD" target="_blank" rel="noopener noreferrer">Join
+              Discord</a>
+            <a class="link" href="https://discord.gg/zzjYhtMGFD" target="_blank"
+              rel="noopener noreferrer">discord.gg/zzjYhtMGFD</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-header"><div class="card-title">Quick Reference</div><div class="card-tag">Cheat sheet</div></div>
-      <div class="card-body">
-        <h3>Core loaders</h3>
-        <p>
-          <span><code>Source.lua</code> – Main</span><br>
-          <span><code>NA testing.lua</code> – Testing</span>
-        </p>
-        <h3>Plugin folders</h3>
-        <p>
-          <span><code>Nameless-Admin/Plugins</code> – .na plugins</span><br>
-          <span><code>Nameless-Admin/PluginsIY</code> – .iy plugins</span>
-        </p>
-        <h3>Safety tips</h3>
-        <ul class="workflow-list">
-          <li>Be careful with commands that interact with remote events, such as <code>fireremotes</code>, <code>remotespy</code>, <code>cobaltspy</code> or <code>turtlespy</code>; anti-cheat systems might notice them.</li>
-          <li>Don’t use risky commands in games with strong anti-cheat.</li>
-          <li>Keep a backup of your config and plugins so you can restore your settings if something breaks.</li>
-        </ul>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Quick Reference</div>
+          <div class="card-tag">Cheat sheet</div>
+        </div>
+        <div class="card-body">
+          <h3>Core loaders</h3>
+          <p>
+            <span><code>Source.lua</code> – Main</span><br>
+            <span><code>NA testing.lua</code> – Testing</span>
+          </p>
+          <h3>Plugin folders</h3>
+          <p>
+            <span><code>Nameless-Admin/Plugins</code> – .na plugins</span><br>
+            <span><code>Nameless-Admin/PluginsIY</code> – .iy plugins</span>
+          </p>
+          <h3>Safety tips</h3>
+          <ul class="workflow-list">
+            <li>Be careful with commands that interact with remote events, such as <code>fireremotes</code>,
+              <code>remotespy</code>, <code>cobaltspy</code> or <code>turtlespy</code>; anti-cheat systems might notice
+              them.</li>
+            <li>Don’t use risky commands in games with strong anti-cheat.</li>
+            <li>Keep a backup of your config and plugins so you can restore your settings if something breaks.</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="card" id="plugins">
-      <div class="card-header"><div class="card-title">Plugin API (very short)</div><div class="card-tag">Plugins</div></div>
-      <div class="card-body">
-        <h3>Single <code>.na</code> command</h3>
-        <pre><code>cmdPluginAdd = {
+      <div class="card" id="plugins">
+        <div class="card-header">
+          <div class="card-title">Plugin API (very short)</div>
+          <div class="card-tag">Plugins</div>
+        </div>
+        <div class="card-body">
+          <h3>Single <code>.na</code> command</h3>
+          <pre><code>cmdPluginAdd = {
     Aliases = {"hello", "hi"},
     ArgsHint = "&lt;name&gt;",
     Info = "Say hi",
@@ -599,8 +808,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
     end,
     RequiresArguments = true
 }</code></pre>
-        <h3>Multiple <code>.na</code> commands in one file</h3>
-        <pre><code>cmdPluginAdd = {
+          <h3>Multiple <code>.na</code> commands in one file</h3>
+          <pre><code>cmdPluginAdd = {
     {
         Aliases = {"ping"},
         Info = "Replies with pong",
@@ -619,187 +828,201 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Namele
         RequiresArguments = true
     }
 }</code></pre>
-        <h3>Calling other commands</h3>
-        <p>You can invoke other commands from your plugin using helpers such as:</p>
-        <pre><code>runCommand("fly 50")
+          <h3>Calling other commands</h3>
+          <p>You can invoke other commands from your plugin using helpers such as:</p>
+          <pre><code>runCommand("fly 50")
 runCommand("to", "random")
 runCommand({"noclip"})</code></pre>
-        <p>If you're new to making plugins, start with the example files below. These templates (like <code>hello.na</code> and <code>example.iy</code>) show how to define your own commands—you can edit them to build your own NA plugin. They're not a catalogue of finished plugins.</p>
-        <ul id="plugin-list" class="workflow-list"></ul>
-        <p>Put <code>.na</code> files into <code>Nameless-Admin/Plugins</code> and <code>.iy</code> files into <code>Nameless-Admin/PluginsIY</code>. Then reload or execute the loader; your new commands will appear automatically.</p>
+          <p>If you're new to making plugins, start with the example files below. These templates (like
+            <code>hello.na</code> and <code>example.iy</code>) show how to define your own commands—you can edit them to
+            build your own NA plugin. They're not a catalogue of finished plugins.</p>
+          <ul id="plugin-list" class="workflow-list"></ul>
+          <p>Put <code>.na</code> files into <code>Nameless-Admin/Plugins</code> and <code>.iy</code> files into
+            <code>Nameless-Admin/PluginsIY</code>. Then reload or execute the loader; your new commands will appear
+            automatically.</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <section id="commands" style="max-width:1120px;margin:0 auto 40px auto;padding:0 16px;">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Commands Reference</div>
+        <div class="card-tag">Core</div>
+      </div>
+      <div class="card-body">
+        <p class="muted">The command list below is loaded directly from <code>commands.json</code>. You can also type
+          <code>cmds</code> or <code>cmdlist</code> in game to browse.</p>
+        <div id="commands-container"></div>
       </div>
     </div>
-  </aside>
-</main>
+  </section>
 
-<section id="commands" style="max-width:1120px;margin:0 auto 40px auto;padding:0 16px;">
-  <div class="card">
-    <div class="card-header"><div class="card-title">Commands Reference</div><div class="card-tag">Core</div></div>
-    <div class="card-body">
-      <p class="muted">The command list below is loaded directly from <code>commands.json</code>. You can also type <code>cmds</code> or <code>cmdlist</code> in game to browse.</p>
-      <div id="commands-container"></div>
+  <section id="patched" style="max-width:1120px;margin:0 auto 40px auto;padding:0 16px;">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Patched Commands</div>
+        <div class="card-tag">Patched</div>
+      </div>
+      <div class="card-body">
+        <p class="muted">Patched commands override existing commands or provide temporary fixes. The list below is
+          loaded dynamically from <code>commands.json</code>.</p>
+        <div id="patched-container"></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="patched" style="max-width:1120px;margin:0 auto 40px auto;padding:0 16px;">
-  <div class="card">
-    <div class="card-header"><div class="card-title">Patched Commands</div><div class="card-tag">Patched</div></div>
-    <div class="card-body">
-      <p class="muted">Patched commands override existing commands or provide temporary fixes. The list below is loaded dynamically from <code>commands.json</code>.</p>
-      <div id="patched-container"></div>
-    </div>
-  </div>
-</section>
+  <script>
+    (async function () {
+      const INV = "zzjYhtMGFD";
+      const INV_URL = "https://discord.com/api/v9/invites/" + encodeURIComponent(INV) + "?with_counts=true&with_expiration=true";
 
-<script>
-(async function() {
-  const INV = "zzjYhtMGFD";
-  const INV_URL = "https://discord.com/api/v9/invites/" + encodeURIComponent(INV) + "?with_counts=true&with_expiration=true";
+      const setTxt = (id, v) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = v || "";
+      };
+      const setImg = (id, src) => {
+        const el = document.getElementById(id);
+        if (el) el.src = src;
+      };
 
-  const setTxt = (id, v) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = v || "";
-  };
-  const setImg = (id, src) => {
-    const el = document.getElementById(id);
-    if (el) el.src = src;
-  };
+      try {
+        const r = await fetch(INV_URL, { mode: "cors" });
+        if (r.ok) {
+          const j = await r.json();
+          const g = j.guild || null;
+          const name = g && g.name ? g.name : "Discord Server";
+          const mem = typeof j.approximate_member_count === "number" ? j.approximate_member_count : null;
+          const onl = typeof j.approximate_presence_count === "number" ? j.approximate_presence_count : null;
 
-  try {
-    const r = await fetch(INV_URL, { mode: "cors" });
-    if (r.ok) {
-      const j = await r.json();
-      const g = j.guild || null;
-      const name = g && g.name ? g.name : "Discord Server";
-      const mem = typeof j.approximate_member_count === "number" ? j.approximate_member_count : null;
-      const onl = typeof j.approximate_presence_count === "number" ? j.approximate_presence_count : null;
+          setTxt("dc-name", name);
+          setTxt("dc-mem", mem != null ? mem.toLocaleString() + " members" : "");
+          setTxt("dc-onl", onl != null ? onl.toLocaleString() + " online" : "");
 
-      setTxt("dc-name", name);
-      setTxt("dc-mem", mem != null ? mem.toLocaleString() + " members" : "");
-      setTxt("dc-onl", onl != null ? onl.toLocaleString() + " online" : "");
-
-      if (g && g.id && g.icon) {
-        const ico = "https://cdn.discordapp.com/icons/" + g.id + "/" + g.icon + ".png?size=96";
-        setImg("dc-ico", ico);
-      } else {
+          if (g && g.id && g.icon) {
+            const ico = "https://cdn.discordapp.com/icons/" + g.id + "/" + g.icon + ".png?size=96";
+            setImg("dc-ico", ico);
+          } else {
+            setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
+          }
+        } else {
+          setTxt("dc-name", "Join the Discord server");
+          setTxt("dc-mem", "");
+          setTxt("dc-onl", "");
+          setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
+        }
+      } catch (e) {
+        setTxt("dc-name", "Join the Discord server");
+        setTxt("dc-mem", "");
+        setTxt("dc-onl", "");
         setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
       }
-    } else {
-      setTxt("dc-name", "Join the Discord server");
-      setTxt("dc-mem", "");
-      setTxt("dc-onl", "");
-      setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
-    }
-  } catch (e) {
-    setTxt("dc-name", "Join the Discord server");
-    setTxt("dc-mem", "");
-    setTxt("dc-onl", "");
-    setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
-  }
 
-  const commandsURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json";
-  try {
-    const resp = await fetch(commandsURL);
-    const data = await resp.json();
-    const commands = data.commands || [];
-    const patched = data.patched_commands || [];
-    const container = document.getElementById("commands-container");
+      const commandsURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json";
+      try {
+        const resp = await fetch(commandsURL);
+        const data = await resp.json();
+        const commands = data.commands || [];
+        const patched = data.patched_commands || [];
+        const container = document.getElementById("commands-container");
+        setTxt("cmd-count", String(commands.length));
 
-    if (commands.length) {
-      const table = document.createElement("table");
-      const thead = document.createElement("thead");
-      const headRow = document.createElement("tr");
-      ["Command", "Aliases", "Arguments", "Description"].forEach(label => {
-        const th = document.createElement("th");
-        th.textContent = label;
-        headRow.appendChild(th);
-      });
-      thead.appendChild(headRow);
-      table.appendChild(thead);
+        if (commands.length) {
+          const table = document.createElement("table");
+          const thead = document.createElement("thead");
+          const headRow = document.createElement("tr");
+          ["Command", "Aliases", "Arguments", "Description"].forEach(label => {
+            const th = document.createElement("th");
+            th.textContent = label;
+            headRow.appendChild(th);
+          });
+          thead.appendChild(headRow);
+          table.appendChild(thead);
 
-      const tbody = document.createElement("tbody");
-      const sorted = [...commands].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-      sorted.forEach(cmd => {
-        const tr = document.createElement("tr");
+          const tbody = document.createElement("tbody");
+          const sorted = [...commands].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+          sorted.forEach(cmd => {
+            const tr = document.createElement("tr");
 
-        const tdName = document.createElement("td");
-        tdName.innerHTML = "<code>" + (cmd.name || "") + "</code>";
+            const tdName = document.createElement("td");
+            tdName.innerHTML = "<code>" + (cmd.name || "") + "</code>";
 
-        const tdAliases = document.createElement("td");
-        if (cmd.aliases && cmd.aliases.length) {
-          tdAliases.innerHTML = "<code>" + cmd.aliases.join(", ") + "</code>";
-        } else {
-          tdAliases.textContent = "";
+            const tdAliases = document.createElement("td");
+            if (cmd.aliases && cmd.aliases.length) {
+              tdAliases.innerHTML = "<code>" + cmd.aliases.join(", ") + "</code>";
+            } else {
+              tdAliases.textContent = "";
+            }
+
+            const tdArgs = document.createElement("td");
+            tdArgs.textContent = cmd.args || "";
+
+            const tdDesc = document.createElement("td");
+            tdDesc.textContent = cmd.desc || "";
+
+            tr.appendChild(tdName);
+            tr.appendChild(tdAliases);
+            tr.appendChild(tdArgs);
+            tr.appendChild(tdDesc);
+            tbody.appendChild(tr);
+          });
+
+          table.appendChild(tbody);
+          container.appendChild(table);
         }
 
-        const tdArgs = document.createElement("td");
-        tdArgs.textContent = cmd.args || "";
-
-        const tdDesc = document.createElement("td");
-        tdDesc.textContent = cmd.desc || "";
-
-        tr.appendChild(tdName);
-        tr.appendChild(tdAliases);
-        tr.appendChild(tdArgs);
-        tr.appendChild(tdDesc);
-        tbody.appendChild(tr);
-      });
-
-      table.appendChild(tbody);
-      container.appendChild(table);
-    }
-
-    const patchedContainer = document.getElementById("patched-container");
-    if (patchedContainer) {
-      if (patched.length) {
-        const ul = document.createElement("ul");
-        ul.style.listStyle = "disc";
-        ul.style.paddingLeft = "20px";
-        patched.forEach(cmd => {
-          const li = document.createElement("li");
-          li.innerHTML = "<code>" + (cmd.name || "") + "</code>: " + (cmd.desc || "");
-          ul.appendChild(li);
-        });
-        patchedContainer.appendChild(ul);
-      } else {
-        patchedContainer.textContent = "No patched commands.";
-      }
-    }
-  } catch (e) {
-    console.error("Unable to load commands.json", e);
-  }
-
-  try {
-    const res = await fetch("https://api.github.com/repos/ltseverydayyou/Nameless-Admin/contents/NAplugins");
-    if (res.ok) {
-      const files = await res.json();
-      const listElem = document.getElementById("plugin-list");
-      for (const file of files) {
-        if (file.type === "file" && (file.name.endsWith(".na") || file.name.endsWith(".iy"))) {
-          try {
-            const fileResp = await fetch(file.download_url);
-            const content = await fileResp.text();
-            const blob = new Blob([content], { type: "text/plain" });
-            const url = URL.createObjectURL(blob);
-            const li = document.createElement("li");
-            const a = document.createElement("a");
-            a.href = url;
-            a.textContent = file.name;
-            a.download = file.name;
-            a.className = "link";
-            li.appendChild(a);
-            listElem.appendChild(li);
-          } catch (err) {
-            console.error("Error downloading plugin", file.name, err);
+        const patchedContainer = document.getElementById("patched-container");
+        if (patchedContainer) {
+          if (patched.length) {
+            const ul = document.createElement("ul");
+            ul.style.listStyle = "disc";
+            ul.style.paddingLeft = "20px";
+            patched.forEach(cmd => {
+              const li = document.createElement("li");
+              li.innerHTML = "<code>" + (cmd.name || "") + "</code>: " + (cmd.desc || "");
+              ul.appendChild(li);
+            });
+            patchedContainer.appendChild(ul);
+          } else {
+            patchedContainer.textContent = "No patched commands.";
           }
         }
+      } catch (e) {
+        console.error("Unable to load commands.json", e);
       }
-    }
-  } catch (e) {
-    console.error("Unable to load plugin list", e);
-  }
-})();
-</script>
+
+      try {
+        const res = await fetch("https://api.github.com/repos/ltseverydayyou/Nameless-Admin/contents/NAplugins");
+        if (res.ok) {
+          const files = await res.json();
+          const listElem = document.getElementById("plugin-list");
+          for (const file of files) {
+            if (file.type === "file" && (file.name.endsWith(".na") || file.name.endsWith(".iy"))) {
+              try {
+                const fileResp = await fetch(file.download_url);
+                const content = await fileResp.text();
+                const blob = new Blob([content], { type: "text/plain" });
+                const url = URL.createObjectURL(blob);
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = url;
+                a.textContent = file.name;
+                a.download = file.name;
+                a.className = "link";
+                li.appendChild(a);
+                listElem.appendChild(li);
+              } catch (err) {
+                console.error("Error downloading plugin", file.name, err);
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Unable to load plugin list", e);
+      }
+    })();
+  </script>
 </body>
+
 </html>
