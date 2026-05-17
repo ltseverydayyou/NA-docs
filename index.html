@@ -532,6 +532,100 @@
       border-radius: 0;
     }
 
+    .loader-code-list {
+      display: grid;
+      gap: 10px;
+      margin: 10px 0 14px;
+    }
+
+    .loader-code-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--code);
+    }
+
+    .loader-code-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .loader-code-title {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .copy-btn {
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      border: 1px solid var(--line-2);
+      border-radius: 9px;
+      background: var(--white-08);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--white-30);
+      background: var(--white-12);
+    }
+
+    .copy-btn[data-copied="true"] {
+      border-color: #f7f7f7;
+      background: #f7f7f7;
+      color: #050505;
+    }
+
+    .stylua-code {
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .stylua-code code {
+      display: block;
+      min-width: max-content;
+      color: #e5e7eb;
+      white-space: pre;
+    }
+
+    .lua-fn {
+      color: #7dd3fc;
+    }
+
+    .lua-var {
+      color: #f8fafc;
+    }
+
+    .lua-method {
+      color: #c4b5fd;
+    }
+
+    .lua-str {
+      color: #86efac;
+    }
+
+    .lua-punc {
+      color: #94a3b8;
+    }
+
     .link {
       color: #ffffff;
       text-decoration: none;
@@ -1003,9 +1097,22 @@
             <div class="tag">Setup</div>
           </div>
           <h3>Loader</h3>
-          <pre><code>loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua"))()</code></pre>
+          <div class="loader-code-list">
+            <div class="loader-code-card">
+              <div class="loader-code-head">
+                <span class="loader-code-title">Main loader</span>
+                <button class="copy-btn" type="button" data-copy-target="main-loader-code" aria-label="Copy main loader">Copy</button>
+              </div>
+              <pre class="stylua-code"><code id="main-loader-code" class="language-lua"><span class="lua-fn">loadstring</span><span class="lua-punc">(</span><span class="lua-var">game</span><span class="lua-punc">:</span><span class="lua-method">HttpGet</span><span class="lua-punc">(</span><span class="lua-str">"https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"</span><span class="lua-punc">)</span><span class="lua-punc">)</span><span class="lua-punc">(</span><span class="lua-punc">)</span></code></pre>
+            </div>
+            <div class="loader-code-card">
+              <div class="loader-code-head">
+                <span class="loader-code-title">Testing loader</span>
+                <button class="copy-btn" type="button" data-copy-target="testing-loader-code" aria-label="Copy testing loader">Copy</button>
+              </div>
+              <pre class="stylua-code"><code id="testing-loader-code" class="language-lua"><span class="lua-fn">loadstring</span><span class="lua-punc">(</span><span class="lua-var">game</span><span class="lua-punc">:</span><span class="lua-method">HttpGet</span><span class="lua-punc">(</span><span class="lua-str">"https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua"</span><span class="lua-punc">)</span><span class="lua-punc">)</span><span class="lua-punc">(</span><span class="lua-punc">)</span></code></pre>
+            </div>
+          </div>
           <h3>Plugin folders</h3>
           <ul class="grid-list">
             <li><code>Nameless-Admin/Plugins</code><br>.na plugins</li>
@@ -1183,6 +1290,49 @@ runCommand({"noclip"})</code></pre>
 
   <script>
     (async function () {
+      const copyText = text => {
+        if (navigator.clipboard && window.isSecureContext) {
+          return navigator.clipboard.writeText(text);
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.top = "-9999px";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+
+        const ok = document.execCommand("copy");
+        document.body.removeChild(area);
+
+        return ok ? Promise.resolve() : Promise.reject(new Error("Copy failed"));
+      };
+
+      document.querySelectorAll("[data-copy-target]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const target = document.getElementById(btn.dataset.copyTarget);
+          const text = target ? target.textContent.trim() : "";
+          const original = btn.textContent;
+
+          if (!text) return;
+
+          try {
+            await copyText(text);
+            btn.textContent = "Copied";
+            btn.dataset.copied = "true";
+          } catch (e) {
+            btn.textContent = "Failed";
+          }
+
+          window.setTimeout(() => {
+            btn.textContent = original;
+            delete btn.dataset.copied;
+          }, 1200);
+        });
+      });
+
       const INV = "zzjYhtMGFD";
       const INV_URL = "https://discord.com/api/v9/invites/" + encodeURIComponent(INV) + "?with_counts=true&with_expiration=true";
 
