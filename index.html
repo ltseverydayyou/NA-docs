@@ -685,6 +685,66 @@
       margin-top: 12px;
     }
 
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0 0;
+    }
+
+    .info-card {
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .info-card h3 {
+      margin: 0 0 6px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .callout {
+      margin: 12px 0 0;
+      padding: 11px 12px;
+      border: 1px solid var(--line-2);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .example-list {
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 10px 0 0;
+      list-style: none;
+    }
+
+    .example-list li {
+      margin: 0;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #0a0a0a;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
     .mini-list {
       display: grid;
       gap: 8px;
@@ -938,6 +998,10 @@
         grid-template-columns: 1fr;
       }
 
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
       pre {
         font-size: 11px;
         border-radius: 12px;
@@ -1037,7 +1101,9 @@
         <a href="#about">About</a>
         <a href="#getting-started">Setup</a>
         <a href="#architecture">How it works</a>
+        <a href="#features">Features</a>
         <a href="#selectors">Players</a>
+        <a href="#rotector">Rotector</a>
         <a href="#commands">Commands</a>
         <a href="#patched">Patched</a>
         <a href="#plugins">Plugins</a>
@@ -1052,7 +1118,7 @@
         <div>
           <div class="eyebrow">Docs</div>
           <h1>Nameless Admin</h1>
-          <p class="lead">An easy admin script for Roblox. This page keeps the loader, commands, plugins and basic help in one place.</p>
+          <p class="lead">An easy admin script for Roblox. This page keeps the loader, commands, player selectors, plugins, UI tools, integrations and Rotector safety checks in one place.</p>
         </div>
         <div class="hero-actions">
           <a class="btn primary" href="#getting-started">Get started</a>
@@ -1081,6 +1147,13 @@
           <div>
             <div class="quick-title">Plugin folders</div>
             <div class="quick-text"><code>.na</code> and <code>.iy</code> plugins.</div>
+          </div>
+        </div>
+        <div class="quick-row">
+          <div class="quick-num">RT</div>
+          <div>
+            <div class="quick-title">Rotector support</div>
+            <div class="quick-text">Warnings, details, markers and the <code>flagged</code> selector.</div>
           </div>
         </div>
       </div>
@@ -1122,9 +1195,11 @@
           <ol class="workflow-list">
             <li>Press the prefix key. Default is <code>;</code>.</li>
             <li>Type a command like <code>fly 3</code>, <code>noclip</code> or <code>view random</code>.</li>
+            <li>Use player selectors anywhere a command accepts targets, such as <code>view nearest</code>, <code>locate flagged</code> or <code>goto %Red</code>.</li>
             <li>Use a backslash to run more than one command: <code>fly 50&#92;goto random&#92;dex</code>.</li>
             <li>Press <code>TAB</code> or tap a suggestion to complete a command.</li>
           </ol>
+          <div class="callout">Tip: most command examples leave out the prefix. With the default prefix, <code>fly 3</code> is typed as <code>;fly 3</code>.</div>
         </div>
 
         <div class="card pad" id="architecture">
@@ -1136,18 +1211,63 @@
             <div class="tag">Core</div>
           </div>
           <ul class="workflow-list">
-            <li><strong>Loader</strong> starts Nameless Admin and prepares shared state.</li>
-            <li><strong>Commands</strong> handle aliases, arguments and command logic.</li>
-            <li><strong>UI</strong> shows windows, settings, command search and tools.</li>
-            <li><strong>Plugins</strong> load extra <code>.na</code> and <code>.iy</code> commands.</li>
+            <li><strong>Loader</strong> starts Nameless Admin, prepares protected/shared runtime state and loads the main systems.</li>
+            <li><strong>Command handler</strong> stores aliases, usage hints, argument rules and command functions.</li>
+            <li><strong>Target resolver</strong> turns names and shortcuts like <code>random</code>, <code>team</code>, <code>rad50</code> or <code>flagged</code> into player lists.</li>
+            <li><strong>UI layer</strong> handles windows, notifications, settings, command search, topbar/menu controls and mobile-friendly buttons.</li>
+            <li><strong>Plugins</strong> add extra <code>.na</code> and <code>.iy</code> commands without editing the main loader.</li>
           </ul>
           <h3>Command flow</h3>
           <ol class="workflow-list">
-            <li>You type a command.</li>
-            <li>Nameless Admin reads the command and arguments.</li>
-            <li>Aliases and targets are resolved.</li>
-            <li>The command runs and shows feedback.</li>
+            <li>You type a command after the prefix.</li>
+            <li>Nameless Admin matches the alias and parses the rest of the text as arguments.</li>
+            <li>Player arguments are resolved through the selector system.</li>
+            <li>The command runs, then NA reports results through notifications, windows, logs or UI changes.</li>
           </ol>
+        </div>
+
+        <div class="card pad" id="features">
+          <div class="card-head">
+            <div class="card-title">
+              <h2>What NA includes</h2>
+              <p class="muted">A clearer overview of the main systems instead of only listing commands.</p>
+            </div>
+            <div class="tag">Features</div>
+          </div>
+          <div class="info-grid">
+            <div class="info-card">
+              <h3>Command bar and autofill</h3>
+              <p>Prefix commands, suggestions, aliases, command chaining with <code>&#92;</code> and quick command search.</p>
+            </div>
+            <div class="info-card">
+              <h3>Player targeting</h3>
+              <p>Use names, display names and selectors such as <code>all</code>, <code>random</code>, <code>rad25</code>, <code>%team</code> and <code>flagged</code>.</p>
+            </div>
+            <div class="info-card">
+              <h3>ESP and locating</h3>
+              <p>Player ESP, chams, locator arrows, part/folder/model ESP and Rotector-only ESP for flagged or recorded users.</p>
+            </div>
+            <div class="info-card">
+              <h3>UI and settings</h3>
+              <p>Resizable windows, notifications, topbar controls, command keybinds, themes/settings and safer UI parenting helpers.</p>
+            </div>
+            <div class="info-card">
+              <h3>Logs and moderation helpers</h3>
+              <p>Chat logs, join/leave logs, server/user info windows and quick copy tools for IDs or server data.</p>
+            </div>
+            <div class="info-card">
+              <h3>Integrations</h3>
+              <p>Webhook helpers, server ID copying, teleport script copying and Bloxstrap RPC text support.</p>
+            </div>
+            <div class="info-card">
+              <h3>Plugins</h3>
+              <p><code>.na</code> plugins can register commands. <code>.iy</code> plugins can be loaded from the Infinite Yield plugin folder.</p>
+            </div>
+            <div class="info-card">
+              <h3>Safety checks</h3>
+              <p>Rotector checks can warn about flagged users, show details and mark matching players when enabled.</p>
+            </div>
+          </div>
         </div>
 
         <div class="card pad" id="selectors">
@@ -1158,6 +1278,7 @@
             </div>
             <div class="tag">Targets</div>
           </div>
+          <p class="muted">Selectors can be used in commands that accept a player argument. They work with direct usernames/display names too, so partial names and special selectors can be mixed depending on the command.</p>
           <ul class="grid-list">
             <li><code>all</code> everyone</li>
             <li><code>others</code> everyone except you</li>
@@ -1171,16 +1292,54 @@
             <li><code>nonfriends</code> not your friends</li>
             <li><code>team</code> your team</li>
             <li><code>nonteam</code> other teams</li>
+            <li><code>allies</code> same team</li>
+            <li><code>enemies</code> different team</li>
+            <li><code>seated</code> sitting players</li>
+            <li><code>stood</code> non-sitting players</li>
             <li><code>r15</code> R15 avatars</li>
             <li><code>r6</code> R6 avatars</li>
+            <li><code>invisible</code> fully transparent characters</li>
+            <li><code>bacon</code> classic bacon-style avatars</li>
+            <li><code>slenders</code> tall R15 avatars</li>
+            <li><code>short</code> short R15 avatars</li>
             <li><code>npc</code> NPCs</li>
             <li><code>cursor</code> player under mouse</li>
+            <li><code>flagged</code> Rotector-flagged or recorded server players</li>
             <li><code>#&lt;number&gt;</code> random amount</li>
-            <li><code>%&lt;team&gt;</code> team name</li>
-            <li><code>age&lt;days&gt;</code> account age</li>
+            <li><code>%&lt;team&gt;</code> team name prefix</li>
+            <li><code>age&lt;days&gt;</code> account age at or below days</li>
+            <li><code>group&lt;id&gt;</code> players in group ID</li>
             <li><code>rad&lt;studs&gt;</code> nearby players</li>
           </ul>
-          <p class="muted">Example: <code>goto random</code> teleports to a random player. <code>view team</code> watches your team.</p>
+          <div class="callout"><code>flagged</code> checks current server players against Rotector data. It uses cached records when available, then looks up uncached users and returns players that NA should warn about or surface.</div>
+          <ul class="example-list">
+            <li><code>view random</code> watches one random player.</li>
+            <li><code>locate flagged</code> locates players surfaced by Rotector.</li>
+            <li><code>goto %Red</code> targets players whose team name starts with Red.</li>
+            <li><code>bring rad25</code> targets players within 25 studs.</li>
+          </ul>
+        </div>
+
+        <div class="card pad" id="rotector">
+          <div class="card-head">
+            <div class="card-title">
+              <h2>Rotector checks</h2>
+              <p class="muted">Checks Roblox users through the Rotector API and shows warning/details inside NA.</p>
+            </div>
+            <div class="tag">API</div>
+          </div>
+          <p class="muted">Rotector results can include a flag status, category, confidence and reason lines when the API returns them. NA caches results for a short time, warns on stronger records, can show CoreGui markers and can open a details window for extra reason text.</p>
+          <ul class="example-list">
+            <li><code>rotector</code> checks other players in the current server.</li>
+            <li><code>rotector all</code> checks every player target returned by <code>all</code>.</li>
+            <li><code>rotector flagged</code> shows details for players matched by the <code>flagged</code> selector.</li>
+            <li><code>rotector id:&lt;userId&gt;</code> checks an offline Roblox user ID.</li>
+            <li><code>rotector on</code> / <code>rotector off</code> toggles Rotector warning notifications.</li>
+            <li><code>rotector mixed on</code> / <code>rotector mixed off</code> toggles mixed-record warnings.</li>
+            <li><code>rotector markers on</code> / <code>rotector markers off</code> toggles visible markers for surfaced players.</li>
+            <li><code>rotectoresp</code> / <code>unrotectoresp</code> enables or disables ESP only for Rotector-flagged or recorded users.</li>
+          </ul>
+          <div class="callout">Rotector data is a safety signal from <code>rotector.com</code>. Treat it as extra context and check the details window before assuming intent.</div>
         </div>
       </section>
 
@@ -1222,9 +1381,11 @@
             <li><code>NA testing.lua</code> testing loader</li>
             <li><code>Nameless-Admin/Plugins</code> .na plugins</li>
             <li><code>Nameless-Admin/PluginsIY</code> .iy plugins</li>
+            <li><code>commands.json</code> command and patched-command data for this docs page</li>
+            <li><code>rotector.com</code> source shown for Rotector checks</li>
           </ul>
           <h3>Small safety note</h3>
-          <p class="muted">Be careful with remote spy or remote firing commands in games with strong anti-cheat.</p>
+          <p class="muted">Be careful with remote spy, remote firing or aggressive automation commands in games with strong anti-cheat.</p>
         </div>
 
         <div class="card pad" id="plugins">
