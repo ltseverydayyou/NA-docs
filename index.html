@@ -886,6 +886,10 @@
       padding: 10px 0 0;
     }
 
+    .is-hidden {
+      display: none !important;
+    }
+
     .unused,
     .pills,
     .pill {
@@ -1245,7 +1249,7 @@
             </div>
             <div class="info-card">
               <h3>ESP and locating</h3>
-              <p>Player ESP, chams, locator arrows, part/folder/model ESP and Rotector-only ESP for flagged or recorded users.</p>
+              <p>Player ESP, chams, locator arrows and part/folder/model ESP.</p>
             </div>
             <div class="info-card">
               <h3>UI and settings</h3>
@@ -1337,7 +1341,6 @@
             <li><code>rotector on</code> / <code>rotector off</code> toggles Rotector warning notifications.</li>
             <li><code>rotector mixed on</code> / <code>rotector mixed off</code> toggles mixed-record warnings.</li>
             <li><code>rotector markers on</code> / <code>rotector markers off</code> toggles visible markers for surfaced players.</li>
-            <li><code>rotectoresp</code> / <code>unrotectoresp</code> enables or disables ESP only for Rotector-flagged or recorded users.</li>
           </ul>
           <div class="callout">Rotector data is a safety signal from <code>rotector.com</code>. Treat it as extra context and check the details window before assuming intent.</div>
         </div>
@@ -1537,8 +1540,13 @@ runCommand({"noclip"})</code></pre>
       try {
         const resp = await fetch(commandsURL);
         const data = await resp.json();
-        const commands = data.commands || [];
-        const patched = data.patched_commands || [];
+        const hiddenCommands = new Set(["rotectoresp", "unrotectoresp"]);
+        const skipCmd = cmd => {
+          const aliases = cmd && Array.isArray(cmd.aliases) ? cmd.aliases : [];
+          return [cmd && cmd.name, ...aliases].some(v => hiddenCommands.has(String(v || "").trim().toLowerCase()));
+        };
+        const commands = (Array.isArray(data.commands) ? data.commands : []).filter(cmd => !skipCmd(cmd));
+        const patched = (Array.isArray(data.patched_commands) ? data.patched_commands : []).filter(cmd => !skipCmd(cmd));
         const container = document.getElementById("commands-container");
         const search = document.getElementById("cmd-search");
         const visible = document.getElementById("cmd-visible");
@@ -1599,12 +1607,17 @@ runCommand({"noclip"})</code></pre>
 
           const updateCount = () => {
             const q = (search && search.value ? search.value : "").trim().toLowerCase();
+            const terms = q.split(/\s+/).filter(Boolean);
             let shown = 0;
+
             rows.forEach(row => {
-              const ok = !q || row.dataset.search.includes(q);
-              row.hidden = !ok;
+              const ok = !terms.length || terms.every(term => row.dataset.search.includes(term));
+              row.classList.toggle("is-hidden", !ok);
+              row.style.display = ok ? "" : "none";
+              row.setAttribute("aria-hidden", ok ? "false" : "true");
               if (ok) shown += 1;
             });
+
             if (visible) visible.textContent = shown.toLocaleString() + " shown";
           };
 
