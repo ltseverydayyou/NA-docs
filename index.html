@@ -1399,20 +1399,67 @@
             </div>
             <div class="tag">API</div>
           </div>
-          <h3>One command</h3>
-          <pre><code>cmdPluginAdd = {
-    Aliases = {"hello", "hi"},
-    ArgsHint = "&lt;name&gt;",
-    Info = "Say hi",
-    Function = function(name)
-        DoNotif("Hello "..tostring(name))
-    end,
-    RequiresArguments = true
-}</code></pre>
-          <h3>Run another command</h3>
-          <pre><code>runCommand("fly 50")
-runCommand("to", "random")
-runCommand({"noclip"})</code></pre>
+          <h3>hello.na</h3>
+          <pre><code>local plugin = Plugin.new(&quot;Hello&quot;)
+
+-- Plugin.new(&quot;Name&quot;) creates a plugin group for your commands.
+-- The first name in :cmd(...) is the main command.
+-- The other names are aliases.
+plugin:cmd(&quot;hello&quot;, &quot;hi&quot;)
+    -- :args(&quot;&lt;name&gt;&quot;) shows the usage hint in command lists/autofill.
+    :args(&quot;&lt;name&gt;&quot;)
+    -- :info(&quot;text&quot;) is the command description.
+    :info(&quot;Say hi&quot;)
+    -- :requiresArgs() makes the command require text after it.
+    :requiresArgs()
+    -- :run(function(ctx, ...)) is the command code.
+    -- ctx is the plugin context.
+    -- Values after ctx are the command arguments.
+    :run(function(ctx, name)
+        -- ctx:notify(text, time) sends a NA notification.
+        ctx:notify(&quot;Hello &quot; .. tostring(name))
+    end)
+
+plugin:cmd(&quot;fastfly&quot;)
+    :info(&quot;Starts fly at speed 50&quot;)
+    :run(function(ctx)
+        -- ctx:run(&quot;command args&quot;) runs a NA command.
+        ctx:run(&quot;fly 50&quot;)
+    end)
+
+plugin:cmd(&quot;torandom&quot;)
+    :info(&quot;Teleports to a random player&quot;)
+    :run(function(ctx)
+        -- You can also pass the command and args separately.
+        ctx:run(&quot;to&quot;, &quot;random&quot;)
+    end)
+
+plugin:cmd(&quot;clipagain&quot;)
+    :info(&quot;Runs noclip from a table&quot;)
+    :run(function(ctx)
+        -- Table form is also supported.
+        ctx:run({&quot;noclip&quot;})
+    end)
+
+-- Other useful calls:
+-- plugin:cmd(&quot;main&quot;, &quot;alias1&quot;, &quot;alias2&quot;)
+--     :args(&quot;&lt;text&gt;&quot;)
+--     :info(&quot;Description shown in command help&quot;)
+--     :requiresArgs()
+--     :run(function(ctx, text)
+--         ctx:notify(text, 3)
+--     end)
+
+-- ctx values you can use inside :run(...):
+-- ctx:notify(&quot;message&quot;, 3)
+-- ctx:run(&quot;fly 50&quot;)
+-- ctx:run(&quot;to&quot;, &quot;random&quot;)
+-- ctx:run({&quot;noclip&quot;})
+-- ctx.Services.Players
+-- ctx.LocalPlayer
+-- ctx.UI
+-- ctx.File
+-- ctx.Path</code></pre>
           <p class="muted">Put plugin files in the right folder, then reload the loader.</p>
           <ul id="plugin-list" class="mini-list"></ul>
         </div>
@@ -1653,34 +1700,113 @@ runCommand({"noclip"})</code></pre>
         setTxt("cmd-visible", "Unable to load commands");
       }
 
+      const pluginDownloadOverrides = {
+        "hello.na": `local plugin = Plugin.new("Hello")
+
+-- Plugin.new("Name") creates a plugin group for your commands.
+-- The first name in :cmd(...) is the main command.
+-- The other names are aliases.
+plugin:cmd("hello", "hi")
+    -- :args("<name>") shows the usage hint in command lists/autofill.
+    :args("<name>")
+    -- :info("text") is the command description.
+    :info("Say hi")
+    -- :requiresArgs() makes the command require text after it.
+    :requiresArgs()
+    -- :run(function(ctx, ...)) is the command code.
+    -- ctx is the plugin context.
+    -- Values after ctx are the command arguments.
+    :run(function(ctx, name)
+        -- ctx:notify(text, time) sends a NA notification.
+        ctx:notify("Hello " .. tostring(name))
+    end)
+
+plugin:cmd("fastfly")
+    :info("Starts fly at speed 50")
+    :run(function(ctx)
+        -- ctx:run("command args") runs a NA command.
+        ctx:run("fly 50")
+    end)
+
+plugin:cmd("torandom")
+    :info("Teleports to a random player")
+    :run(function(ctx)
+        -- You can also pass the command and args separately.
+        ctx:run("to", "random")
+    end)
+
+plugin:cmd("clipagain")
+    :info("Runs noclip from a table")
+    :run(function(ctx)
+        -- Table form is also supported.
+        ctx:run({"noclip"})
+    end)
+
+-- Other useful calls:
+-- plugin:cmd("main", "alias1", "alias2")
+--     :args("<text>")
+--     :info("Description shown in command help")
+--     :requiresArgs()
+--     :run(function(ctx, text)
+--         ctx:notify(text, 3)
+--     end)
+
+-- ctx values you can use inside :run(...):
+-- ctx:notify("message", 3)
+-- ctx:run("fly 50")
+-- ctx:run("to", "random")
+-- ctx:run({"noclip"})
+-- ctx.Services.Players
+-- ctx.LocalPlayer
+-- ctx.UI
+-- ctx.File
+-- ctx.Path`
+      };
+
+      const makePluginDownload = (listElem, name, content) => {
+        if (!listElem || !name || typeof content !== "string") return;
+        const blob = new Blob([content], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = url;
+        a.textContent = name;
+        a.download = name;
+        a.className = "link";
+        li.appendChild(a);
+        listElem.appendChild(li);
+      };
+
       try {
         const res = await fetch("https://api.github.com/repos/ltseverydayyou/Nameless-Admin/contents/NAplugins");
         if (res.ok) {
           const files = await res.json();
           const listElem = document.getElementById("plugin-list");
+          const addedPlugins = new Set();
           for (const file of files) {
             if (file.type === "file" && (file.name.endsWith(".na") || file.name.endsWith(".iy"))) {
               try {
-                const fileResp = await fetch(file.download_url);
-                const content = await fileResp.text();
-                const blob = new Blob([content], { type: "text/plain" });
-                const url = URL.createObjectURL(blob);
-                const li = document.createElement("li");
-                const a = document.createElement("a");
-                a.href = url;
-                a.textContent = file.name;
-                a.download = file.name;
-                a.className = "link";
-                li.appendChild(a);
-                if (listElem) listElem.appendChild(li);
+                const override = pluginDownloadOverrides[file.name];
+                let content = override;
+                if (typeof content !== "string") {
+                  const fileResp = await fetch(file.download_url);
+                  content = await fileResp.text();
+                }
+                makePluginDownload(listElem, file.name, content);
+                addedPlugins.add(file.name);
               } catch (err) {
                 console.error("Error downloading plugin", file.name, err);
               }
             }
           }
+          if (listElem && !addedPlugins.has("hello.na")) {
+            makePluginDownload(listElem, "hello.na", pluginDownloadOverrides["hello.na"]);
+          }
         }
       } catch (e) {
         console.error("Unable to load plugin list", e);
+        const listElem = document.getElementById("plugin-list");
+        makePluginDownload(listElem, "hello.na", pluginDownloadOverrides["hello.na"]);
       }
     })();
   </script>
