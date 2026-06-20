@@ -1441,6 +1441,56 @@ plugin:cmd(&quot;clipagain&quot;)
         ctx:run({&quot;noclip&quot;})
     end)
 
+plugin:cmd(&quot;note&quot;)
+    :args(&quot;&lt;text&gt;&quot;)
+    :info(&quot;Shows a notification&quot;)
+    :requiresArgs()
+    -- Creates a temporary plugin userbutton when the plugin loads.
+    -- Commands that require args use the normal userbutton argument prompt.
+    -- Plugin buttons are not saved to UserButtons.json.
+    :userButton({ Label = &quot;Note&quot;, SaveArgs = true })
+    :run(function(ctx, ...)
+        ctx:notify(table.concat({...}, &quot; &quot;), 3)
+    end)
+
+-- Plugin UI can also create temporary buttons directly:
+PluginUI.addUserButton(&quot;Noclip&quot;, &quot;noclip&quot;) -- single click
+PluginUI.addToggleButton(&quot;Clip&quot;, &quot;noclip&quot;, &quot;clip&quot;) -- toggle on/off
+PluginUI.addUserButton({ Label = &quot;Fly&quot;, Command = &quot;fly&quot;, SaveArgs = true }) -- args prompt
+-- PluginUI.removeUserButton(&quot;Fly&quot;) removes a plugin button by id, label or command
+
+plugin:cmd(&quot;panelon&quot;)
+    :info(&quot;Creates a button when the command runs&quot;)
+    :buttonOnRun({
+        Id = &quot;panel-toggle&quot;,
+        Label = &quot;Panel&quot;,
+        Command = &quot;panelon&quot;,
+        Command2 = &quot;paneloff&quot;,
+        MobileOnly = true
+    })
+    :run(function(ctx)
+        if ctx.IsOnMobile then
+            ctx:notify(&quot;Panel button ready&quot;, 2)
+        end
+    end)
+
+plugin:cmd(&quot;paneloff&quot;)
+    :info(&quot;Removes the button created by panelon&quot;)
+    :removeButtonOnRun(&quot;panel-toggle&quot;)
+    :run(function(ctx)
+        ctx:notify(&quot;Panel button removed&quot;, 2)
+    end)
+
+plugin:cmd(&quot;makenotebutton&quot;)
+    :info(&quot;Creates the Note button when this command is run&quot;)
+    :run(function(ctx)
+        ctx:addUserButton({
+            Label = &quot;Note&quot;,
+            Command = &quot;note&quot;,
+            SaveArgs = true
+        })
+    end)
+
 -- Other useful calls:
 -- plugin:cmd(&quot;main&quot;, &quot;alias1&quot;, &quot;alias2&quot;)
 --     :args(&quot;&lt;text&gt;&quot;)
@@ -1455,6 +1505,12 @@ plugin:cmd(&quot;clipagain&quot;)
 -- ctx:run(&quot;fly 50&quot;)
 -- ctx:run(&quot;to&quot;, &quot;random&quot;)
 -- ctx:run({&quot;noclip&quot;})
+-- ctx:addUserButton({ Label = &quot;Fly&quot;, Command = &quot;fly&quot;, SaveArgs = true })
+-- ctx:removeUserButton(&quot;Fly&quot;)
+-- ctx.IsOnMobile / ctx.IsOnPC / ctx.IsMobile / ctx.IsPC
+-- IsOnMobile / IsOnPC / IsMobile / IsPC
+-- NA_GRAB_BODY
+-- getRoot(character), getChar(), getHum(character)
 -- ctx.Services.Players
 -- ctx.LocalPlayer
 -- ctx.UI
@@ -1742,6 +1798,56 @@ plugin:cmd("clipagain")
         ctx:run({"noclip"})
     end)
 
+plugin:cmd("note")
+    :args("<text>")
+    :info("Shows a notification")
+    :requiresArgs()
+    -- Creates a temporary plugin userbutton when the plugin loads.
+    -- Commands that require args use the normal userbutton argument prompt.
+    -- Plugin buttons are not saved to UserButtons.json.
+    :userButton({ Label = "Note", SaveArgs = true })
+    :run(function(ctx, ...)
+        ctx:notify(table.concat({...}, " "), 3)
+    end)
+
+-- Plugin UI can also create temporary buttons directly:
+PluginUI.addUserButton("Noclip", "noclip") -- single click
+PluginUI.addToggleButton("Clip", "noclip", "clip") -- toggle on/off
+PluginUI.addUserButton({ Label = "Fly", Command = "fly", SaveArgs = true }) -- args prompt
+-- PluginUI.removeUserButton("Fly") removes a plugin button by id, label or command
+
+plugin:cmd("panelon")
+    :info("Creates a button when the command runs")
+    :buttonOnRun({
+        Id = "panel-toggle",
+        Label = "Panel",
+        Command = "panelon",
+        Command2 = "paneloff",
+        MobileOnly = true
+    })
+    :run(function(ctx)
+        if ctx.IsOnMobile then
+            ctx:notify("Panel button ready", 2)
+        end
+    end)
+
+plugin:cmd("paneloff")
+    :info("Removes the button created by panelon")
+    :removeButtonOnRun("panel-toggle")
+    :run(function(ctx)
+        ctx:notify("Panel button removed", 2)
+    end)
+
+plugin:cmd("makenotebutton")
+    :info("Creates the Note button when this command is run")
+    :run(function(ctx)
+        ctx:addUserButton({
+            Label = "Note",
+            Command = "note",
+            SaveArgs = true
+        })
+    end)
+
 -- Other useful calls:
 -- plugin:cmd("main", "alias1", "alias2")
 --     :args("<text>")
@@ -1756,6 +1862,12 @@ plugin:cmd("clipagain")
 -- ctx:run("fly 50")
 -- ctx:run("to", "random")
 -- ctx:run({"noclip"})
+-- ctx:addUserButton({ Label = "Fly", Command = "fly", SaveArgs = true })
+-- ctx:removeUserButton("Fly")
+-- ctx.IsOnMobile / ctx.IsOnPC / ctx.IsMobile / ctx.IsPC
+-- IsOnMobile / IsOnPC / IsMobile / IsPC
+-- NA_GRAB_BODY
+-- getRoot(character), getChar(), getHum(character)
 -- ctx.Services.Players
 -- ctx.LocalPlayer
 -- ctx.UI
