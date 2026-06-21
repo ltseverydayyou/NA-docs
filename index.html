@@ -4,10 +4,8 @@
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
   <title>Nameless Admin Documentation</title>
-
   <link rel='icon' type='image/png' href='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png'>
   <link rel='apple-touch-icon' href='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png'>
-
   <meta name='theme-color' content='#050505'>
   <meta property='og:title' content='Nameless Admin Documentation'>
   <meta property='og:description' content='Docs, commands and plugins for Nameless Admin.'>
@@ -22,30 +20,34 @@
     :root {
       color-scheme: dark;
       --bg: #050505;
-      --bg2: #090909;
-      --panel: rgba(255, 255, 255, 0.055);
-      --panel2: rgba(255, 255, 255, 0.085);
-      --panel3: rgba(255, 255, 255, 0.12);
       --text: #f7f7f7;
       --muted: #aaa;
       --dim: #777;
-      --line: rgba(255, 255, 255, 0.12);
-      --line2: rgba(255, 255, 255, 0.2);
-      --good: #f7f7f7;
-      --bad: #ff6b8a;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.48);
-      --radius: 22px;
+      --line: rgba(255,255,255,.12);
+      --line2: rgba(255,255,255,.2);
+      --panel: rgba(255,255,255,.055);
+      --panel2: rgba(255,255,255,.09);
+      --panel3: rgba(255,255,255,.13);
+      --shadow: 0 24px 80px rgba(0,0,0,.48);
       --page: 1180px;
+      --radius: 22px;
+      --kw: #c586ff;
+      --fn: #7dd3fc;
+      --method: #fde68a;
+      --str: #fca5a5;
+      --var: #93c5fd;
+      --num: #a7f3d0;
+      --prop: #f9a8d4;
+      --com: #6b7280;
+      --pun: #d4d4d8;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
       min-width: 0;
-      scroll-behavior: smooth;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -55,12 +57,11 @@
       overflow-x: hidden;
       color: var(--text);
       background:
-        radial-gradient(circle at 8% -8%, rgba(255, 255, 255, 0.16), transparent 32rem),
-        radial-gradient(circle at 100% 10%, rgba(255, 255, 255, 0.075), transparent 28rem),
-        radial-gradient(circle at 40% 110%, rgba(255, 255, 255, 0.055), transparent 26rem),
+        radial-gradient(circle at 8% -8%, rgba(255,255,255,.16), transparent 32rem),
+        radial-gradient(circle at 100% 10%, rgba(255,255,255,.075), transparent 28rem),
+        radial-gradient(circle at 40% 110%, rgba(255,255,255,.055), transparent 26rem),
         var(--bg);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
-      text-rendering: optimizeLegibility;
       padding-left: env(safe-area-inset-left);
       padding-right: env(safe-area-inset-right);
     }
@@ -72,46 +73,25 @@
       z-index: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: linear-gradient(to bottom, black, transparent 80%);
     }
 
-    a {
-      color: inherit;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    ::selection {
-      background: #fff;
-      color: #050505;
-    }
-
-    :focus-visible {
-      outline: 2px solid #fff;
-      outline-offset: 3px;
-    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    ::selection { background: #fff; color: #050505; }
+    :focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
     .topbar {
       position: sticky;
       top: 0;
       z-index: 40;
       border-bottom: 1px solid var(--line);
-      background: rgba(5, 5, 5, 0.76);
+      background: rgba(5,5,5,.76);
       backdrop-filter: blur(18px);
       padding-top: env(safe-area-inset-top);
     }
@@ -141,7 +121,7 @@
       border-radius: 14px;
       padding: 3px;
       border: 1px solid var(--line2);
-      background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.04));
+      background: linear-gradient(180deg, rgba(255,255,255,.2), rgba(255,255,255,.04));
     }
 
     .brand-icon img {
@@ -181,9 +161,7 @@
       padding-bottom: 1px;
     }
 
-    .nav::-webkit-scrollbar {
-      display: none;
-    }
+    .nav::-webkit-scrollbar { display: none; }
 
     .nav a {
       flex: 0 0 auto;
@@ -216,12 +194,16 @@
       padding: clamp(14px, 2.2vw, 24px) clamp(12px, 3vw, 22px) calc(54px + env(safe-area-inset-bottom));
     }
 
-    .hero {
+    .hero,
+    .section-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(290px, .65fr);
       gap: 16px;
       align-items: stretch;
     }
+
+    .section-grid { grid-template-columns: minmax(0, 1fr) minmax(310px, .72fr); align-items: start; }
+    .section { margin-top: 16px; }
 
     .card {
       min-width: 0;
@@ -232,9 +214,7 @@
       overflow: hidden;
     }
 
-    .pad {
-      padding: clamp(15px, 2.4vw, 24px);
-    }
+    .pad { padding: clamp(15px, 2.4vw, 24px); }
 
     .hero-main {
       min-height: 330px;
@@ -243,6 +223,10 @@
       justify-content: space-between;
       gap: 26px;
     }
+
+    .hero-side, .loader-grid, .feature-grid, .workflow-grid { display: grid; gap: 12px; }
+    .loader-grid, .workflow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
     .eyebrow {
       width: max-content;
@@ -259,12 +243,7 @@
       text-transform: uppercase;
     }
 
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
+    h1, h2, h3, p { margin-top: 0; }
 
     h1 {
       margin-bottom: 12px;
@@ -281,24 +260,9 @@
       letter-spacing: -.04em;
     }
 
-    h3 {
-      margin: 0 0 8px;
-      font-size: 15px;
-      line-height: 1.25;
-    }
-
-    p {
-      margin-bottom: 12px;
-      color: var(--muted);
-      line-height: 1.58;
-    }
-
-    .lead {
-      max-width: 720px;
-      margin-bottom: 0;
-      font-size: clamp(15px, 2.2vw, 18px);
-      line-height: 1.65;
-    }
+    h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.25; }
+    p { margin-bottom: 12px; color: var(--muted); line-height: 1.58; }
+    .lead { max-width: 720px; margin-bottom: 0; font-size: clamp(15px, 2.2vw, 18px); line-height: 1.65; }
 
     .actions {
       display: flex;
@@ -307,7 +271,7 @@
       align-items: center;
     }
 
-    .btn {
+    .btn, .copy {
       min-height: 42px;
       display: inline-flex;
       align-items: center;
@@ -326,48 +290,22 @@
       transition: transform .16s ease, background .16s ease, border-color .16s ease;
     }
 
-    .btn.primary {
-      background: #f7f7f7;
-      color: #050505;
-      border-color: #f7f7f7;
-    }
+    .copy { min-height: 34px; padding: 0 10px; font-size: 12px; }
+    .copy[data-copied='true'], .btn.primary { background: #f7f7f7; color: #050505; border-color: #f7f7f7; }
+    .btn:hover, .copy:hover { transform: translateY(-1px); background: var(--panel3); border-color: rgba(255,255,255,.32); }
+    .btn.primary:hover { background: #fff; }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      background: var(--panel3);
-      border-color: rgba(255,255,255,.32);
-    }
-
-    .btn.primary:hover {
-      background: #fff;
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 12px;
-    }
-
-    .mini-stat,
-    .quick-link {
+    .mini-stat, .quick-link, .tile {
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 14px;
-      background: rgba(255,255,255,.045);
+      background: rgba(255,255,255,.042);
     }
 
-    .mini-stat strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 28px;
-      letter-spacing: -.04em;
-    }
-
-    .mini-stat span,
-    .quick-link span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
+    .mini-stat strong { display: block; margin-bottom: 4px; font-size: 28px; letter-spacing: -.04em; }
+    .mini-stat span, .quick-link span, .tile p { color: var(--muted); font-size: 13px; line-height: 1.4; }
+    .tile p { margin-bottom: 0; }
 
     .quick-link {
       display: flex;
@@ -378,22 +316,7 @@
       transition: background .16s ease, transform .16s ease, border-color .16s ease;
     }
 
-    .quick-link:hover {
-      transform: translateY(-1px);
-      background: var(--panel2);
-      border-color: var(--line2);
-    }
-
-    .section {
-      margin-top: 16px;
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(310px, .72fr);
-      gap: 16px;
-      align-items: start;
-    }
+    .quick-link:hover { transform: translateY(-1px); background: var(--panel2); border-color: var(--line2); }
 
     .card-head {
       display: flex;
@@ -414,44 +337,12 @@
       background: rgba(255,255,255,.06);
     }
 
-    .loader-grid,
-    .feature-grid,
-    .workflow-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .loader-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .feature-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .workflow-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .tile {
-      min-width: 0;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,.042);
-    }
-
-    .tile p {
-      margin-bottom: 0;
-      font-size: 13px;
-    }
-
     pre {
       margin: 0;
       overflow-x: auto;
       border-radius: 16px;
       border: 1px solid var(--line);
-      background: rgba(0,0,0,.46);
+      background: rgba(0,0,0,.48);
       -webkit-overflow-scrolling: touch;
     }
 
@@ -464,41 +355,24 @@
       display: block;
       min-width: max-content;
       padding: 14px;
-      color: #eee;
+      color: #e5e7eb;
       line-height: 1.62;
+      tab-size: 4;
     }
 
-    .code-box {
-      display: grid;
-      gap: 9px;
-    }
+    .code-box { display: grid; gap: 9px; }
+    .copy-row { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
+    .copy-row b { font-size: 14px; }
 
-    .copy-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 9px;
-    }
-
-    .copy-row b {
-      font-size: 14px;
-    }
-
-    .copy {
-      min-height: 34px;
-      padding: 0 10px;
-      border-radius: 11px;
-      border: 1px solid var(--line2);
-      background: rgba(255,255,255,.08);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 760;
-    }
-
-    .copy[data-copied='true'] {
-      background: #f7f7f7;
-      color: #050505;
-    }
+    .luau .kw { color: var(--kw); font-weight: 700; }
+    .luau .fn { color: var(--fn); }
+    .luau .method { color: var(--method); }
+    .luau .str { color: var(--str); }
+    .luau .var { color: var(--var); }
+    .luau .num { color: var(--num); }
+    .luau .prop { color: var(--prop); }
+    .luau .com { color: var(--com); font-style: italic; }
+    .luau .pun, .luau .op { color: var(--pun); }
 
     .list {
       display: grid;
@@ -517,9 +391,7 @@
       line-height: 1.42;
     }
 
-    .list code {
-      color: var(--text);
-    }
+    .list code { color: var(--text); }
 
     .searchbar {
       position: sticky;
@@ -548,9 +420,7 @@
       outline: none;
     }
 
-    .searchbar input::placeholder {
-      color: var(--dim);
-    }
+    .searchbar input::placeholder { color: var(--dim); }
 
     .count {
       min-height: 42px;
@@ -581,23 +451,9 @@
       background: rgba(255,255,255,.042);
     }
 
-    .cmd-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .cmd h3 {
-      margin: 0;
-      word-break: break-word;
-    }
-
-    .cmd p {
-      margin-bottom: 10px;
-      font-size: 13px;
-    }
+    .cmd-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+    .cmd h3 { margin: 0; word-break: break-word; }
+    .cmd p { margin-bottom: 10px; font-size: 13px; }
 
     .usage {
       display: block;
@@ -612,11 +468,7 @@
       white-space: nowrap;
     }
 
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .chips span {
       max-width: 100%;
@@ -658,147 +510,48 @@
       object-fit: cover;
     }
 
-    .dc-name {
-      font-weight: 800;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .dc-meta {
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .footer {
-      margin-top: 16px;
-      color: var(--dim);
-      text-align: center;
-      font-size: 13px;
-    }
+    .dc-name { font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dc-meta { margin-top: 3px; color: var(--muted); font-size: 13px; }
+    .footer { margin-top: 16px; color: var(--dim); text-align: center; font-size: 13px; }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
 
     @media (max-width: 980px) {
-      .hero,
-      .section-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .cmd-grid {
-        grid-template-columns: 1fr;
-      }
+      .hero, .section-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cmd-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
-      .topbar-inner {
-        grid-template-columns: 1fr;
-        gap: 9px;
-        padding-top: 10px;
-      }
-
-      .nav {
-        max-width: 100%;
-        justify-content: flex-start;
-        padding-bottom: 4px;
-      }
-
-      .page {
-        padding-top: 12px;
-      }
-
-      .hero-main {
-        min-height: auto;
-      }
-
-      .loader-grid,
-      .feature-grid,
-      .workflow-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .searchbar {
-        top: 104px;
-        grid-template-columns: 1fr;
-      }
-
-      .count {
-        justify-content: flex-start;
-      }
+      .topbar-inner { grid-template-columns: 1fr; gap: 9px; padding-top: 10px; }
+      .nav { max-width: 100%; justify-content: flex-start; padding-bottom: 4px; }
+      .page { padding-top: 12px; }
+      .hero-main { min-height: auto; }
+      .loader-grid, .feature-grid, .workflow-grid { grid-template-columns: 1fr; }
+      .searchbar { top: 104px; grid-template-columns: 1fr; }
+      .count { justify-content: flex-start; }
     }
 
     @media (max-width: 430px) {
-      h1 {
-        font-size: 37px;
-      }
-
-      .brand-sub {
-        display: none;
-      }
-
-      .actions .btn {
-        width: 100%;
-      }
-
-      .card-head {
-        flex-direction: column;
-      }
-
-      .tag {
-        width: max-content;
-      }
+      h1 { font-size: 37px; }
+      .brand-sub { display: none; }
+      .actions .btn { width: 100%; }
+      .card-head { flex-direction: column; }
+      .tag { width: max-content; }
     }
 
     @media (orientation: landscape) and (max-height: 560px) {
-      .topbar {
-        position: relative;
-      }
-
-      .topbar-inner {
-        grid-template-columns: minmax(0, 1fr) auto;
-        padding-top: 8px;
-        padding-bottom: 8px;
-      }
-
-      .nav {
-        max-width: 62vw;
-      }
-
-      .page {
-        padding-top: 10px;
-      }
-
-      .hero {
-        grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
-      }
-
-      .hero-main {
-        min-height: 235px;
-      }
-
-      h1 {
-        font-size: clamp(32px, 6vw, 48px);
-      }
-
-      .lead {
-        font-size: 14px;
-        line-height: 1.5;
-      }
-
-      .searchbar {
-        position: relative;
-        top: auto;
-      }
+      .topbar { position: relative; }
+      .topbar-inner { grid-template-columns: minmax(0, 1fr) auto; padding-top: 8px; padding-bottom: 8px; }
+      .nav { max-width: 62vw; }
+      .page { padding-top: 10px; }
+      .hero { grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); }
+      .hero-main { min-height: 235px; }
+      h1 { font-size: clamp(32px, 6vw, 48px); }
+      .lead { font-size: 14px; line-height: 1.5; }
+      .searchbar { position: relative; top: auto; }
     }
   </style>
 </head>
@@ -844,14 +597,8 @@
           <strong id='stat-cmds'>...</strong>
           <span>commands loaded from commands.json</span>
         </div>
-        <a class='quick-link' href='#plugins'>
-          <span><b>Plugins</b><br>.na and .iy folder support</span>
-          <span>→</span>
-        </a>
-        <a class='quick-link' href='#discord'>
-          <span><b>Community</b><br>updates and support</span>
-          <span>→</span>
-        </a>
+        <a class='quick-link' href='#plugins'><span><b>Plugins</b><br>.na and .iy folder support</span><span>→</span></a>
+        <a class='quick-link' href='#discord'><span><b>Community</b><br>updates and support</span><span>→</span></a>
       </aside>
     </section>
 
@@ -862,16 +609,16 @@
             <h2>Loaders</h2>
             <p>Use main for normal usage. Testing is for changes that are still being checked.</p>
           </div>
-          <div class='tag'>Copy ready</div>
+          <div class='tag'>Luau</div>
         </div>
         <div class='loader-grid'>
           <div class='tile code-box'>
             <div class='copy-row'><b>Main</b><button class='copy' data-copy='main-code'>Copy</button></div>
-            <pre><code id='main-code'>loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua&quot;))()</code></pre>
+            <pre><code id='main-code' class='luau'><span class='fn'>loadstring</span><span class='pun'>(</span><span class='var'>game</span><span class='pun'>:</span><span class='method'>HttpGet</span><span class='pun'>(</span><span class='str'>&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua&quot;</span><span class='pun'>)</span><span class='pun'>)</span><span class='pun'>()</span></code></pre>
           </div>
           <div class='tile code-box'>
             <div class='copy-row'><b>Testing</b><button class='copy' data-copy='test-code'>Copy</button></div>
-            <pre><code id='test-code'>loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua&quot;))()</code></pre>
+            <pre><code id='test-code' class='luau'><span class='fn'>loadstring</span><span class='pun'>(</span><span class='var'>game</span><span class='pun'>:</span><span class='method'>HttpGet</span><span class='pun'>(</span><span class='str'>&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua&quot;</span><span class='pun'>)</span><span class='pun'>)</span><span class='pun'>()</span></code></pre>
           </div>
         </div>
       </div>
@@ -895,10 +642,7 @@
 
     <section class='section card pad' id='features'>
       <div class='card-head'>
-        <div>
-          <h2>What it covers</h2>
-          <p>Short version of what Nameless Admin is built around.</p>
-        </div>
+        <div><h2>What it covers</h2><p>Short version of what Nameless Admin is built around.</p></div>
         <div class='tag'>Features</div>
       </div>
       <div class='feature-grid'>
@@ -914,10 +658,7 @@
     <section class='section section-grid' id='workflow'>
       <div class='card pad'>
         <div class='card-head'>
-          <div>
-            <h2>Basic use</h2>
-            <p>No long guide. Just the normal flow.</p>
-          </div>
+          <div><h2>Basic use</h2><p>No long guide. Just the normal flow.</p></div>
           <div class='tag'>Start</div>
         </div>
         <div class='workflow-grid'>
@@ -930,10 +671,7 @@
 
       <aside class='card pad' id='discord'>
         <div class='card-head'>
-          <div>
-            <h2>Discord</h2>
-            <p>Updates, support and plugins.</p>
-          </div>
+          <div><h2>Discord</h2><p>Updates, support and plugins.</p></div>
           <div class='tag'>Server</div>
         </div>
         <div class='dc-card'>
@@ -956,34 +694,31 @@
             <h2>Plugins</h2>
             <p>Current .na plugins use <code>Plugin.new(...)</code>, not the old <code>cmdPluginAdd</code> style.</p>
           </div>
-          <div class='tag'>API</div>
+          <div class='tag'>Luau</div>
         </div>
         <div class='code-box'>
           <div class='copy-row'><b>hello.na</b><button class='copy' data-copy='plugin-code'>Copy</button></div>
-          <pre><code id='plugin-code'>local plugin = Plugin.new(&quot;Hello&quot;)
+          <pre><code id='plugin-code' class='luau'><span class='kw'>local</span> <span class='var'>plugin</span> <span class='op'>=</span> <span class='var'>Plugin</span><span class='pun'>.</span><span class='method'>new</span><span class='pun'>(</span><span class='str'>&quot;Hello&quot;</span><span class='pun'>)</span>
 
-plugin:cmd(&quot;hello&quot;, &quot;hi&quot;)
-    :args(&quot;&lt;name&gt;&quot;)
-    :info(&quot;Say hi&quot;)
-    :requiresArgs()
-    :run(function(ctx, name)
-        ctx:notify(&quot;Hello &quot; .. tostring(name), 3)
-    end)
+<span class='var'>plugin</span><span class='pun'>:</span><span class='method'>cmd</span><span class='pun'>(</span><span class='str'>&quot;hello&quot;</span><span class='pun'>,</span> <span class='str'>&quot;hi&quot;</span><span class='pun'>)</span>
+    <span class='pun'>:</span><span class='method'>args</span><span class='pun'>(</span><span class='str'>&quot;&lt;name&gt;&quot;</span><span class='pun'>)</span>
+    <span class='pun'>:</span><span class='method'>info</span><span class='pun'>(</span><span class='str'>&quot;Say hi&quot;</span><span class='pun'>)</span>
+    <span class='pun'>:</span><span class='method'>requiresArgs</span><span class='pun'>()</span>
+    <span class='pun'>:</span><span class='method'>run</span><span class='pun'>(</span><span class='kw'>function</span><span class='pun'>(</span><span class='var'>ctx</span><span class='pun'>,</span> <span class='var'>name</span><span class='pun'>)</span>
+        <span class='var'>ctx</span><span class='pun'>:</span><span class='method'>notify</span><span class='pun'>(</span><span class='str'>&quot;Hello &quot;</span> <span class='op'>..</span> <span class='fn'>tostring</span><span class='pun'>(</span><span class='var'>name</span><span class='pun'>),</span> <span class='num'>3</span><span class='pun'>)</span>
+    <span class='kw'>end</span><span class='pun'>)</span>
 
-plugin:cmd(&quot;fastfly&quot;)
-    :info(&quot;Starts fly at speed 50&quot;)
-    :run(function(ctx)
-        ctx:run(&quot;fly 50&quot;)
-    end)</code></pre>
+<span class='var'>plugin</span><span class='pun'>:</span><span class='method'>cmd</span><span class='pun'>(</span><span class='str'>&quot;fastfly&quot;</span><span class='pun'>)</span>
+    <span class='pun'>:</span><span class='method'>info</span><span class='pun'>(</span><span class='str'>&quot;Starts fly at speed 50&quot;</span><span class='pun'>)</span>
+    <span class='pun'>:</span><span class='method'>run</span><span class='pun'>(</span><span class='kw'>function</span><span class='pun'>(</span><span class='var'>ctx</span><span class='pun'>)</span>
+        <span class='var'>ctx</span><span class='pun'>:</span><span class='method'>run</span><span class='pun'>(</span><span class='str'>&quot;fly 50&quot;</span><span class='pun'>)</span>
+    <span class='kw'>end</span><span class='pun'>)</span></code></pre>
         </div>
       </div>
 
       <aside class='card pad'>
         <div class='card-head'>
-          <div>
-            <h2>Plugin folders</h2>
-            <p>Put files in the right place, reload, done.</p>
-          </div>
+          <div><h2>Plugin folders</h2><p>Put files in the right place, reload, done.</p></div>
           <div class='tag'>Paths</div>
         </div>
         <ul class='list'>
@@ -997,10 +732,7 @@ plugin:cmd(&quot;fastfly&quot;)
 
     <section class='section card pad' id='commands'>
       <div class='card-head'>
-        <div>
-          <h2>Commands</h2>
-          <p>Loaded live from the Nameless Admin repository.</p>
-        </div>
+        <div><h2>Commands</h2><p>Loaded live from the Nameless Admin repository.</p></div>
         <div class='tag'>Core</div>
       </div>
       <div class='searchbar'>
@@ -1012,10 +744,7 @@ plugin:cmd(&quot;fastfly&quot;)
 
     <section class='section card pad' id='patched'>
       <div class='card-head'>
-        <div>
-          <h2>Patched commands</h2>
-          <p>Overrides and fixes from <code>commands.json</code>.</p>
-        </div>
+        <div><h2>Patched commands</h2><p>Overrides and fixes from <code>commands.json</code>.</p></div>
         <div class='tag'>Patched</div>
       </div>
       <div id='patched-list' class='cmd-grid'></div>
@@ -1032,13 +761,12 @@ plugin:cmd(&quot;fastfly&quot;)
       let allCards = [];
 
       const $ = id => document.getElementById(id);
-      const esc = value => String(value == null ? '' : value).replace(/[&<>'`]/g, ch => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '\'': '&#39;',
-        '`': '&#96;'
-      }[ch]));
+      const esc = v => String(v == null ? '' : v)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/'/g, '&#39;')
+        .replace(/`/g, '&#96;');
 
       const copyText = async text => {
         if (navigator.clipboard && window.isSecureContext) {
@@ -1093,7 +821,6 @@ plugin:cmd(&quot;fastfly&quot;)
         const card = document.createElement('article');
         card.className = 'cmd';
         card.dataset.search = [name, usage, desc, ...aliases].join(' ').toLowerCase();
-
         const chips = aliases.slice(0, 8).map(v => `<span>${esc(v)}</span>`).join('');
         const more = aliases.length > 8 ? `<span>+${aliases.length - 8}</span>` : '';
 
@@ -1106,19 +833,16 @@ plugin:cmd(&quot;fastfly&quot;)
           <code class='usage'>${esc(usage)}</code>
           <div class='chips'>${chips}${more}</div>
         `;
-
         return card;
       };
 
       const renderCommands = (items, target, emptyText) => {
         const box = $(target);
         box.innerHTML = '';
-
         if (!items.length) {
           box.innerHTML = `<div class='empty'>${esc(emptyText)}</div>`;
           return [];
         }
-
         const frag = document.createDocumentFragment();
         const cards = items.map(makeCommand);
         cards.forEach(card => frag.appendChild(card));
@@ -1129,13 +853,11 @@ plugin:cmd(&quot;fastfly&quot;)
       const applySearch = () => {
         const q = ($('cmd-search').value || '').trim().toLowerCase();
         let visible = 0;
-
         allCards.forEach(card => {
           const ok = !q || card.dataset.search.includes(q);
           card.hidden = !ok;
           if (ok) visible++;
         });
-
         $('cmd-count').textContent = `${visible} shown`;
       };
 
@@ -1146,10 +868,8 @@ plugin:cmd(&quot;fastfly&quot;)
           const data = await res.json();
           const commands = (Array.isArray(data.commands) ? data.commands : []).filter(validCommand);
           const patched = (Array.isArray(data.patched_commands) ? data.patched_commands : []).filter(validCommand);
-
           allCards = renderCommands(commands, 'cmds', 'No commands found.');
           renderCommands(patched, 'patched-list', 'No patched commands listed.');
-
           $('stat-cmds').textContent = String(commands.length);
           count.textContent = `${commands.length} shown`;
           $('cmd-search').addEventListener('input', applySearch);
@@ -1166,22 +886,12 @@ plugin:cmd(&quot;fastfly&quot;)
           const url = `https://discord.com/api/v9/invites/${encodeURIComponent(invite)}?with_counts=true&with_expiration=true`;
           const res = await fetch(url, { mode: 'cors' });
           if (!res.ok) return;
-
           const data = await res.json();
           const guild = data.guild || null;
           if (guild && guild.name) $('dc-name').textContent = guild.name;
-
-          if (typeof data.approximate_member_count === 'number') {
-            $('dc-members').textContent = `${data.approximate_member_count.toLocaleString()} members`;
-          }
-
-          if (typeof data.approximate_presence_count === 'number') {
-            $('dc-online').textContent = `· ${data.approximate_presence_count.toLocaleString()} online`;
-          }
-
-          if (guild && guild.id && guild.icon) {
-            $('dc-icon').src = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128`;
-          }
+          if (typeof data.approximate_member_count === 'number') $('dc-members').textContent = `${data.approximate_member_count.toLocaleString()} members`;
+          if (typeof data.approximate_presence_count === 'number') $('dc-online').textContent = `· ${data.approximate_presence_count.toLocaleString()} online`;
+          if (guild && guild.id && guild.icon) $('dc-icon').src = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128`;
         } catch (e) {}
       };
 
