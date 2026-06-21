@@ -224,9 +224,10 @@
       gap: 26px;
     }
 
-    .hero-side, .loader-grid, .feature-grid, .workflow-grid { display: grid; gap: 12px; }
+    .hero-side, .loader-grid, .feature-grid, .workflow-grid, .api-grid { display: grid; gap: 12px; }
     .loader-grid, .workflow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .api-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
     .eyebrow {
       width: max-content;
@@ -370,7 +371,6 @@
     .luau .str { color: var(--str); }
     .luau .var { color: var(--var); }
     .luau .num { color: var(--num); }
-    .luau .prop { color: var(--prop); }
     .luau .com { color: var(--com); font-style: italic; }
     .luau .pun, .luau .op { color: var(--pun); }
 
@@ -520,7 +520,7 @@
 
     @media (max-width: 980px) {
       .hero, .section-grid { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feature-grid, .api-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cmd-grid { grid-template-columns: 1fr; }
     }
 
@@ -529,7 +529,7 @@
       .nav { max-width: 100%; justify-content: flex-start; padding-bottom: 4px; }
       .page { padding-top: 12px; }
       .hero-main { min-height: auto; }
-      .loader-grid, .feature-grid, .workflow-grid { grid-template-columns: 1fr; }
+      .loader-grid, .feature-grid, .workflow-grid, .api-grid { grid-template-columns: 1fr; }
       .searchbar { top: 104px; grid-template-columns: 1fr; }
       .count { justify-content: flex-start; }
     }
@@ -605,30 +605,24 @@
     <section class='section section-grid' id='loaders'>
       <div class='card pad'>
         <div class='card-head'>
-          <div>
-            <h2>Loaders</h2>
-            <p>Use main for normal usage. Testing is for changes that are still being checked.</p>
-          </div>
+          <div><h2>Loaders</h2><p>Use main for normal usage. Testing is for changes that are still being checked.</p></div>
           <div class='tag'>Luau</div>
         </div>
         <div class='loader-grid'>
           <div class='tile code-box'>
             <div class='copy-row'><b>Main</b><button class='copy' data-copy='main-code'>Copy</button></div>
-            <pre><code id='main-code' class='luau'><span class='fn'>loadstring</span><span class='pun'>(</span><span class='var'>game</span><span class='pun'>:</span><span class='method'>HttpGet</span><span class='pun'>(</span><span class='str'>&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua&quot;</span><span class='pun'>)</span><span class='pun'>)</span><span class='pun'>()</span></code></pre>
+            <pre><code id='main-code' class='luau'>loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua&quot;))()</code></pre>
           </div>
           <div class='tile code-box'>
             <div class='copy-row'><b>Testing</b><button class='copy' data-copy='test-code'>Copy</button></div>
-            <pre><code id='test-code' class='luau'><span class='fn'>loadstring</span><span class='pun'>(</span><span class='var'>game</span><span class='pun'>:</span><span class='method'>HttpGet</span><span class='pun'>(</span><span class='str'>&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua&quot;</span><span class='pun'>)</span><span class='pun'>)</span><span class='pun'>()</span></code></pre>
+            <pre><code id='test-code' class='luau'>loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua&quot;))()</code></pre>
           </div>
         </div>
       </div>
 
       <aside class='card pad'>
         <div class='card-head'>
-          <div>
-            <h2>Quick info</h2>
-            <p>Small things that matter.</p>
-          </div>
+          <div><h2>Quick info</h2><p>Small things that matter.</p></div>
           <div class='tag'>Basics</div>
         </div>
         <ul class='list'>
@@ -687,47 +681,119 @@
       </aside>
     </section>
 
-    <section class='section section-grid' id='plugins'>
-      <div class='card pad'>
-        <div class='card-head'>
-          <div>
-            <h2>Plugins</h2>
-            <p>Current .na plugins use <code>Plugin.new(...)</code>, not the old <code>cmdPluginAdd</code> style.</p>
-          </div>
-          <div class='tag'>Luau</div>
+    <section class='section card pad' id='plugins'>
+      <div class='card-head'>
+        <div>
+          <h2>Plugins</h2>
+          <p>Full native .na plugin example using the current Plugin API.</p>
         </div>
-        <div class='code-box'>
-          <div class='copy-row'><b>hello.na</b><button class='copy' data-copy='plugin-code'>Copy</button></div>
-          <pre><code id='plugin-code' class='luau'><span class='kw'>local</span> <span class='var'>plugin</span> <span class='op'>=</span> <span class='var'>Plugin</span><span class='pun'>.</span><span class='method'>new</span><span class='pun'>(</span><span class='str'>&quot;Hello&quot;</span><span class='pun'>)</span>
-
-<span class='var'>plugin</span><span class='pun'>:</span><span class='method'>cmd</span><span class='pun'>(</span><span class='str'>&quot;hello&quot;</span><span class='pun'>,</span> <span class='str'>&quot;hi&quot;</span><span class='pun'>)</span>
-    <span class='pun'>:</span><span class='method'>args</span><span class='pun'>(</span><span class='str'>&quot;&lt;name&gt;&quot;</span><span class='pun'>)</span>
-    <span class='pun'>:</span><span class='method'>info</span><span class='pun'>(</span><span class='str'>&quot;Say hi&quot;</span><span class='pun'>)</span>
-    <span class='pun'>:</span><span class='method'>requiresArgs</span><span class='pun'>()</span>
-    <span class='pun'>:</span><span class='method'>run</span><span class='pun'>(</span><span class='kw'>function</span><span class='pun'>(</span><span class='var'>ctx</span><span class='pun'>,</span> <span class='var'>name</span><span class='pun'>)</span>
-        <span class='var'>ctx</span><span class='pun'>:</span><span class='method'>notify</span><span class='pun'>(</span><span class='str'>&quot;Hello &quot;</span> <span class='op'>..</span> <span class='fn'>tostring</span><span class='pun'>(</span><span class='var'>name</span><span class='pun'>),</span> <span class='num'>3</span><span class='pun'>)</span>
-    <span class='kw'>end</span><span class='pun'>)</span>
-
-<span class='var'>plugin</span><span class='pun'>:</span><span class='method'>cmd</span><span class='pun'>(</span><span class='str'>&quot;fastfly&quot;</span><span class='pun'>)</span>
-    <span class='pun'>:</span><span class='method'>info</span><span class='pun'>(</span><span class='str'>&quot;Starts fly at speed 50&quot;</span><span class='pun'>)</span>
-    <span class='pun'>:</span><span class='method'>run</span><span class='pun'>(</span><span class='kw'>function</span><span class='pun'>(</span><span class='var'>ctx</span><span class='pun'>)</span>
-        <span class='var'>ctx</span><span class='pun'>:</span><span class='method'>run</span><span class='pun'>(</span><span class='str'>&quot;fly 50&quot;</span><span class='pun'>)</span>
-    <span class='kw'>end</span><span class='pun'>)</span></code></pre>
-        </div>
+        <div class='tag'>Luau</div>
       </div>
+      <div class='code-box'>
+        <div class='copy-row'><b>full-example.na</b><button class='copy' data-copy='plugin-code'>Copy</button></div>
+        <pre><code id='plugin-code' class='luau'>local plugin = Plugin.new(&quot;Example&quot;)
 
-      <aside class='card pad'>
-        <div class='card-head'>
-          <div><h2>Plugin folders</h2><p>Put files in the right place, reload, done.</p></div>
-          <div class='tag'>Paths</div>
-        </div>
-        <ul class='list'>
-          <li><code>Nameless-Admin/Plugins</code><br>.na plugins</li>
-          <li><code>Nameless-Admin/PluginsIY</code><br>.iy plugins</li>
-          <li><code>ctx:notify(text, time)</code><br>send a Nameless Admin notification</li>
-          <li><code>ctx:run(command)</code><br>run another Nameless Admin command</li>
-        </ul>
-      </aside>
+plugin:cmd(&quot;hello&quot;, &quot;hi&quot;)
+    -- :args(text) shows the usage hint in command lists and autofill.
+    :args(&quot;&lt;name&gt;&quot;)
+    -- :info(text) is the command description.
+    :info(&quot;Say hi&quot;)
+    -- :requiresArgs() blocks empty command input.
+    :requiresArgs()
+    -- :userButton(...) creates a temporary plugin button when the plugin loads.
+    :userButton({ Label = &quot;Hello&quot;, SaveArgs = true })
+    -- :run(function(ctx, ...)) is the command code.
+    :run(function(ctx, name)
+        ctx:notify(&quot;Hello &quot; .. tostring(name), 3)
+    end)
+
+plugin:cmd(&quot;fastfly&quot;)
+    :info(&quot;Starts fly at speed 50&quot;)
+    :run(function(ctx)
+        ctx:run(&quot;fly 50&quot;)
+    end)
+
+plugin:cmd(&quot;torandom&quot;)
+    :info(&quot;Teleports to a random player&quot;)
+    :run(function(ctx)
+        ctx:run(&quot;to&quot;, &quot;random&quot;)
+    end)
+
+plugin:cmd(&quot;clipagain&quot;)
+    :info(&quot;Runs noclip from a table command call&quot;)
+    :run(function(ctx)
+        ctx:run({&quot;noclip&quot;})
+    end)
+
+plugin:cmd(&quot;note&quot;)
+    :args(&quot;&lt;text&gt;&quot;)
+    :info(&quot;Shows a notification&quot;)
+    :requiresArgs()
+    :userButton({ Label = &quot;Note&quot;, SaveArgs = true })
+    :run(function(ctx, ...)
+        ctx:notify(table.concat({...}, &quot; &quot;), 3)
+    end)
+
+PluginUI.addUserButton(&quot;Noclip&quot;, &quot;noclip&quot;)
+PluginUI.addToggleButton(&quot;Clip&quot;, &quot;noclip&quot;, &quot;clip&quot;)
+PluginUI.addUserButton({ Label = &quot;Fly&quot;, Command = &quot;fly&quot;, SaveArgs = true })
+PluginUI.removeUserButton(&quot;Fly&quot;)
+
+plugin:cmd(&quot;panelon&quot;)
+    :info(&quot;Creates a mobile-only panel button&quot;)
+    :buttonOnRun({
+        Id = &quot;panel-toggle&quot;,
+        Label = &quot;Panel&quot;,
+        Command = &quot;panelon&quot;,
+        Command2 = &quot;paneloff&quot;,
+        MobileOnly = true
+    })
+    :run(function(ctx)
+        if ctx.IsOnMobile then
+            ctx:notify(&quot;Panel button ready&quot;, 2)
+        end
+    end)
+
+plugin:cmd(&quot;paneloff&quot;)
+    :info(&quot;Removes the panel button&quot;)
+    :removeButtonOnRun(&quot;panel-toggle&quot;)
+    :run(function(ctx)
+        ctx:notify(&quot;Panel button removed&quot;, 2)
+    end)
+
+plugin:cmd(&quot;makenotebutton&quot;)
+    :info(&quot;Creates the Note button when this command is run&quot;)
+    :run(function(ctx)
+        ctx:addUserButton({
+            Label = &quot;Note&quot;,
+            Command = &quot;note&quot;,
+            SaveArgs = true
+        })
+    end)
+
+-- Useful ctx values inside :run(...):
+-- ctx:notify(&quot;message&quot;, 3)
+-- ctx:run(&quot;fly 50&quot;)
+-- ctx:run(&quot;to&quot;, &quot;random&quot;)
+-- ctx:run({&quot;noclip&quot;})
+-- ctx:addUserButton({ Label = &quot;Fly&quot;, Command = &quot;fly&quot;, SaveArgs = true })
+-- ctx:removeUserButton(&quot;Fly&quot;)
+-- ctx.IsOnMobile / ctx.IsOnPC / ctx.IsMobile / ctx.IsPC
+-- IsOnMobile / IsOnPC / IsMobile / IsPC
+-- NA_GRAB_BODY
+-- getRoot(character), getChar(), getHum(character)
+-- ctx.Services.Players
+-- ctx.LocalPlayer
+-- ctx.UI
+-- ctx.File
+-- ctx.Path</code></pre>
+      </div>
+      <div class='api-grid' style='margin-top:12px'>
+        <div class='tile'><h3>Native folder</h3><p><code>Nameless-Admin/Plugins</code><br>.na plugins use <code>Plugin.new(...)</code>.</p></div>
+        <div class='tile'><h3>IY folder</h3><p><code>Nameless-Admin/PluginsIY</code><br>.iy plugins stay in the Infinite Yield style folder.</p></div>
+        <div class='tile'><h3>Buttons</h3><p>Plugins can create temporary user buttons, toggle buttons and command-run buttons.</p></div>
+        <div class='tile'><h3>Context</h3><p><code>ctx</code> gives helpers for notifications, command calls, UI, file paths and local player data.</p></div>
+      </div>
     </section>
 
     <section class='section card pad' id='commands'>
@@ -755,7 +821,7 @@
 
   <script>
     (function () {
-      const commandsURL = 'https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json';
+      const cmdURL = 'https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json';
       const invite = 'zzjYhtMGFD';
       const hidden = new Set(['rotectoresp', 'unrotectoresp']);
       let allCards = [];
@@ -767,6 +833,62 @@
         .replace(/>/g, '&gt;')
         .replace(/'/g, '&#39;')
         .replace(/`/g, '&#96;');
+
+      const span = (cls, txt) => `<span class='${cls}'>${esc(txt)}</span>`;
+      const kw = new Set(['and','break','continue','do','else','elseif','end','false','for','function','if','in','local','nil','not','or','repeat','return','then','true','until','while']);
+      const built = new Set(['loadstring','tostring','tonumber','pairs','ipairs','next','table','string','math','task','game']);
+      const isA = c => /[A-Za-z_]/.test(c);
+      const isB = c => /[A-Za-z0-9_]/.test(c);
+      const isN = c => /[0-9]/.test(c);
+
+      const highlight = src => {
+        let out = '';
+        let i = 0;
+        while (i < src.length) {
+          const ch = src[i];
+          if (ch === '-' && src[i + 1] === '-') {
+            let j = i;
+            while (j < src.length && src[j] !== '\n') j++;
+            out += span('com', src.slice(i, j));
+            i = j;
+          } else if (ch === '\'' || ch.charCodeAt(0) === 34) {
+            const q = ch;
+            let j = i + 1;
+            while (j < src.length) {
+              if (src[j] === q && src[j - 1] !== '\\') { j++; break; }
+              j++;
+            }
+            out += span('str', src.slice(i, j));
+            i = j;
+          } else if (isA(ch)) {
+            let j = i + 1;
+            while (j < src.length && isB(src[j])) j++;
+            const word = src.slice(i, j);
+            let k = i - 1;
+            while (k >= 0 && /\s/.test(src[k])) k--;
+            const prev = src[k];
+            const cls = kw.has(word) ? 'kw' : (prev === ':' || prev === '.') ? 'method' : built.has(word) ? 'fn' : 'var';
+            out += span(cls, word);
+            i = j;
+          } else if (isN(ch)) {
+            let j = i + 1;
+            while (j < src.length && /[0-9.]/.test(src[j])) j++;
+            out += span('num', src.slice(i, j));
+            i = j;
+          } else if ('(){}[],:.=+-*/#<>'.includes(ch)) {
+            out += span('pun', ch);
+            i++;
+          } else {
+            out += esc(ch);
+            i++;
+          }
+        }
+        return out;
+      };
+
+      document.querySelectorAll('code.luau').forEach(code => {
+        code.innerHTML = highlight(code.textContent);
+      });
 
       const copyText = async text => {
         if (navigator.clipboard && window.isSecureContext) {
@@ -864,7 +986,7 @@
       const loadCommands = async () => {
         const count = $('cmd-count');
         try {
-          const res = await fetch(commandsURL, { cache: 'no-store' });
+          const res = await fetch(cmdURL, { cache: 'no-store' });
           const data = await res.json();
           const commands = (Array.isArray(data.commands) ? data.commands : []).filter(validCommand);
           const patched = (Array.isArray(data.patched_commands) ? data.patched_commands : []).filter(validCommand);
