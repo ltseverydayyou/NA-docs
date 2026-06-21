@@ -1,51 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang='en'>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
   <title>Nameless Admin Documentation</title>
 
-  <link rel="icon" type="image/png"
-    href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
-  <link rel="apple-touch-icon"
-    href="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png">
+  <link rel='icon' type='image/png' href='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png'>
+  <link rel='apple-touch-icon' href='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png'>
 
-  <meta name="theme-color" content="#050505">
-  <meta property="og:title" content="Nameless Admin Documentation">
-  <meta property="og:description"
-    content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
-  <meta property="og:type" content="website">
-  <meta property="og:image"
-    content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nameless Admin Documentation">
-  <meta name="twitter:description"
-    content="Docs, commands and plugins for Nameless Admin, continuation by ltseverydayyou.">
-  <meta name="twitter:image"
-    content="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png">
+  <meta name='theme-color' content='#050505'>
+  <meta property='og:title' content='Nameless Admin Documentation'>
+  <meta property='og:description' content='Docs, commands and plugins for Nameless Admin.'>
+  <meta property='og:type' content='website'>
+  <meta property='og:image' content='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png'>
+  <meta name='twitter:card' content='summary_large_image'>
+  <meta name='twitter:title' content='Nameless Admin Documentation'>
+  <meta name='twitter:description' content='Docs, commands and plugins for Nameless Admin.'>
+  <meta name='twitter:image' content='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/Github_Images/banner.png'>
 
   <style>
     :root {
       color-scheme: dark;
       --bg: #050505;
-      --bg-soft: #0a0a0a;
-      --panel: #111111;
-      --panel-2: #161616;
-      --panel-3: #1d1d1d;
+      --bg2: #090909;
+      --panel: rgba(255, 255, 255, 0.055);
+      --panel2: rgba(255, 255, 255, 0.085);
+      --panel3: rgba(255, 255, 255, 0.12);
       --text: #f7f7f7;
-      --muted: #aaaaaa;
-      --dim: #777777;
-      --line: #2a2a2a;
-      --line-2: #3a3a3a;
-      --white-08: rgba(255, 255, 255, 0.08);
-      --white-12: rgba(255, 255, 255, 0.12);
-      --white-18: rgba(255, 255, 255, 0.18);
-      --white-30: rgba(255, 255, 255, 0.3);
-      --code: #090909;
-      --danger: #ff5a78;
-      --radius: 18px;
-      --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --muted: #aaa;
+      --dim: #777;
+      --line: rgba(255, 255, 255, 0.12);
+      --line2: rgba(255, 255, 255, 0.2);
+      --good: #f7f7f7;
+      --bad: #ff6b8a;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.48);
+      --radius: 22px;
       --page: 1180px;
     }
 
@@ -54,35 +43,39 @@
     }
 
     html {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
+      min-width: 0;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
-      width: 100%;
-      max-width: 100%;
+      min-width: 0;
       min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.08), transparent 26rem),
-        radial-gradient(circle at 100% 20%, rgba(255, 255, 255, 0.04), transparent 30rem),
-        var(--bg);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 8% -8%, rgba(255, 255, 255, 0.16), transparent 32rem),
+        radial-gradient(circle at 100% 10%, rgba(255, 255, 255, 0.075), transparent 28rem),
+        radial-gradient(circle at 40% 110%, rgba(255, 255, 255, 0.055), transparent 26rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
       text-rendering: optimizeLegibility;
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
 
     body::before {
-      content: "";
+      content: '';
       position: fixed;
       inset: 0;
+      z-index: 0;
       pointer-events: none;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent 75%);
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
     }
 
     a {
@@ -99,50 +92,37 @@
       font: inherit;
     }
 
+    button {
+      cursor: pointer;
+    }
+
+    ::selection {
+      background: #fff;
+      color: #050505;
+    }
+
     :focus-visible {
-      outline: 2px solid #ffffff;
+      outline: 2px solid #fff;
       outline-offset: 3px;
-    }
-
-    @keyframes enter {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
-      }
     }
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 40;
       border-bottom: 1px solid var(--line);
-      background: rgba(5, 5, 5, 0.9);
-      backdrop-filter: blur(14px);
+      background: rgba(5, 5, 5, 0.76);
+      backdrop-filter: blur(18px);
+      padding-top: env(safe-area-inset-top);
     }
 
     .topbar-inner {
-      max-width: var(--page);
+      width: min(100%, var(--page));
       margin: 0 auto;
       padding: 12px clamp(12px, 3vw, 22px);
       display: grid;
-      grid-template-columns: minmax(180px, 1fr) auto;
-      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
       align-items: center;
     }
 
@@ -150,38 +130,30 @@
       min-width: 0;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
       text-decoration: none;
     }
 
     .brand-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      border: 1px solid var(--line-2);
-      background: var(--panel-2);
-      padding: 3px;
+      width: 42px;
+      height: 42px;
       flex: 0 0 auto;
+      border-radius: 14px;
+      padding: 3px;
+      border: 1px solid var(--line2);
+      background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.04));
     }
 
     .brand-icon img {
       width: 100%;
       height: 100%;
-      border-radius: 9px;
+      border-radius: 11px;
       object-fit: cover;
     }
 
-    .brand-title {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
     .brand-main {
-      font-size: clamp(15px, 2vw, 18px);
-      font-weight: 750;
-      letter-spacing: 0.02em;
+      display: block;
+      font-weight: 800;
       line-height: 1.1;
       white-space: nowrap;
       overflow: hidden;
@@ -189,22 +161,32 @@
     }
 
     .brand-sub {
-      font-size: 12px;
+      display: block;
+      margin-top: 2px;
       color: var(--muted);
+      font-size: 12px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .nav {
+      max-width: min(720px, 58vw);
       display: flex;
-      align-items: center;
       justify-content: flex-end;
       gap: 6px;
-      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 1px;
+    }
+
+    .nav::-webkit-scrollbar {
+      display: none;
     }
 
     .nav a {
+      flex: 0 0 auto;
       min-height: 36px;
       display: inline-flex;
       align-items: center;
@@ -215,14 +197,14 @@
       color: var(--muted);
       text-decoration: none;
       font-size: 13px;
-      white-space: nowrap;
-      transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+      font-weight: 650;
+      transition: color .16s ease, background .16s ease, border-color .16s ease, transform .16s ease;
     }
 
     .nav a:hover {
       color: var(--text);
-      background: var(--white-08);
-      border-color: var(--line-2);
+      background: var(--panel2);
+      border-color: var(--line2);
       transform: translateY(-1px);
     }
 
@@ -231,47 +213,50 @@
       z-index: 1;
       width: min(100%, var(--page));
       margin: 0 auto;
-      padding: 18px clamp(12px, 3vw, 22px) 56px;
+      padding: clamp(14px, 2.2vw, 24px) clamp(12px, 3vw, 22px) calc(54px + env(safe-area-inset-bottom));
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(290px, .65fr);
       gap: 16px;
-      margin-bottom: 16px;
+      align-items: stretch;
     }
 
     .card {
       min-width: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)), var(--panel);
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.025)), var(--panel);
       box-shadow: var(--shadow);
-      animation: enter 0.32s ease-out both;
+      overflow: hidden;
     }
 
-    .card.pad {
-      padding: clamp(14px, 2.2vw, 22px);
+    .pad {
+      padding: clamp(15px, 2.4vw, 24px);
     }
 
-    .hero-card {
+    .hero-main {
+      min-height: 330px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 18px;
-      min-height: 260px;
+      gap: 26px;
     }
 
     .eyebrow {
       width: max-content;
       max-width: 100%;
-      padding: 5px 10px;
-      border: 1px solid var(--line-2);
+      margin-bottom: 12px;
+      padding: 6px 10px;
       border-radius: 999px;
+      border: 1px solid var(--line2);
+      background: rgba(255,255,255,.08);
       color: var(--muted);
-      background: var(--white-08);
       font-size: 12px;
-      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .03em;
+      text-transform: uppercase;
     }
 
     h1,
@@ -282,48 +267,39 @@
     }
 
     h1 {
-      margin-bottom: 8px;
-      font-size: clamp(30px, 7vw, 58px);
-      letter-spacing: -0.055em;
-      line-height: 0.95;
+      margin-bottom: 12px;
+      max-width: 780px;
+      font-size: clamp(38px, 8vw, 78px);
+      line-height: .92;
+      letter-spacing: -.07em;
     }
 
     h2 {
       margin-bottom: 10px;
-      font-size: clamp(19px, 2.4vw, 24px);
-      letter-spacing: -0.025em;
-      line-height: 1.15;
+      font-size: clamp(22px, 3.1vw, 31px);
+      line-height: 1.06;
+      letter-spacing: -.04em;
     }
 
     h3 {
-      margin: 18px 0 8px;
+      margin: 0 0 8px;
       font-size: 15px;
       line-height: 1.25;
     }
 
     p {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      color: var(--muted);
       line-height: 1.58;
     }
 
     .lead {
-      max-width: 760px;
+      max-width: 720px;
       margin-bottom: 0;
-      color: var(--muted);
-      font-size: clamp(15px, 2vw, 17px);
+      font-size: clamp(15px, 2.2vw, 18px);
       line-height: 1.65;
     }
 
-    .muted {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .dim {
-      color: var(--dim);
-    }
-
-    .hero-actions,
     .actions {
       display: flex;
       flex-wrap: wrap;
@@ -331,105 +307,92 @@
       align-items: center;
     }
 
-    .btn,
-    .link-btn {
-      min-height: 40px;
+    .btn {
+      min-height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 0 13px;
-      border-radius: 12px;
-      border: 1px solid var(--line-2);
-      background: var(--white-08);
+      padding: 0 14px;
+      border: 1px solid var(--line2);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
       color: var(--text);
       text-decoration: none;
+      font-weight: 750;
       font-size: 13px;
-      font-weight: 650;
       line-height: 1;
       white-space: nowrap;
-      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
     }
 
     .btn.primary {
       background: #f7f7f7;
-      border-color: #f7f7f7;
       color: #050505;
+      border-color: #f7f7f7;
     }
 
-    .btn:hover,
-    .link-btn:hover {
+    .btn:hover {
       transform: translateY(-1px);
-      border-color: var(--white-30);
-      background: var(--white-12);
+      background: var(--panel3);
+      border-color: rgba(255,255,255,.32);
     }
 
     .btn.primary:hover {
-      background: #ffffff;
-      color: #050505;
+      background: #fff;
     }
 
-    .quick-card {
+    .hero-side {
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .quick-row {
-      display: grid;
-      grid-template-columns: 42px minmax(0, 1fr);
-      gap: 10px;
-      align-items: center;
-      padding: 10px;
+    .mini-stat,
+    .quick-link {
       border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.035);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,.045);
     }
 
-    .quick-num {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      border: 1px solid var(--line-2);
-      background: #f7f7f7;
-      color: #050505;
-      font-weight: 800;
-      font-size: 14px;
+    .mini-stat strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 28px;
+      letter-spacing: -.04em;
     }
 
-    .quick-title {
-      color: var(--text);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .quick-text {
+    .mini-stat span,
+    .quick-link span {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.4;
-      margin-top: 2px;
     }
 
-    .layout {
+    .quick-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration: none;
+      transition: background .16s ease, transform .16s ease, border-color .16s ease;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-1px);
+      background: var(--panel2);
+      border-color: var(--line2);
+    }
+
+    .section {
+      margin-top: 16px;
+    }
+
+    .section-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+      grid-template-columns: minmax(0, 1fr) minmax(310px, .72fr);
+      gap: 16px;
       align-items: start;
-      gap: 16px;
-    }
-
-    .stack {
-      display: grid;
-      gap: 16px;
-      min-width: 0;
-    }
-
-    .side {
-      position: sticky;
-      top: 76px;
-      display: grid;
-      gap: 16px;
-      min-width: 0;
     }
 
     .card-head {
@@ -437,1491 +400,794 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .card-title {
-      min-width: 0;
-    }
-
-    .card-title h2 {
-      margin-bottom: 2px;
+      margin-bottom: 14px;
     }
 
     .tag {
       flex: 0 0 auto;
-      padding: 5px 9px;
-      border: 1px solid var(--line-2);
+      padding: 6px 10px;
+      border: 1px solid var(--line2);
       border-radius: 999px;
-      background: var(--white-08);
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    ul,
-    ol {
-      padding-left: 20px;
-      margin: 8px 0 0;
-    }
-
-    li {
-      margin: 5px 0;
-      line-height: 1.5;
-    }
-
-    .workflow-list {
-      color: var(--muted);
-    }
-
-    .sub-bullet {
-      list-style: disc;
-      margin-top: 4px;
-      padding-left: 18px;
-    }
-
-    .grid-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      padding: 0;
-      margin: 10px 0 0;
-      list-style: none;
-    }
-
-    .grid-list li {
-      margin: 0;
-      padding: 9px 10px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.035);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    code {
-      font-family: "SFMono-Regular", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
-      background: var(--code);
-      color: #ffffff;
-      border: 1px solid var(--line);
-      padding: 2px 5px;
-      border-radius: 6px;
-      font-size: 0.88em;
-      word-break: break-word;
-    }
-
-    pre {
-      max-width: 100%;
-      overflow-x: auto;
-      margin: 10px 0 14px;
-      padding: 13px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: var(--code);
-      color: #ffffff;
-      line-height: 1.55;
-      font-size: 12px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    pre code {
-      border: 0;
-      background: transparent;
-      padding: 0;
-      border-radius: 0;
-    }
-
-    .loader-code-list {
-      display: grid;
-      gap: 10px;
-      margin: 10px 0 14px;
-    }
-
-    .loader-code-card {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--code);
-    }
-
-    .loader-code-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 9px 10px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.035);
-    }
-
-    .loader-code-title {
       color: var(--muted);
       font-size: 12px;
       font-weight: 750;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
+      background: rgba(255,255,255,.06);
     }
 
-    .copy-btn {
-      min-height: 30px;
-      display: inline-flex;
+    .loader-grid,
+    .feature-grid,
+    .workflow-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .loader-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .workflow-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tile {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.042);
+    }
+
+    .tile p {
+      margin-bottom: 0;
+      font-size: 13px;
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.46);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+      font-size: 12.5px;
+    }
+
+    pre code {
+      display: block;
+      min-width: max-content;
+      padding: 14px;
+      color: #eee;
+      line-height: 1.62;
+    }
+
+    .code-box {
+      display: grid;
+      gap: 9px;
+    }
+
+    .copy-row {
+      display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      gap: 9px;
+    }
+
+    .copy-row b {
+      font-size: 14px;
+    }
+
+    .copy {
+      min-height: 34px;
       padding: 0 10px;
-      border: 1px solid var(--line-2);
-      border-radius: 9px;
-      background: var(--white-08);
+      border-radius: 11px;
+      border: 1px solid var(--line2);
+      background: rgba(255,255,255,.08);
       color: var(--text);
-      cursor: pointer;
       font-size: 12px;
-      font-weight: 700;
-      line-height: 1;
-      transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+      font-weight: 760;
     }
 
-    .copy-btn:hover {
-      transform: translateY(-1px);
-      border-color: var(--white-30);
-      background: var(--white-12);
-    }
-
-    .copy-btn[data-copied="true"] {
-      border-color: #f7f7f7;
+    .copy[data-copied='true'] {
       background: #f7f7f7;
       color: #050505;
     }
 
-    .stylua-code {
-      margin: 0;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-    }
-
-    .stylua-code code {
-      display: block;
-      min-width: max-content;
-      color: #e5e7eb;
-      white-space: pre;
-    }
-
-    .lua-fn {
-      color: #7dd3fc;
-    }
-
-    .lua-var {
-      color: #f8fafc;
-    }
-
-    .lua-method {
-      color: #c4b5fd;
-    }
-
-    .lua-str {
-      color: #86efac;
-    }
-
-    .lua-punc {
-      color: #94a3b8;
-    }
-
-    .link {
-      color: #ffffff;
-      text-decoration: none;
-      border-bottom: 1px solid var(--white-18);
-      transition: border-color 0.16s ease;
-    }
-
-    .link:hover {
-      border-bottom-color: #ffffff;
-    }
-
-    .dc-wrap {
+    .list {
       display: grid;
-      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      color: var(--muted);
+      background: rgba(255,255,255,.035);
+      line-height: 1.42;
+    }
+
+    .list code {
+      color: var(--text);
+    }
+
+    .searchbar {
+      position: sticky;
+      top: 75px;
+      z-index: 25;
+      margin-bottom: 13px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 10px;
-      align-items: center;
-      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(8,8,8,.86);
+      backdrop-filter: blur(16px);
     }
 
-    .dc-ico {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      overflow: hidden;
-      background: var(--panel-2);
-      border: 1px solid var(--line-2);
-    }
-
-    .dc-ico img {
+    .searchbar input {
+      min-width: 0;
       width: 100%;
-      height: 100%;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0 13px;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      outline: none;
+    }
+
+    .searchbar input::placeholder {
+      color: var(--dim);
+    }
+
+    .count {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      background: rgba(255,255,255,.045);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .cmd-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .cmd {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,.042);
+    }
+
+    .cmd-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .cmd h3 {
+      margin: 0;
+      word-break: break-word;
+    }
+
+    .cmd p {
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .usage {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(0,0,0,.32);
+      color: #eee;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chips span {
+      max-width: 100%;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.052);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .empty {
+      padding: 28px;
+      border: 1px dashed var(--line2);
+      border-radius: 18px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .dc-card {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.042);
+    }
+
+    .dc-card img {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 1px solid var(--line2);
       object-fit: cover;
     }
 
     .dc-name {
-      min-width: 0;
+      font-weight: 800;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-weight: 700;
     }
 
-    .dc-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .dc-meta {
       margin-top: 3px;
       color: var(--muted);
-      font-size: 12px;
-    }
-
-    .dc-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      align-items: center;
-      margin-top: 12px;
-    }
-
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin: 12px 0 0;
-    }
-
-    .info-card {
-      min-width: 0;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.035);
-    }
-
-    .info-card h3 {
-      margin: 0 0 6px;
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.25;
-    }
-
-    .info-card p {
-      margin: 0;
-      color: var(--muted);
       font-size: 13px;
-      line-height: 1.5;
     }
 
-    .callout {
-      margin: 12px 0 0;
-      padding: 11px 12px;
-      border: 1px solid var(--line-2);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.055);
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .example-list {
-      display: grid;
-      gap: 8px;
-      padding: 0;
-      margin: 10px 0 0;
-      list-style: none;
-    }
-
-    .example-list li {
-      margin: 0;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #0a0a0a;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 8px;
-      padding: 0;
-      margin: 10px 0 0;
-      list-style: none;
-    }
-
-    .mini-list li {
-      margin: 0;
-      padding: 9px 10px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.035);
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .section-wide {
+    .footer {
       margin-top: 16px;
-    }
-
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin: 12px 0;
-    }
-
-    .search {
-      position: relative;
-      flex: 1 1 260px;
-      min-width: 0;
-    }
-
-    .search input {
-      width: 100%;
-      min-height: 42px;
-      padding: 0 13px;
-      border: 1px solid var(--line-2);
-      border-radius: 13px;
-      background: #090909;
-      color: var(--text);
-      outline: 0;
-    }
-
-    .search input::placeholder {
       color: var(--dim);
-    }
-
-    .count-pill {
-      min-height: 38px;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 11px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--white-08);
-      color: var(--muted);
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .table-wrap {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: #0a0a0a;
-    }
-
-    table {
-      width: 100%;
-      min-width: 760px;
-      border-collapse: collapse;
+      text-align: center;
       font-size: 13px;
     }
 
-    th,
-    td {
-      padding: 10px 11px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: #151515;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 750;
-      letter-spacing: 0.02em;
-    }
-
-    td {
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    tbody tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    tbody tr:hover {
-      background: rgba(255, 255, 255, 0.055);
-    }
-
-    tbody tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .patch-list {
-      display: grid;
-      gap: 8px;
-      padding: 0;
-      margin: 12px 0 0;
-      list-style: none;
-    }
-
-    .patch-list li {
-      margin: 0;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.035);
-      color: var(--muted);
-    }
-
-    .empty {
-      color: var(--dim);
-      padding: 10px 0 0;
-    }
-
-    .is-hidden {
-      display: none !important;
-    }
-
-    .unused,
-    .pills,
-    .pill {
-      display: none !important;
-    }
-
-    @media (max-width: 1020px) {
-      .topbar-inner {
-        grid-template-columns: 1fr;
-        gap: 10px;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
       }
+    }
 
-      .nav {
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 2px;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .nav::-webkit-scrollbar {
-        display: none;
-      }
-
+    @media (max-width: 980px) {
       .hero,
-      .layout {
+      .section-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-card {
-        min-height: 0;
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .side {
-        position: static;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .cmd-grid {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 720px) {
-      body::before {
-        display: none;
-      }
-
       .topbar-inner {
-        padding: 10px 11px;
+        grid-template-columns: 1fr;
+        gap: 9px;
+        padding-top: 10px;
       }
 
-      .brand-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 11px;
+      .nav {
+        max-width: 100%;
+        justify-content: flex-start;
+        padding-bottom: 4px;
+      }
+
+      .page {
+        padding-top: 12px;
+      }
+
+      .hero-main {
+        min-height: auto;
+      }
+
+      .loader-grid,
+      .feature-grid,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .searchbar {
+        top: 104px;
+        grid-template-columns: 1fr;
+      }
+
+      .count {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 430px) {
+      h1 {
+        font-size: 37px;
       }
 
       .brand-sub {
         display: none;
       }
 
-      .nav {
-        gap: 7px;
-      }
-
-      .nav a {
-        min-height: 38px;
-        padding: 0 11px;
-        border-color: var(--line);
-        background: rgba(255, 255, 255, 0.035);
-        font-size: 12px;
-      }
-
-      .page {
-        padding: 12px 10px 42px;
-      }
-
-      .hero,
-      .layout,
-      .stack,
-      .side,
-      .section-wide {
-        gap: 10px;
-      }
-
-      .side {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        border-radius: 15px;
-      }
-
-      .card.pad {
-        padding: 14px;
-      }
-
-      .hero-actions,
-      .actions,
-      .dc-row,
-      .toolbar {
-        align-items: stretch;
-      }
-
-      .btn,
-      .link-btn,
-      .search,
-      .count-pill {
+      .actions .btn {
         width: 100%;
       }
 
-      .grid-list {
-        grid-template-columns: 1fr;
+      .card-head {
+        flex-direction: column;
       }
 
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      pre {
-        font-size: 11px;
-        border-radius: 12px;
-      }
-
-      .table-wrap {
-        overflow: visible;
-        border: 0;
-        background: transparent;
-      }
-
-      table,
-      thead,
-      tbody,
-      tr,
-      th,
-      td {
-        display: block;
-        width: 100%;
-        min-width: 0;
-      }
-
-      table {
-        min-width: 0;
-      }
-
-      thead {
-        display: none;
-      }
-
-      tbody {
-        display: grid;
-        gap: 9px;
-      }
-
-      tr {
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: #0d0d0d !important;
-        padding: 9px 10px;
-      }
-
-      td {
-        display: grid;
-        grid-template-columns: 86px minmax(0, 1fr);
-        gap: 10px;
-        align-items: start;
-        padding: 6px 0;
-        border: 0;
-        white-space: normal !important;
-        word-break: break-word;
-      }
-
-      td::before {
-        content: attr(data-label);
-        color: var(--dim);
-        font-size: 11px;
-        line-height: 1.4;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
+      .tag {
+        width: max-content;
       }
     }
 
-    @media (max-width: 410px) {
-      .dc-wrap,
-      .quick-row {
-        grid-template-columns: 1fr;
+    @media (orientation: landscape) and (max-height: 560px) {
+      .topbar {
+        position: relative;
       }
 
-      .dc-ico,
-      .quick-num {
-        width: 42px;
-        height: 42px;
+      .topbar-inner {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding-top: 8px;
+        padding-bottom: 8px;
       }
 
-      td {
-        grid-template-columns: 1fr;
-        gap: 3px;
+      .nav {
+        max-width: 62vw;
+      }
+
+      .page {
+        padding-top: 10px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+      }
+
+      .hero-main {
+        min-height: 235px;
+      }
+
+      h1 {
+        font-size: clamp(32px, 6vw, 48px);
+      }
+
+      .lead {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .searchbar {
+        position: relative;
+        top: auto;
       }
     }
   </style>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#about" aria-label="Nameless Admin home">
-        <div class="brand-icon"><img
-            src="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png"
-            alt="NA icon"></div>
-        <div class="brand-title">
-          <div class="brand-main">Nameless Admin</div>
-          <div class="brand-sub">continuation by ltseverydayyou</div>
-        </div>
+  <header class='topbar'>
+    <div class='topbar-inner'>
+      <a class='brand' href='#top' aria-label='Nameless Admin Docs'>
+        <span class='brand-icon'><img src='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png' alt=''></span>
+        <span>
+          <span class='brand-main'>Nameless Admin</span>
+          <span class='brand-sub'>Docs, commands, plugins</span>
+        </span>
       </a>
-      <nav class="nav" aria-label="Page sections">
-        <a href="#about">About</a>
-        <a href="#getting-started">Setup</a>
-        <a href="#architecture">How it works</a>
-        <a href="#features">Features</a>
-        <a href="#selectors">Players</a>
-        <a href="#rotector">Rotector</a>
-        <a href="#commands">Commands</a>
-        <a href="#patched">Patched</a>
-        <a href="#plugins">Plugins</a>
-        <a href="#discord">Discord</a>
+      <nav class='nav' aria-label='Page navigation'>
+        <a href='#loaders'>Load</a>
+        <a href='#features'>Features</a>
+        <a href='#workflow'>Use</a>
+        <a href='#plugins'>Plugins</a>
+        <a href='#commands'>Commands</a>
+        <a href='#patched'>Patched</a>
+        <a href='#discord'>Discord</a>
       </nav>
     </div>
   </header>
 
-  <main class="page">
-    <section class="hero" id="about">
-      <div class="card pad hero-card">
+  <main class='page' id='top'>
+    <section class='hero'>
+      <div class='card pad hero-main'>
         <div>
-          <div class="eyebrow">Docs</div>
-          <h1>Nameless Admin</h1>
-          <p class="lead">An easy admin script for Roblox. This page keeps the loader, commands, player selectors, plugins, UI tools, integrations and Rotector safety checks in one place.</p>
+          <div class='eyebrow'>Roblox admin utility</div>
+          <h1>Fast docs for Nameless Admin.</h1>
+          <p class='lead'>Load the script, find commands, check plugin examples, and copy the useful stuff without digging through walls of text.</p>
         </div>
-        <div class="hero-actions">
-          <a class="btn primary" href="#getting-started">Get started</a>
-          <a class="btn" href="#commands">View commands</a>
-          <a class="btn" href="#plugins">Plugins</a>
+        <div class='actions'>
+          <a class='btn primary' href='#loaders'>Get loader</a>
+          <a class='btn' href='#commands'>Browse commands</a>
+          <a class='btn' href='https://github.com/ltseverydayyou/Nameless-Admin'>GitHub</a>
         </div>
       </div>
 
-      <div class="card pad quick-card" aria-label="Quick info">
-        <div class="quick-row">
-          <div class="quick-num" id="cmd-count">999</div>
+      <aside class='card pad hero-side'>
+        <div class='mini-stat'>
+          <strong id='stat-cmds'>...</strong>
+          <span>commands loaded from commands.json</span>
+        </div>
+        <a class='quick-link' href='#plugins'>
+          <span><b>Plugins</b><br>.na and .iy folder support</span>
+          <span>→</span>
+        </a>
+        <a class='quick-link' href='#discord'>
+          <span><b>Community</b><br>updates and support</span>
+          <span>→</span>
+        </a>
+      </aside>
+    </section>
+
+    <section class='section section-grid' id='loaders'>
+      <div class='card pad'>
+        <div class='card-head'>
           <div>
-            <div class="quick-title">Core commands</div>
-            <div class="quick-text">Loaded from <code>commands.json</code>.</div>
+            <h2>Loaders</h2>
+            <p>Use main for normal usage. Testing is for changes that are still being checked.</p>
+          </div>
+          <div class='tag'>Copy ready</div>
+        </div>
+        <div class='loader-grid'>
+          <div class='tile code-box'>
+            <div class='copy-row'><b>Main</b><button class='copy' data-copy='main-code'>Copy</button></div>
+            <pre><code id='main-code'>loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua&quot;))()</code></pre>
+          </div>
+          <div class='tile code-box'>
+            <div class='copy-row'><b>Testing</b><button class='copy' data-copy='test-code'>Copy</button></div>
+            <pre><code id='test-code'>loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua&quot;))()</code></pre>
           </div>
         </div>
-        <div class="quick-row">
-          <div class="quick-num">2</div>
+      </div>
+
+      <aside class='card pad'>
+        <div class='card-head'>
           <div>
-            <div class="quick-title">Loaders</div>
-            <div class="quick-text">Main and testing builds.</div>
+            <h2>Quick info</h2>
+            <p>Small things that matter.</p>
           </div>
+          <div class='tag'>Basics</div>
         </div>
-        <div class="quick-row">
-          <div class="quick-num">2</div>
-          <div>
-            <div class="quick-title">Plugin folders</div>
-            <div class="quick-text"><code>.na</code> and <code>.iy</code> plugins.</div>
-          </div>
+        <ul class='list'>
+          <li>Default prefix is <code>;</code>.</li>
+          <li>Plugins go inside <code>Nameless-Admin/Plugins</code> or <code>Nameless-Admin/PluginsIY</code>.</li>
+          <li>Commands are pulled from <code>commands.json</code>.</li>
+          <li>Use the search box below to filter commands quickly.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class='section card pad' id='features'>
+      <div class='card-head'>
+        <div>
+          <h2>What it covers</h2>
+          <p>Short version of what Nameless Admin is built around.</p>
         </div>
-        <div class="quick-row">
-          <div class="quick-num">RT</div>
-          <div>
-            <div class="quick-title">Rotector support</div>
-            <div class="quick-text">Warnings, details, markers and the <code>flagged</code> selector.</div>
-          </div>
-        </div>
+        <div class='tag'>Features</div>
+      </div>
+      <div class='feature-grid'>
+        <div class='tile'><h3>Commands</h3><p>Admin command workflow with aliases, arguments, patched commands and quick search.</p></div>
+        <div class='tile'><h3>Players</h3><p>Player selectors like random, others, team-based targets and command-friendly targeting.</p></div>
+        <div class='tile'><h3>Plugins</h3><p>Native .na plugins and Infinite Yield-style .iy plugin folder support.</p></div>
+        <div class='tile'><h3>UI tools</h3><p>Command bar, settings, notifications, user buttons and mobile-aware controls.</p></div>
+        <div class='tile'><h3>Integrations</h3><p>Webhook helpers, teleport scripts, server info copying and Bloxstrap RPC text.</p></div>
+        <div class='tile'><h3>Rotector</h3><p>Optional user safety checks with flagged-player details when enabled.</p></div>
       </div>
     </section>
 
-    <div class="layout">
-      <section class="stack">
-        <div class="card pad" id="getting-started">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>Getting started</h2>
-              <p class="muted">Load the script, then use the command bar.</p>
-            </div>
-            <div class="tag">Setup</div>
+    <section class='section section-grid' id='workflow'>
+      <div class='card pad'>
+        <div class='card-head'>
+          <div>
+            <h2>Basic use</h2>
+            <p>No long guide. Just the normal flow.</p>
           </div>
-          <h3>Loader</h3>
-          <div class="loader-code-list">
-            <div class="loader-code-card">
-              <div class="loader-code-head">
-                <span class="loader-code-title">Main loader</span>
-                <button class="copy-btn" type="button" data-copy-target="main-loader-code" aria-label="Copy main loader">Copy</button>
-              </div>
-              <pre class="stylua-code"><code id="main-loader-code" class="language-lua"><span class="lua-fn">loadstring</span><span class="lua-punc">(</span><span class="lua-var">game</span><span class="lua-punc">:</span><span class="lua-method">HttpGet</span><span class="lua-punc">(</span><span class="lua-str">"https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"</span><span class="lua-punc">)</span><span class="lua-punc">)</span><span class="lua-punc">(</span><span class="lua-punc">)</span></code></pre>
-            </div>
-            <div class="loader-code-card">
-              <div class="loader-code-head">
-                <span class="loader-code-title">Testing loader</span>
-                <button class="copy-btn" type="button" data-copy-target="testing-loader-code" aria-label="Copy testing loader">Copy</button>
-              </div>
-              <pre class="stylua-code"><code id="testing-loader-code" class="language-lua"><span class="lua-fn">loadstring</span><span class="lua-punc">(</span><span class="lua-var">game</span><span class="lua-punc">:</span><span class="lua-method">HttpGet</span><span class="lua-punc">(</span><span class="lua-str">"https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua"</span><span class="lua-punc">)</span><span class="lua-punc">)</span><span class="lua-punc">(</span><span class="lua-punc">)</span></code></pre>
-            </div>
-          </div>
-          <h3>Plugin folders</h3>
-          <ul class="grid-list">
-            <li><code>Nameless-Admin/Plugins</code><br>.na plugins</li>
-            <li><code>Nameless-Admin/PluginsIY</code><br>.iy plugins</li>
-          </ul>
-          <h3>Basic use</h3>
-          <ol class="workflow-list">
-            <li>Press the prefix key. Default is <code>;</code>.</li>
-            <li>Type a command like <code>fly 3</code>, <code>noclip</code> or <code>view random</code>.</li>
-            <li>Use player selectors anywhere a command accepts targets, such as <code>view nearest</code>, <code>locate flagged</code> or <code>goto %Red</code>.</li>
-            <li>Use a backslash to run more than one command: <code>fly 50&#92;goto random&#92;dex</code>.</li>
-            <li>Press <code>TAB</code> or tap a suggestion to complete a command.</li>
-          </ol>
-          <div class="callout">Tip: most command examples leave out the prefix. With the default prefix, <code>fly 3</code> is typed as <code>;fly 3</code>.</div>
+          <div class='tag'>Start</div>
         </div>
-
-        <div class="card pad" id="architecture">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>How it works</h2>
-              <p class="muted">Simple view of the main parts.</p>
-            </div>
-            <div class="tag">Core</div>
-          </div>
-          <ul class="workflow-list">
-            <li><strong>Loader</strong> starts Nameless Admin, prepares protected/shared runtime state and loads the main systems.</li>
-            <li><strong>Command handler</strong> stores aliases, usage hints, argument rules and command functions.</li>
-            <li><strong>Target resolver</strong> turns names and shortcuts like <code>random</code>, <code>team</code>, <code>rad50</code> or <code>flagged</code> into player lists.</li>
-            <li><strong>UI layer</strong> handles windows, notifications, settings, command search, topbar/menu controls and mobile-friendly buttons.</li>
-            <li><strong>Plugins</strong> add extra <code>.na</code> and <code>.iy</code> commands without editing the main loader.</li>
-          </ul>
-          <h3>Command flow</h3>
-          <ol class="workflow-list">
-            <li>You type a command after the prefix.</li>
-            <li>Nameless Admin matches the alias and parses the rest of the text as arguments.</li>
-            <li>Player arguments are resolved through the selector system.</li>
-            <li>The command runs, then NA reports results through notifications, windows, logs or UI changes.</li>
-          </ol>
+        <div class='workflow-grid'>
+          <div class='tile'><h3>1. Execute</h3><p>Run the main loader from your executor.</p></div>
+          <div class='tile'><h3>2. Open command bar</h3><p>Press the prefix key. Default is <code>;</code>.</p></div>
+          <div class='tile'><h3>3. Run command</h3><p>Try <code>fly 3</code>, <code>noclip</code> or <code>view random</code>.</p></div>
+          <div class='tile'><h3>4. Add plugins</h3><p>Drop plugin files in the right folder and reload plugins.</p></div>
         </div>
+      </div>
 
-        <div class="card pad" id="features">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>What NA includes</h2>
-              <p class="muted">A clearer overview of the main systems instead of only listing commands.</p>
-            </div>
-            <div class="tag">Features</div>
+      <aside class='card pad' id='discord'>
+        <div class='card-head'>
+          <div>
+            <h2>Discord</h2>
+            <p>Updates, support and plugins.</p>
           </div>
-          <div class="info-grid">
-            <div class="info-card">
-              <h3>Command bar and autofill</h3>
-              <p>Prefix commands, suggestions, aliases, command chaining with <code>&#92;</code> and quick command search.</p>
-            </div>
-            <div class="info-card">
-              <h3>Player targeting</h3>
-              <p>Use names, display names and selectors such as <code>all</code>, <code>random</code>, <code>rad25</code>, <code>%team</code> and <code>flagged</code>.</p>
-            </div>
-            <div class="info-card">
-              <h3>ESP and locating</h3>
-              <p>Player ESP, chams, locator arrows and part/folder/model ESP.</p>
-            </div>
-            <div class="info-card">
-              <h3>UI and settings</h3>
-              <p>Resizable windows, notifications, topbar controls, command keybinds, themes/settings and safer UI parenting helpers.</p>
-            </div>
-            <div class="info-card">
-              <h3>Logs and moderation helpers</h3>
-              <p>Chat logs, join/leave logs, server/user info windows and quick copy tools for IDs or server data.</p>
-            </div>
-            <div class="info-card">
-              <h3>Integrations</h3>
-              <p>Webhook helpers, server ID copying, teleport script copying and Bloxstrap RPC text support.</p>
-            </div>
-            <div class="info-card">
-              <h3>Plugins</h3>
-              <p><code>.na</code> plugins can register commands. <code>.iy</code> plugins can be loaded from the Infinite Yield plugin folder.</p>
-            </div>
-            <div class="info-card">
-              <h3>Safety checks</h3>
-              <p>Rotector checks can warn about flagged users, show details and mark matching players when enabled.</p>
-            </div>
+          <div class='tag'>Server</div>
+        </div>
+        <div class='dc-card'>
+          <img id='dc-icon' src='https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png' alt='Discord icon'>
+          <div>
+            <div class='dc-name' id='dc-name'>Join the Discord server</div>
+            <div class='dc-meta'><span id='dc-members'></span> <span id='dc-online'></span></div>
           </div>
         </div>
-
-        <div class="card pad" id="selectors">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>Selecting players</h2>
-              <p class="muted">Short names for picking targets.</p>
-            </div>
-            <div class="tag">Targets</div>
-          </div>
-          <p class="muted">Selectors can be used in commands that accept a player argument. They work with direct usernames/display names too, so partial names and special selectors can be mixed depending on the command.</p>
-          <ul class="grid-list">
-            <li><code>all</code> everyone</li>
-            <li><code>others</code> everyone except you</li>
-            <li><code>me</code> just you</li>
-            <li><code>random</code> one random player</li>
-            <li><code>nearest</code> closest player</li>
-            <li><code>farthest</code> farthest player</li>
-            <li><code>alive</code> alive players</li>
-            <li><code>dead</code> dead players</li>
-            <li><code>friends</code> Roblox friends</li>
-            <li><code>nonfriends</code> not your friends</li>
-            <li><code>team</code> your team</li>
-            <li><code>nonteam</code> other teams</li>
-            <li><code>allies</code> same team</li>
-            <li><code>enemies</code> different team</li>
-            <li><code>seated</code> sitting players</li>
-            <li><code>stood</code> non-sitting players</li>
-            <li><code>r15</code> R15 avatars</li>
-            <li><code>r6</code> R6 avatars</li>
-            <li><code>invisible</code> fully transparent characters</li>
-            <li><code>bacon</code> classic bacon-style avatars</li>
-            <li><code>slenders</code> tall R15 avatars</li>
-            <li><code>short</code> short R15 avatars</li>
-            <li><code>npc</code> NPCs</li>
-            <li><code>cursor</code> player under mouse</li>
-            <li><code>flagged</code> Rotector-flagged or recorded server players</li>
-            <li><code>#&lt;number&gt;</code> random amount</li>
-            <li><code>%&lt;team&gt;</code> team name prefix</li>
-            <li><code>age&lt;days&gt;</code> account age at or below days</li>
-            <li><code>group&lt;id&gt;</code> players in group ID</li>
-            <li><code>rad&lt;studs&gt;</code> nearby players</li>
-          </ul>
-          <div class="callout"><code>flagged</code> checks current server players against Rotector data. It uses cached records when available, then looks up uncached users and returns players that NA should warn about or surface.</div>
-          <ul class="example-list">
-            <li><code>view random</code> watches one random player.</li>
-            <li><code>locate flagged</code> locates players surfaced by Rotector.</li>
-            <li><code>goto %Red</code> targets players whose team name starts with Red.</li>
-            <li><code>bring rad25</code> targets players within 25 studs.</li>
-          </ul>
+        <div class='actions' style='margin-top:12px'>
+          <a class='btn primary' href='https://discord.gg/zzjYhtMGFD'>Join Discord</a>
         </div>
+      </aside>
+    </section>
 
-        <div class="card pad" id="rotector">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>Rotector checks</h2>
-              <p class="muted">Checks Roblox users through the Rotector API and shows warning/details inside NA.</p>
-            </div>
-            <div class="tag">API</div>
+    <section class='section section-grid' id='plugins'>
+      <div class='card pad'>
+        <div class='card-head'>
+          <div>
+            <h2>Plugins</h2>
+            <p>Current .na plugins use <code>Plugin.new(...)</code>, not the old <code>cmdPluginAdd</code> style.</p>
           </div>
-          <p class="muted">Rotector results can include a flag status, category, confidence and reason lines when the API returns them. NA caches results for a short time, warns on stronger records, can show CoreGui markers and can open a details window for extra reason text.</p>
-          <ul class="example-list">
-            <li><code>rotector</code> checks other players in the current server.</li>
-            <li><code>rotector all</code> checks every player target returned by <code>all</code>.</li>
-            <li><code>rotector flagged</code> shows details for players matched by the <code>flagged</code> selector.</li>
-            <li><code>rotector id:&lt;userId&gt;</code> checks an offline Roblox user ID.</li>
-            <li><code>rotector on</code> / <code>rotector off</code> toggles Rotector warning notifications.</li>
-            <li><code>rotector mixed on</code> / <code>rotector mixed off</code> toggles mixed-record warnings.</li>
-            <li><code>rotector markers on</code> / <code>rotector markers off</code> toggles visible markers for surfaced players.</li>
-          </ul>
-          <div class="callout">Rotector data is a safety signal from <code>rotector.com</code>. Treat it as extra context and check the details window before assuming intent.</div>
+          <div class='tag'>API</div>
         </div>
-      </section>
+        <div class='code-box'>
+          <div class='copy-row'><b>hello.na</b><button class='copy' data-copy='plugin-code'>Copy</button></div>
+          <pre><code id='plugin-code'>local plugin = Plugin.new(&quot;Hello&quot;)
 
-      <aside class="side">
-        <div class="card pad" id="discord">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>Discord</h2>
-              <p class="muted">Updates, support and plugins.</p>
-            </div>
-            <div class="tag">Server</div>
-          </div>
-          <div class="dc-wrap">
-            <div class="dc-ico"><img id="dc-ico" alt=""></div>
-            <div>
-              <div class="dc-name" id="dc-name">Loading server info...</div>
-              <div class="dc-stats">
-                <span id="dc-mem"></span>
-                <span id="dc-onl"></span>
-              </div>
-            </div>
-          </div>
-          <div class="dc-row">
-            <a class="btn primary" href="https://discord.gg/zzjYhtMGFD" target="_blank" rel="noopener noreferrer">Join Discord</a>
-            <a class="link" href="https://discord.gg/zzjYhtMGFD" target="_blank" rel="noopener noreferrer">discord.gg/zzjYhtMGFD</a>
-          </div>
-        </div>
-
-        <div class="card pad">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>Quick reference</h2>
-              <p class="muted">Common paths and files.</p>
-            </div>
-            <div class="tag">Info</div>
-          </div>
-          <ul class="mini-list">
-            <li><code>Source.lua</code> main loader</li>
-            <li><code>NA testing.lua</code> testing loader</li>
-            <li><code>Nameless-Admin/Plugins</code> .na plugins</li>
-            <li><code>Nameless-Admin/PluginsIY</code> .iy plugins</li>
-            <li><code>commands.json</code> command and patched-command data for this docs page</li>
-            <li><code>rotector.com</code> source shown for Rotector checks</li>
-          </ul>
-          <h3>Small safety note</h3>
-          <p class="muted">Be careful with remote spy, remote firing or aggressive automation commands in games with strong anti-cheat.</p>
-        </div>
-
-        <div class="card pad" id="plugins">
-          <div class="card-head">
-            <div class="card-title">
-              <h2>Plugins</h2>
-              <p class="muted">Basic <code>.na</code> examples.</p>
-            </div>
-            <div class="tag">API</div>
-          </div>
-          <h3>hello.na</h3>
-          <pre><code>local plugin = Plugin.new(&quot;Hello&quot;)
-
--- Plugin.new(&quot;Name&quot;) creates a plugin group for your commands.
--- The first name in :cmd(...) is the main command.
--- The other names are aliases.
 plugin:cmd(&quot;hello&quot;, &quot;hi&quot;)
-    -- :args(&quot;&lt;name&gt;&quot;) shows the usage hint in command lists/autofill.
     :args(&quot;&lt;name&gt;&quot;)
-    -- :info(&quot;text&quot;) is the command description.
     :info(&quot;Say hi&quot;)
-    -- :requiresArgs() makes the command require text after it.
     :requiresArgs()
-    -- :run(function(ctx, ...)) is the command code.
-    -- ctx is the plugin context.
-    -- Values after ctx are the command arguments.
     :run(function(ctx, name)
-        -- ctx:notify(text, time) sends a NA notification.
-        ctx:notify(&quot;Hello &quot; .. tostring(name))
+        ctx:notify(&quot;Hello &quot; .. tostring(name), 3)
     end)
 
 plugin:cmd(&quot;fastfly&quot;)
     :info(&quot;Starts fly at speed 50&quot;)
     :run(function(ctx)
-        -- ctx:run(&quot;command args&quot;) runs a NA command.
         ctx:run(&quot;fly 50&quot;)
-    end)
-
-plugin:cmd(&quot;torandom&quot;)
-    :info(&quot;Teleports to a random player&quot;)
-    :run(function(ctx)
-        -- You can also pass the command and args separately.
-        ctx:run(&quot;to&quot;, &quot;random&quot;)
-    end)
-
-plugin:cmd(&quot;clipagain&quot;)
-    :info(&quot;Runs noclip from a table&quot;)
-    :run(function(ctx)
-        -- Table form is also supported.
-        ctx:run({&quot;noclip&quot;})
-    end)
-
-plugin:cmd(&quot;note&quot;)
-    :args(&quot;&lt;text&gt;&quot;)
-    :info(&quot;Shows a notification&quot;)
-    :requiresArgs()
-    -- Creates a temporary plugin userbutton when the plugin loads.
-    -- Commands that require args use the normal userbutton argument prompt.
-    -- Plugin buttons are not saved to UserButtons.json.
-    :userButton({ Label = &quot;Note&quot;, SaveArgs = true })
-    :run(function(ctx, ...)
-        ctx:notify(table.concat({...}, &quot; &quot;), 3)
-    end)
-
--- Plugin UI can also create temporary buttons directly:
-PluginUI.addUserButton(&quot;Noclip&quot;, &quot;noclip&quot;) -- single click
-PluginUI.addToggleButton(&quot;Clip&quot;, &quot;noclip&quot;, &quot;clip&quot;) -- toggle on/off
-PluginUI.addUserButton({ Label = &quot;Fly&quot;, Command = &quot;fly&quot;, SaveArgs = true }) -- args prompt
--- PluginUI.removeUserButton(&quot;Fly&quot;) removes a plugin button by id, label or command
-
-plugin:cmd(&quot;panelon&quot;)
-    :info(&quot;Creates a button when the command runs&quot;)
-    :buttonOnRun({
-        Id = &quot;panel-toggle&quot;,
-        Label = &quot;Panel&quot;,
-        Command = &quot;panelon&quot;,
-        Command2 = &quot;paneloff&quot;,
-        MobileOnly = true
-    })
-    :run(function(ctx)
-        if ctx.IsOnMobile then
-            ctx:notify(&quot;Panel button ready&quot;, 2)
-        end
-    end)
-
-plugin:cmd(&quot;paneloff&quot;)
-    :info(&quot;Removes the button created by panelon&quot;)
-    :removeButtonOnRun(&quot;panel-toggle&quot;)
-    :run(function(ctx)
-        ctx:notify(&quot;Panel button removed&quot;, 2)
-    end)
-
-plugin:cmd(&quot;makenotebutton&quot;)
-    :info(&quot;Creates the Note button when this command is run&quot;)
-    :run(function(ctx)
-        ctx:addUserButton({
-            Label = &quot;Note&quot;,
-            Command = &quot;note&quot;,
-            SaveArgs = true
-        })
-    end)
-
--- Other useful calls:
--- plugin:cmd(&quot;main&quot;, &quot;alias1&quot;, &quot;alias2&quot;)
---     :args(&quot;&lt;text&gt;&quot;)
---     :info(&quot;Description shown in command help&quot;)
---     :requiresArgs()
---     :run(function(ctx, text)
---         ctx:notify(text, 3)
---     end)
-
--- ctx values you can use inside :run(...):
--- ctx:notify(&quot;message&quot;, 3)
--- ctx:run(&quot;fly 50&quot;)
--- ctx:run(&quot;to&quot;, &quot;random&quot;)
--- ctx:run({&quot;noclip&quot;})
--- ctx:addUserButton({ Label = &quot;Fly&quot;, Command = &quot;fly&quot;, SaveArgs = true })
--- ctx:removeUserButton(&quot;Fly&quot;)
--- ctx.IsOnMobile / ctx.IsOnPC / ctx.IsMobile / ctx.IsPC
--- IsOnMobile / IsOnPC / IsMobile / IsPC
--- NA_GRAB_BODY
--- getRoot(character), getChar(), getHum(character)
--- ctx.Services.Players
--- ctx.LocalPlayer
--- ctx.UI
--- ctx.File
--- ctx.Path</code></pre>
-          <p class="muted">Put plugin files in the right folder, then reload the loader.</p>
-          <ul id="plugin-list" class="mini-list"></ul>
+    end)</code></pre>
         </div>
+      </div>
+
+      <aside class='card pad'>
+        <div class='card-head'>
+          <div>
+            <h2>Plugin folders</h2>
+            <p>Put files in the right place, reload, done.</p>
+          </div>
+          <div class='tag'>Paths</div>
+        </div>
+        <ul class='list'>
+          <li><code>Nameless-Admin/Plugins</code><br>.na plugins</li>
+          <li><code>Nameless-Admin/PluginsIY</code><br>.iy plugins</li>
+          <li><code>ctx:notify(text, time)</code><br>send a Nameless Admin notification</li>
+          <li><code>ctx:run(command)</code><br>run another Nameless Admin command</li>
+        </ul>
       </aside>
-    </div>
-
-    <section id="commands" class="section-wide">
-      <div class="card pad">
-        <div class="card-head">
-          <div class="card-title">
-            <h2>Commands</h2>
-            <p class="muted">Loaded from <code>commands.json</code>.</p>
-          </div>
-          <div class="tag">Core</div>
-        </div>
-        <div class="toolbar">
-          <label class="search" for="cmd-search">
-            <input id="cmd-search" type="search" placeholder="Search commands" autocomplete="off">
-          </label>
-          <div class="count-pill" id="cmd-visible">Loading commands...</div>
-        </div>
-        <div id="commands-container"></div>
-      </div>
     </section>
 
-    <section id="patched" class="section-wide">
-      <div class="card pad">
-        <div class="card-head">
-          <div class="card-title">
-            <h2>Patched commands</h2>
-            <p class="muted">Fixes and overrides loaded from <code>commands.json</code>.</p>
-          </div>
-          <div class="tag">Patched</div>
+    <section class='section card pad' id='commands'>
+      <div class='card-head'>
+        <div>
+          <h2>Commands</h2>
+          <p>Loaded live from the Nameless Admin repository.</p>
         </div>
-        <div id="patched-container"></div>
+        <div class='tag'>Core</div>
       </div>
+      <div class='searchbar'>
+        <input id='cmd-search' type='search' placeholder='Search commands, aliases, usage...'>
+        <div class='count' id='cmd-count'>Loading...</div>
+      </div>
+      <div id='cmds' class='cmd-grid'></div>
     </section>
+
+    <section class='section card pad' id='patched'>
+      <div class='card-head'>
+        <div>
+          <h2>Patched commands</h2>
+          <p>Overrides and fixes from <code>commands.json</code>.</p>
+        </div>
+        <div class='tag'>Patched</div>
+      </div>
+      <div id='patched-list' class='cmd-grid'></div>
+    </section>
+
+    <div class='footer'>Nameless Admin Docs · made for quick lookup</div>
   </main>
 
   <script>
-    (async function () {
-      const copyText = text => {
+    (function () {
+      const commandsURL = 'https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json';
+      const invite = 'zzjYhtMGFD';
+      const hidden = new Set(['rotectoresp', 'unrotectoresp']);
+      let allCards = [];
+
+      const $ = id => document.getElementById(id);
+      const esc = value => String(value == null ? '' : value).replace(/[&<>'`]/g, ch => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '\'': '&#39;',
+        '`': '&#96;'
+      }[ch]));
+
+      const copyText = async text => {
         if (navigator.clipboard && window.isSecureContext) {
-          return navigator.clipboard.writeText(text);
+          await navigator.clipboard.writeText(text);
+          return;
         }
 
-        const area = document.createElement("textarea");
+        const area = document.createElement('textarea');
         area.value = text;
-        area.setAttribute("readonly", "");
-        area.style.position = "fixed";
-        area.style.top = "-9999px";
-        area.style.opacity = "0";
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.top = '-9999px';
+        area.style.opacity = '0';
         document.body.appendChild(area);
         area.select();
-
-        const ok = document.execCommand("copy");
+        document.execCommand('copy');
         document.body.removeChild(area);
-
-        return ok ? Promise.resolve() : Promise.reject(new Error("Copy failed"));
       };
 
-      document.querySelectorAll("[data-copy-target]").forEach(btn => {
-        btn.addEventListener("click", async () => {
-          const target = document.getElementById(btn.dataset.copyTarget);
-          const text = target ? target.textContent.trim() : "";
-          const original = btn.textContent;
-
+      document.querySelectorAll('[data-copy]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const target = $(btn.dataset.copy);
+          const text = target ? target.textContent.trim() : '';
+          const old = btn.textContent;
           if (!text) return;
 
           try {
             await copyText(text);
-            btn.textContent = "Copied";
-            btn.dataset.copied = "true";
+            btn.textContent = 'Copied';
+            btn.dataset.copied = 'true';
           } catch (e) {
-            btn.textContent = "Failed";
+            btn.textContent = 'Failed';
           }
 
-          window.setTimeout(() => {
-            btn.textContent = original;
+          setTimeout(() => {
+            btn.textContent = old;
             delete btn.dataset.copied;
           }, 1200);
         });
       });
 
-      const INV = "zzjYhtMGFD";
-      const INV_URL = "https://discord.com/api/v9/invites/" + encodeURIComponent(INV) + "?with_counts=true&with_expiration=true";
-
-      const setTxt = (id, v) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = v || "";
-      };
-      const setImg = (id, src) => {
-        const el = document.getElementById(id);
-        if (el) el.src = src;
+      const validCommand = cmd => {
+        const aliases = Array.isArray(cmd && cmd.aliases) ? cmd.aliases : [];
+        return ![cmd && cmd.name, ...aliases].some(v => hidden.has(String(v || '').trim().toLowerCase()));
       };
 
-      try {
-        const r = await fetch(INV_URL, { mode: "cors" });
-        if (r.ok) {
-          const j = await r.json();
-          const g = j.guild || null;
-          const name = g && g.name ? g.name : "Discord Server";
-          const mem = typeof j.approximate_member_count === "number" ? j.approximate_member_count : null;
-          const onl = typeof j.approximate_presence_count === "number" ? j.approximate_presence_count : null;
+      const makeCommand = cmd => {
+        const aliases = Array.isArray(cmd.aliases) ? cmd.aliases.filter(Boolean) : [];
+        const name = cmd.name || aliases[0] || 'command';
+        const usage = cmd.usage || (cmd.args ? name + ' ' + cmd.args : name);
+        const desc = cmd.desc || cmd.description || 'No description.';
+        const card = document.createElement('article');
+        card.className = 'cmd';
+        card.dataset.search = [name, usage, desc, ...aliases].join(' ').toLowerCase();
 
-          setTxt("dc-name", name);
-          setTxt("dc-mem", mem != null ? mem.toLocaleString() + " members" : "");
-          setTxt("dc-onl", onl != null ? onl.toLocaleString() + " online" : "");
+        const chips = aliases.slice(0, 8).map(v => `<span>${esc(v)}</span>`).join('');
+        const more = aliases.length > 8 ? `<span>+${aliases.length - 8}</span>` : '';
 
-          if (g && g.id && g.icon) {
-            setImg("dc-ico", "https://cdn.discordapp.com/icons/" + g.id + "/" + g.icon + ".png?size=96");
-          } else {
-            setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
-          }
-        } else {
-          setTxt("dc-name", "Join the Discord server");
-          setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
-        }
-      } catch (e) {
-        setTxt("dc-name", "Join the Discord server");
-        setImg("dc-ico", "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAimages/NAnew.png");
-      }
+        card.innerHTML = `
+          <div class='cmd-top'>
+            <h3>${esc(name)}</h3>
+            <span class='tag'>cmd</span>
+          </div>
+          <p>${esc(desc)}</p>
+          <code class='usage'>${esc(usage)}</code>
+          <div class='chips'>${chips}${more}</div>
+        `;
 
-      const commandsURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json";
-      try {
-        const resp = await fetch(commandsURL);
-        const data = await resp.json();
-        const hiddenCommands = new Set(["rotectoresp", "unrotectoresp"]);
-        const skipCmd = cmd => {
-          const aliases = cmd && Array.isArray(cmd.aliases) ? cmd.aliases : [];
-          return [cmd && cmd.name, ...aliases].some(v => hiddenCommands.has(String(v || "").trim().toLowerCase()));
-        };
-        const commands = (Array.isArray(data.commands) ? data.commands : []).filter(cmd => !skipCmd(cmd));
-        const patched = (Array.isArray(data.patched_commands) ? data.patched_commands : []).filter(cmd => !skipCmd(cmd));
-        const container = document.getElementById("commands-container");
-        const search = document.getElementById("cmd-search");
-        const visible = document.getElementById("cmd-visible");
-        setTxt("cmd-count", String(commands.length));
-
-        if (commands.length && container) {
-          const labels = ["Command", "Aliases", "Arguments", "Description"];
-          const wrap = document.createElement("div");
-          wrap.className = "table-wrap";
-          const table = document.createElement("table");
-          const thead = document.createElement("thead");
-          const headRow = document.createElement("tr");
-
-          labels.forEach(label => {
-            const th = document.createElement("th");
-            th.textContent = label;
-            headRow.appendChild(th);
-          });
-
-          thead.appendChild(headRow);
-          table.appendChild(thead);
-
-          const tbody = document.createElement("tbody");
-          const sorted = [...commands].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-          const rows = [];
-
-          sorted.forEach(cmd => {
-            const tr = document.createElement("tr");
-            const name = cmd.name || "";
-            const aliases = cmd.aliases && cmd.aliases.length ? cmd.aliases.join(", ") : "";
-            const args = cmd.args || "";
-            const desc = cmd.desc || "";
-            tr.dataset.search = [name, aliases, args, desc].join(" ").toLowerCase();
-
-            const vals = [name, aliases, args, desc];
-            vals.forEach((val, i) => {
-              const td = document.createElement("td");
-              td.dataset.label = labels[i];
-              if (i === 0 || i === 1) {
-                if (val) {
-                  const c = document.createElement("code");
-                  c.textContent = val;
-                  td.appendChild(c);
-                }
-              } else {
-                td.textContent = val;
-              }
-              tr.appendChild(td);
-            });
-
-            rows.push(tr);
-            tbody.appendChild(tr);
-          });
-
-          table.appendChild(tbody);
-          wrap.appendChild(table);
-          container.appendChild(wrap);
-
-          const updateCount = () => {
-            const q = (search && search.value ? search.value : "").trim().toLowerCase();
-            const terms = q.split(/\s+/).filter(Boolean);
-            let shown = 0;
-
-            rows.forEach(row => {
-              const ok = !terms.length || terms.every(term => row.dataset.search.includes(term));
-              row.classList.toggle("is-hidden", !ok);
-              row.style.display = ok ? "" : "none";
-              row.setAttribute("aria-hidden", ok ? "false" : "true");
-              if (ok) shown += 1;
-            });
-
-            if (visible) visible.textContent = shown.toLocaleString() + " shown";
-          };
-
-          if (search) search.addEventListener("input", updateCount, { passive: true });
-          updateCount();
-        } else if (visible) {
-          visible.textContent = "No commands found";
-        }
-
-        const patchedContainer = document.getElementById("patched-container");
-        if (patchedContainer) {
-          if (patched.length) {
-            const ul = document.createElement("ul");
-            ul.className = "patch-list";
-            patched.forEach(cmd => {
-              const li = document.createElement("li");
-              const c = document.createElement("code");
-              c.textContent = cmd.name || "";
-              li.appendChild(c);
-              li.appendChild(document.createTextNode((cmd.desc ? ": " + cmd.desc : "")));
-              ul.appendChild(li);
-            });
-            patchedContainer.appendChild(ul);
-          } else {
-            const p = document.createElement("p");
-            p.className = "empty";
-            p.textContent = "No patched commands.";
-            patchedContainer.appendChild(p);
-          }
-        }
-      } catch (e) {
-        console.error("Unable to load commands.json", e);
-        setTxt("cmd-visible", "Unable to load commands");
-      }
-
-      const pluginDownloadOverrides = {
-        "hello.na": `local plugin = Plugin.new("Hello")
-
--- Plugin.new("Name") creates a plugin group for your commands.
--- The first name in :cmd(...) is the main command.
--- The other names are aliases.
-plugin:cmd("hello", "hi")
-    -- :args("<name>") shows the usage hint in command lists/autofill.
-    :args("<name>")
-    -- :info("text") is the command description.
-    :info("Say hi")
-    -- :requiresArgs() makes the command require text after it.
-    :requiresArgs()
-    -- :run(function(ctx, ...)) is the command code.
-    -- ctx is the plugin context.
-    -- Values after ctx are the command arguments.
-    :run(function(ctx, name)
-        -- ctx:notify(text, time) sends a NA notification.
-        ctx:notify("Hello " .. tostring(name))
-    end)
-
-plugin:cmd("fastfly")
-    :info("Starts fly at speed 50")
-    :run(function(ctx)
-        -- ctx:run("command args") runs a NA command.
-        ctx:run("fly 50")
-    end)
-
-plugin:cmd("torandom")
-    :info("Teleports to a random player")
-    :run(function(ctx)
-        -- You can also pass the command and args separately.
-        ctx:run("to", "random")
-    end)
-
-plugin:cmd("clipagain")
-    :info("Runs noclip from a table")
-    :run(function(ctx)
-        -- Table form is also supported.
-        ctx:run({"noclip"})
-    end)
-
-plugin:cmd("note")
-    :args("<text>")
-    :info("Shows a notification")
-    :requiresArgs()
-    -- Creates a temporary plugin userbutton when the plugin loads.
-    -- Commands that require args use the normal userbutton argument prompt.
-    -- Plugin buttons are not saved to UserButtons.json.
-    :userButton({ Label = "Note", SaveArgs = true })
-    :run(function(ctx, ...)
-        ctx:notify(table.concat({...}, " "), 3)
-    end)
-
--- Plugin UI can also create temporary buttons directly:
-PluginUI.addUserButton("Noclip", "noclip") -- single click
-PluginUI.addToggleButton("Clip", "noclip", "clip") -- toggle on/off
-PluginUI.addUserButton({ Label = "Fly", Command = "fly", SaveArgs = true }) -- args prompt
--- PluginUI.removeUserButton("Fly") removes a plugin button by id, label or command
-
-plugin:cmd("panelon")
-    :info("Creates a button when the command runs")
-    :buttonOnRun({
-        Id = "panel-toggle",
-        Label = "Panel",
-        Command = "panelon",
-        Command2 = "paneloff",
-        MobileOnly = true
-    })
-    :run(function(ctx)
-        if ctx.IsOnMobile then
-            ctx:notify("Panel button ready", 2)
-        end
-    end)
-
-plugin:cmd("paneloff")
-    :info("Removes the button created by panelon")
-    :removeButtonOnRun("panel-toggle")
-    :run(function(ctx)
-        ctx:notify("Panel button removed", 2)
-    end)
-
-plugin:cmd("makenotebutton")
-    :info("Creates the Note button when this command is run")
-    :run(function(ctx)
-        ctx:addUserButton({
-            Label = "Note",
-            Command = "note",
-            SaveArgs = true
-        })
-    end)
-
--- Other useful calls:
--- plugin:cmd("main", "alias1", "alias2")
---     :args("<text>")
---     :info("Description shown in command help")
---     :requiresArgs()
---     :run(function(ctx, text)
---         ctx:notify(text, 3)
---     end)
-
--- ctx values you can use inside :run(...):
--- ctx:notify("message", 3)
--- ctx:run("fly 50")
--- ctx:run("to", "random")
--- ctx:run({"noclip"})
--- ctx:addUserButton({ Label = "Fly", Command = "fly", SaveArgs = true })
--- ctx:removeUserButton("Fly")
--- ctx.IsOnMobile / ctx.IsOnPC / ctx.IsMobile / ctx.IsPC
--- IsOnMobile / IsOnPC / IsMobile / IsPC
--- NA_GRAB_BODY
--- getRoot(character), getChar(), getHum(character)
--- ctx.Services.Players
--- ctx.LocalPlayer
--- ctx.UI
--- ctx.File
--- ctx.Path`
+        return card;
       };
 
-      const makePluginDownload = (listElem, name, content) => {
-        if (!listElem || !name || typeof content !== "string") return;
-        const blob = new Blob([content], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = url;
-        a.textContent = name;
-        a.download = name;
-        a.className = "link";
-        li.appendChild(a);
-        listElem.appendChild(li);
+      const renderCommands = (items, target, emptyText) => {
+        const box = $(target);
+        box.innerHTML = '';
+
+        if (!items.length) {
+          box.innerHTML = `<div class='empty'>${esc(emptyText)}</div>`;
+          return [];
+        }
+
+        const frag = document.createDocumentFragment();
+        const cards = items.map(makeCommand);
+        cards.forEach(card => frag.appendChild(card));
+        box.appendChild(frag);
+        return cards;
       };
 
-      try {
-        const res = await fetch("https://api.github.com/repos/ltseverydayyou/Nameless-Admin/contents/NAplugins");
-        if (res.ok) {
-          const files = await res.json();
-          const listElem = document.getElementById("plugin-list");
-          const addedPlugins = new Set();
-          for (const file of files) {
-            if (file.type === "file" && (file.name.endsWith(".na") || file.name.endsWith(".iy"))) {
-              try {
-                const override = pluginDownloadOverrides[file.name];
-                let content = override;
-                if (typeof content !== "string") {
-                  const fileResp = await fetch(file.download_url);
-                  content = await fileResp.text();
-                }
-                makePluginDownload(listElem, file.name, content);
-                addedPlugins.add(file.name);
-              } catch (err) {
-                console.error("Error downloading plugin", file.name, err);
-              }
-            }
-          }
-          if (listElem && !addedPlugins.has("hello.na")) {
-            makePluginDownload(listElem, "hello.na", pluginDownloadOverrides["hello.na"]);
-          }
+      const applySearch = () => {
+        const q = ($('cmd-search').value || '').trim().toLowerCase();
+        let visible = 0;
+
+        allCards.forEach(card => {
+          const ok = !q || card.dataset.search.includes(q);
+          card.hidden = !ok;
+          if (ok) visible++;
+        });
+
+        $('cmd-count').textContent = `${visible} shown`;
+      };
+
+      const loadCommands = async () => {
+        const count = $('cmd-count');
+        try {
+          const res = await fetch(commandsURL, { cache: 'no-store' });
+          const data = await res.json();
+          const commands = (Array.isArray(data.commands) ? data.commands : []).filter(validCommand);
+          const patched = (Array.isArray(data.patched_commands) ? data.patched_commands : []).filter(validCommand);
+
+          allCards = renderCommands(commands, 'cmds', 'No commands found.');
+          renderCommands(patched, 'patched-list', 'No patched commands listed.');
+
+          $('stat-cmds').textContent = String(commands.length);
+          count.textContent = `${commands.length} shown`;
+          $('cmd-search').addEventListener('input', applySearch);
+        } catch (e) {
+          $('stat-cmds').textContent = '0';
+          count.textContent = 'Failed';
+          $('cmds').innerHTML = `<div class='empty'>Failed to load commands.json.</div>`;
+          $('patched-list').innerHTML = `<div class='empty'>Patched commands unavailable.</div>`;
         }
-      } catch (e) {
-        console.error("Unable to load plugin list", e);
-        const listElem = document.getElementById("plugin-list");
-        makePluginDownload(listElem, "hello.na", pluginDownloadOverrides["hello.na"]);
-      }
+      };
+
+      const loadDiscord = async () => {
+        try {
+          const url = `https://discord.com/api/v9/invites/${encodeURIComponent(invite)}?with_counts=true&with_expiration=true`;
+          const res = await fetch(url, { mode: 'cors' });
+          if (!res.ok) return;
+
+          const data = await res.json();
+          const guild = data.guild || null;
+          if (guild && guild.name) $('dc-name').textContent = guild.name;
+
+          if (typeof data.approximate_member_count === 'number') {
+            $('dc-members').textContent = `${data.approximate_member_count.toLocaleString()} members`;
+          }
+
+          if (typeof data.approximate_presence_count === 'number') {
+            $('dc-online').textContent = `· ${data.approximate_presence_count.toLocaleString()} online`;
+          }
+
+          if (guild && guild.id && guild.icon) {
+            $('dc-icon').src = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128`;
+          }
+        } catch (e) {}
+      };
+
+      loadCommands();
+      loadDiscord();
     })();
   </script>
 </body>
-
 </html>
