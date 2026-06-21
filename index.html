@@ -595,7 +595,7 @@
       <aside class='card pad hero-side'>
         <div class='mini-stat'>
           <strong id='stat-cmds'>...</strong>
-          <span>commands loaded from commands.json</span>
+          <span>commands Nameless Admin has</span>
         </div>
         <a class='quick-link' href='#plugins'><span><b>Plugins</b><br>.na and .iy folder support</span><span>→</span></a>
         <a class='quick-link' href='#discord'><span><b>Community</b><br>updates and support</span><span>→</span></a>
@@ -634,7 +634,7 @@
         <ul class='list'>
           <li>Default prefix is <code>;</code>.</li>
           <li>Plugins go inside <code>Nameless-Admin/Plugins</code> or <code>Nameless-Admin/PluginsIY</code>.</li>
-          <li>Commands are pulled from <code>commands.json</code>.</li>
+          <li>The command list shows what Nameless Admin currently has.</li>
           <li>Use the search box below to filter commands quickly.</li>
         </ul>
       </aside>
@@ -732,7 +732,7 @@
 
     <section class='section card pad' id='commands'>
       <div class='card-head'>
-        <div><h2>Commands</h2><p>Loaded live from the Nameless Admin repository.</p></div>
+        <div><h2>Commands</h2><p>The commands Nameless Admin has.</p></div>
         <div class='tag'>Core</div>
       </div>
       <div class='searchbar'>
@@ -744,7 +744,7 @@
 
     <section class='section card pad' id='patched'>
       <div class='card-head'>
-        <div><h2>Patched commands</h2><p>Overrides and fixes from <code>commands.json</code>.</p></div>
+        <div><h2>Patched commands</h2><p>Command overrides and fixes Nameless Admin includes.</p></div>
         <div class='tag'>Patched</div>
       </div>
       <div id='patched-list' class='cmd-grid'></div>
@@ -876,7 +876,7 @@
         } catch (e) {
           $('stat-cmds').textContent = '0';
           count.textContent = 'Failed';
-          $('cmds').innerHTML = `<div class='empty'>Failed to load commands.json.</div>`;
+          $('cmds').innerHTML = `<div class='empty'>Failed to load commands.</div>`;
           $('patched-list').innerHTML = `<div class='empty'>Patched commands unavailable.</div>`;
         }
       };
