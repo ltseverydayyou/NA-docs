@@ -186,6 +186,33 @@
       transform: translateY(-1px);
     }
 
+    .nav a.nav-support {
+      color: #050505;
+      background: linear-gradient(135deg, #00b9fe, #ffffff);
+      border-color: rgba(255,255,255,.62);
+      box-shadow: 0 10px 28px rgba(0,185,254,.24);
+      font-weight: 850;
+    }
+
+    .nav a.nav-support:hover {
+      color: #050505;
+      background: linear-gradient(135deg, #2ac8ff, #ffffff);
+      border-color: rgba(255,255,255,.88);
+    }
+
+    .btn.support-btn {
+      color: #050505;
+      background: linear-gradient(135deg, #00b9fe, #ffffff);
+      border-color: rgba(255,255,255,.6);
+      box-shadow: 0 14px 34px rgba(0,185,254,.22);
+    }
+
+    .btn.support-btn:hover {
+      color: #050505;
+      background: linear-gradient(135deg, #2ac8ff, #ffffff);
+      border-color: rgba(255,255,255,.88);
+    }
+
     .page {
       position: relative;
       z-index: 1;
@@ -225,7 +252,8 @@
     }
 
     .hero-side, .loader-grid, .feature-grid, .workflow-grid, .api-grid { display: grid; gap: 12px; }
-    .loader-grid, .workflow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .loader-grid { grid-template-columns: 1fr; }
+    .workflow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .api-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -307,6 +335,7 @@
     .mini-stat strong { display: block; margin-bottom: 4px; font-size: 28px; letter-spacing: -.04em; }
     .mini-stat span, .quick-link span, .tile p { color: var(--muted); font-size: 13px; line-height: 1.4; }
     .tile p { margin-bottom: 0; }
+    .loader-grid .tile { padding: 16px; }
 
     .quick-link {
       display: flex;
@@ -572,6 +601,7 @@
         <a href='#plugins'>Plugins</a>
         <a href='#commands'>Commands</a>
         <a href='#patched'>Patched</a>
+        <a class='nav-support' href='https://ko-fi.com/ltseverydayyou' target='_blank' rel='noopener noreferrer'>Support</a>
         <a href='#discord'>Discord</a>
       </nav>
     </div>
@@ -582,11 +612,12 @@
       <div class='card pad hero-main'>
         <div>
           <div class='eyebrow'>Roblox admin utility</div>
-          <h1>Fast docs for Nameless Admin.</h1>
-          <p class='lead'>Load the script, find commands, check plugin examples, and copy the useful stuff without digging through walls of text.</p>
+          <h1>Docs for Nameless Admin.</h1>
+          <p class='lead'>Load the script, find commands, check plugin examples, and copy useful stuff without digging through walls of text.</p>
         </div>
         <div class='actions'>
           <a class='btn primary' href='#loaders'>Get loader</a>
+          <a class='btn support-btn' href='https://ko-fi.com/ltseverydayyou' target='_blank' rel='noopener noreferrer'>Support Nameless Admin</a>
           <a class='btn' href='#commands'>Browse commands</a>
           <a class='btn' href='https://github.com/ltseverydayyou/Nameless-Admin'>GitHub</a>
         </div>
@@ -601,6 +632,7 @@
         <a class='quick-link' href='#discord'><span><b>Community</b><br>updates and support</span><span>→</span></a>
       </aside>
     </section>
+
 
     <section class='section section-grid' id='loaders'>
       <div class='card pad'>
