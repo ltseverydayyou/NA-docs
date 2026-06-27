@@ -1197,6 +1197,18 @@ plugin:cmd(&quot;makenotebutton&quot;)
         return cards;
       };
 
+      const uniqueCommandCount = (...groups) => {
+        const names = new Set();
+        groups.forEach(items => {
+          items.forEach(cmd => {
+            const aliases = Array.isArray(cmd.aliases) ? cmd.aliases : [];
+            const name = String(cmd.name || aliases[0] || '').trim().toLowerCase();
+            if (name) names.add(name);
+          });
+        });
+        return names.size;
+      };
+
       const applySearch = () => {
         const q = ($('cmd-search').value || '').trim().toLowerCase();
         let visible = 0;
@@ -1217,7 +1229,7 @@ plugin:cmd(&quot;makenotebutton&quot;)
           const patched = (Array.isArray(data.patched_commands) ? data.patched_commands : []).filter(validCommand);
           allCards = renderCommands(commands, 'cmds', 'No commands found.');
           renderCommands(patched, 'patched-list', 'No patched commands listed.');
-          $('stat-cmds').textContent = String(commands.length);
+          $('stat-cmds').textContent = String(uniqueCommandCount(commands, patched));
           count.textContent = `${commands.length} shown`;
           $('cmd-search').addEventListener('input', applySearch);
         } catch (e) {
