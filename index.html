@@ -870,7 +870,7 @@
       <div class='card-head'>
         <div>
           <h2>Plugins</h2>
-          <p>Full native .na plugin example using the current Plugin API.</p>
+          <p>Full native .na plugin example, including opt-in base command alias overrides.</p>
         </div>
         <div class='tag'>Luau</div>
       </div>
@@ -891,6 +891,20 @@ plugin:cmd(&quot;hello&quot;, &quot;hi&quot;)
     :run(function(ctx, name)
         ctx:notify(&quot;Hello &quot; .. tostring(name), 3)
     end)
+
+-- OverrideAliases is opt-in. Use it only when this plugin intentionally
+-- needs to take a base NA alias that already exists.
+-- Without it, the conflict is remapped to plugin:&lt;alias&gt;.
+-- Another plugin alias or a saved user alias is not replaced.
+-- The original base alias returns when the plugin is disabled, unloaded, or reloaded.
+--
+-- plugin:cmd(&quot;fly&quot;, &quot;customfly&quot;)
+--     :OverrideAliases()
+--     :args(&quot;[speed]&quot;)
+--     :info(&quot;Custom replacement for the base fly command&quot;)
+--     :run(function(ctx, speed)
+--         ctx:notify(&quot;Custom fly speed: &quot; .. tostring(speed or &quot;default&quot;), 3)
+--     end)
 
 plugin:cmd(&quot;fastfly&quot;)
     :info(&quot;Starts fly at speed 50&quot;)
@@ -978,6 +992,36 @@ plugin:cmd(&quot;makenotebutton&quot;)
         <div class='tile'><h3>IY folder</h3><p><code>Nameless-Admin/PluginsIY</code><br>.iy plugins stay in the Infinite Yield style folder.</p></div>
         <div class='tile'><h3>Buttons</h3><p>Plugins can create temporary user buttons, toggle buttons and command-run buttons.</p></div>
         <div class='tile'><h3>Context</h3><p><code>ctx</code> gives helpers for notifications, command calls, UI, file paths and local player data.</p></div>
+        <div class='tile'><h3>Native alias override</h3><p>Add <code>:OverrideAliases()</code> after <code>plugin:cmd(...)</code> to claim conflicting base NA aliases. Without it, conflicts are renamed to <code>plugin:&lt;alias&gt;</code>.</p></div>
+        <div class='tile'><h3>Table / IY override</h3><p>Table and Infinite Yield-style commands use <code>OverrideAliases = true</code>. Plugin-owned aliases and saved user aliases remain protected.</p></div>
+        <div class='tile'><h3>Automatic restoration</h3><p>Overridden base aliases are restored when the plugin is disabled, unloaded, removed, or reloaded.</p></div>
+      </div>
+
+      <div class='code-box' style='margin-top:12px'>
+        <div class='copy-row'><b>OverrideAliases forms</b><button class='copy' data-copy='override-alias-code'>Copy</button></div>
+        <pre><code id='override-alias-code' class='luau'>-- Native .na builder form
+plugin:cmd(&quot;fly&quot;, &quot;customfly&quot;)
+    :OverrideAliases()
+    :info(&quot;Custom replacement for the base fly command&quot;)
+    :run(function(ctx, speed)
+        ctx:notify(&quot;Custom fly speed: &quot; .. tostring(speed or &quot;default&quot;), 3)
+    end)
+
+-- Table / Infinite Yield-style command form
+return {
+    PluginName = &quot;Override Example&quot;,
+    Commands = {
+        fly = {
+            ListName = &quot;fly&quot;,
+            Aliases = {&quot;customfly&quot;},
+            OverrideAliases = true,
+            Description = &quot;Custom replacement for the base fly command&quot;,
+            Function = function(args, speaker)
+                print(&quot;Custom fly speed:&quot;, args[1] or &quot;default&quot;)
+            end
+        }
+    }
+}</code></pre>
       </div>
     </section>
 
