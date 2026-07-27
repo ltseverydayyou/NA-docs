@@ -663,7 +663,7 @@
           <li>Plugins go inside <code>Nameless-Admin/Plugins</code> or <code>Nameless-Admin/PluginsIY</code>.</li>
           <li>The command list shows what Nameless Admin currently has.</li>
           <li>Use the search box below to filter commands quickly.</li>
-          <li>Player selectors work anywhere a command accepts <code>&lt;player&gt;</code>, like <code>hitbox nonteam 8</code>, <code>view random</code>, or <code>to %red</code>.</li>
+          <li>Player selectors work anywhere a command accepts <code>&lt;player&gt;</code>, like <code>fling nearest</code>, <code>view alive+closest</code>, <code>hitbox all-me 8</code>, or <code>to %red</code>.</li>
         </ul>
       </aside>
     </section>
@@ -675,7 +675,7 @@
       </div>
       <div class='feature-grid'>
         <div class='tile'><h3>Commands</h3><p>Admin command workflow with aliases, arguments, patched commands and quick search.</p></div>
-        <div class='tile'><h3>Players</h3><p>Player selectors like random, others, team/nonteam targets, radius filters, team prefix matching, and cursor targeting.</p></div>
+        <div class='tile'><h3>Players</h3><p>Player selectors support aliases, exact UserId/name/display targeting, unions, include/exclude filters, teams, radius checks, cursor targeting, and persistent loop targets.</p></div>
         <div class='tile'><h3>Plugins</h3><p>Native .na plugins and Infinite Yield-style .iy plugin folder support.</p></div>
         <div class='tile'><h3>UI tools</h3><p>Command bar, settings, notifications, user buttons and mobile-aware controls.</p></div>
         <div class='tile'><h3>Integrations</h3><p>Webhook helpers, teleport scripts, server info copying and Bloxstrap RPC text.</p></div>
@@ -720,7 +720,7 @@
       <div class='card-head'>
         <div>
           <h2>Player selectors</h2>
-          <p>Use these anywhere a command accepts a player argument. Examples: <code>hitbox nonteam 8</code>, <code>view random</code>, <code>bring %red</code>, <code>tp rad50</code>.</p>
+          <p>Use these anywhere a command accepts a player argument. Examples: <code>fling nearest</code>, <code>view alive+closest</code>, <code>hitbox all-me 8</code>, <code>bring %red</code>, and <code>tp userid:123456</code>.</p>
         </div>
         <div class='tag'>Targets</div>
       </div>
@@ -728,19 +728,19 @@
       <div class='cmd-grid'>
         <article class='cmd'>
           <div class='cmd-top'><h3>Basic</h3><span class='tag'>selectors</span></div>
-          <p>Common direct target groups.</p>
-          <code class='usage'>all · others · me · random · nearest · farthest</code>
+          <p>Common direct target groups and their aliases.</p>
+          <code class='usage'>all · everyone · * · others · other · me · self · random · nearest · closest · farthest · furthest</code>
           <div class='chips'>
-            <span>all = every player</span><span>others = everyone except you</span><span>random = one random other player</span><span>nearest/farthest = distance from you</span>
+            <span>all/everyone/* = every player</span><span>others/other = everyone except you</span><span>me/self = your player</span><span>random = one random other player</span><span>nearest/closest = closest player</span><span>farthest/furthest = most distant player</span>
           </div>
         </article>
 
         <article class='cmd'>
           <div class='cmd-top'><h3>Team-aware</h3><span class='tag'>teams</span></div>
-          <p>Team selectors now handle games where players have no team.</p>
-          <code class='usage'>team · allies · ally · nonteam · nonteams · noteam · noteams · notteam · enemies · enemy</code>
+          <p>Target teammates or players outside your team. Neutral/no-team players are treated as nonteam.</p>
+          <code class='usage'>team · teammate · teammates · allies · ally · nonteam · nonteams · noteam · noteams · notteam · enemies · enemy</code>
           <div class='chips'>
-            <span>team/allies = same team</span><span>nonteam/enemies = outside your team</span><span>no-team fallback = all other players</span>
+            <span>team/teammates/allies = same team</span><span>nonteam/enemies = outside your team</span><span>local player is excluded from team groups</span><span>neutral players count as nonteam</span>
           </div>
         </article>
 
@@ -756,18 +756,18 @@
         <article class='cmd'>
           <div class='cmd-top'><h3>State filters</h3><span class='tag'>status</span></div>
           <p>Target by character state, rig type, or basic avatar checks.</p>
-          <code class='usage'>alive · dead · seated · stood · r6 · r15 · invisible · bacon · slenders · short</code>
+          <code class='usage'>alive · dead · seated · sat · stood · standing · r6 · r15 · invisible · bacon · slenders · short</code>
           <div class='chips'>
-            <span>alive/dead = humanoid health</span><span>seated/stood = Humanoid.Sit</span><span>r6/r15 = rig type</span>
+            <span>alive/dead = humanoid health</span><span>seated/sat = sitting</span><span>stood/standing = not sitting</span><span>r6/r15 = rig type</span>
           </div>
         </article>
 
         <article class='cmd'>
           <div class='cmd-top'><h3>Social / safety</h3><span class='tag'>filters</span></div>
           <p>Target friends, non-friends, or users surfaced by Rotector lookups.</p>
-          <code class='usage'>friends · nonfriends · flagged</code>
+          <code class='usage'>friends · friend · nonfriends · nonfriend · flagged</code>
           <div class='chips'>
-            <span>friends = Roblox friends</span><span>nonfriends = not friends</span><span>flagged = Rotector surfaced records</span>
+            <span>friends/friend = Roblox friends</span><span>nonfriends/nonfriend = not friends</span><span>flagged = Rotector surfaced records</span>
           </div>
         </article>
 
@@ -776,25 +776,53 @@
           <p>Selectors that carry a number or query inside the argument.</p>
           <code class='usage'>#3 · 3 · age30 · group123456 · rad50 · cursor</code>
           <div class='chips'>
-            <span>#N / N = random amount</span><span>ageN = account age at or below N days</span><span>groupID = group members</span><span>radN = radius around you</span><span>cursor = player under mouse</span>
+            <span>#N / N = N random players</span><span>ageN = account age at or below N days</span><span>groupID = group members</span><span>radN = players within N studs</span><span>cursor = player under your mouse</span>
           </div>
         </article>
 
         <article class='cmd'>
           <div class='cmd-top'><h3>NPC selectors</h3><span class='tag'>npc</span></div>
-          <p>Use NPC selectors for supported NPC-aware commands.</p>
-          <code class='usage'>npc · npcs</code>
+          <p>Use NPC selectors for supported NPC-aware commands. A selector may be placed after <code>npc:</code>, <code>npcs:</code>, or inside brackets.</p>
+          <code class='usage'>npc · npcs · npc:nearest · npc:[alive] · npcs:rad50 · npc:[nearest,farthest]</code>
           <div class='chips'>
-            <span>NPC model resolution</span><span>works with NPC-specific commands</span>
+            <span>NPC names and humanoid display names use prefix matching</span><span>random/nearest/farthest</span><span>alive/dead/seated/stood</span><span>#N and radN</span><span>comma or | joins NPC results</span>
           </div>
         </article>
 
         <article class='cmd'>
           <div class='cmd-top'><h3>Name matching</h3><span class='tag'>players</span></div>
-          <p>Plain text still matches usernames or display names by prefix.</p>
-          <code class='usage'>ghost · aerv · displaynameprefix</code>
+          <p>Plain text matches usernames or display names by prefix. Prefixing the query with <code>@</code> restricts it to usernames.</p>
+          <code class='usage'>ghost · displaynameprefix · @usernameprefix</code>
           <div class='chips'>
-            <span>Username prefix</span><span>DisplayName prefix</span><span>case-insensitive</span>
+            <span>plain text = username or DisplayName prefix</span><span>@name = username prefix only</span><span>case-insensitive</span>
+          </div>
+        </article>
+
+
+        <article class='cmd'>
+          <div class='cmd-top'><h3>Explicit player fields</h3><span class='tag'>exact</span></div>
+          <p>Choose which player field is searched instead of relying on normal username/display-name matching.</p>
+          <code class='usage'>userid:&lt;id&gt; · id:&lt;id&gt; · username:&lt;prefix&gt; · name:&lt;prefix&gt; · display:&lt;prefix&gt;</code>
+          <div class='chips'>
+            <span>userid/id = exact numeric UserId</span><span>username/name = username prefix only</span><span>display = DisplayName prefix only</span><span>use UserId when names may change</span>
+          </div>
+        </article>
+
+        <article class='cmd'>
+          <div class='cmd-top'><h3>Combine and filter</h3><span class='tag'>syntax</span></div>
+          <p>Join separate result groups with a comma or pipe. Within one group, use <code>+</code> to narrow the current results and <code>-</code> to remove matches.</p>
+          <code class='usage'>nearest,farthest · nearest|farthest · alive+nearest · all-me · others-dead · team+rad50</code>
+          <div class='chips'>
+            <span>comma / | = union of result groups</span><span>+ = intersect/narrow</span><span>- = exclude</span><span>operations run from left to right</span><span>duplicates are removed</span>
+          </div>
+        </article>
+
+        <article class='cmd'>
+          <div class='cmd-top'><h3>Persistent loop targets</h3><span class='tag'>rejoin</span></div>
+          <p>Long-running target commands resolve the selector first, then remember each matched player by UserId.</p>
+          <code class='usage'>loopfling nearest · bang random · glue username:player</code>
+          <div class='chips'>
+            <span>dynamic selector chooses the initial target</span><span>leaving pauses that target</span><span>rejoining reacquires the new Player instance</span><span>does not switch to a new nearest/random player</span>
           </div>
         </article>
       </div>
