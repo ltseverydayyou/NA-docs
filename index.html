@@ -599,6 +599,7 @@
         <a href='#features'>Features</a>
         <a href='#workflow'>Use</a>
         <a href='#selectors'>Selectors</a>
+        <a href='#plugin-maker'>Maker</a>
         <a href='#plugins'>Plugins</a>
         <a href='#commands'>Commands</a>
         <a href='#patched'>Patched</a>
@@ -614,7 +615,7 @@
         <div>
           <div class='eyebrow'>Roblox admin utility</div>
           <h1>Docs for Nameless Admin.</h1>
-          <p class='lead'>Load the script, find commands, check plugin examples, and copy useful stuff without digging through walls of text.</p>
+          <p class='lead'>Load the script, find commands, build .na/.iy plugins with Plugin Maker, check manual plugin examples, and copy useful stuff without digging through walls of text.</p>
         </div>
         <div class='actions'>
           <a class='btn primary' href='#loaders'>Get loader</a>
@@ -629,7 +630,7 @@
           <strong id='stat-cmds'>...</strong>
           <span>commands Nameless Admin has</span>
         </div>
-        <a class='quick-link' href='#plugins'><span><b>Plugins</b><br>.na and .iy folder support</span><span>→</span></a>
+        <a class='quick-link' href='#plugin-maker'><span><b>Plugin Maker</b><br>build .na/.iy plugins in NA</span><span>→</span></a>
         <a class='quick-link' href='#discord'><span><b>Community</b><br>updates and support</span><span>→</span></a>
       </aside>
     </section>
@@ -660,6 +661,7 @@
         </div>
         <ul class='list'>
           <li>Default prefix is <code>;</code>.</li>
+          <li>Run <code>pluginmaker</code> to build, preview, save, install, or edit plugins without starting from raw code.</li>
           <li>Plugins go inside <code>Nameless-Admin/Plugins</code> or <code>Nameless-Admin/PluginsIY</code>.</li>
           <li>The command list shows what Nameless Admin currently has.</li>
           <li>Use the search box below to filter commands quickly.</li>
@@ -676,7 +678,7 @@
       <div class='feature-grid'>
         <div class='tile'><h3>Commands</h3><p>Admin command workflow with aliases, arguments, patched commands and quick search.</p></div>
         <div class='tile'><h3>Players</h3><p>Player selectors support aliases, exact UserId/name/display targeting, unions, include/exclude filters, teams, radius checks, cursor targeting, and persistent loop targets.</p></div>
-        <div class='tile'><h3>Plugins</h3><p>Native .na plugins and Infinite Yield-style .iy plugin folder support.</p></div>
+        <div class='tile'><h3>Plugins</h3><p>Native .na and Infinite Yield-style .iy support, plus a built-in Plugin Maker with visual actions, code editors, ServiceResolver service selection, preview and installation.</p></div>
         <div class='tile'><h3>UI tools</h3><p>Command bar, settings, notifications, user buttons and mobile-aware controls.</p></div>
         <div class='tile'><h3>Integrations</h3><p>Webhook helpers, teleport scripts, server info copying and Bloxstrap RPC text.</p></div>
         <div class='tile'><h3>Rotector</h3><p>Optional user safety checks with flagged-player details when enabled.</p></div>
@@ -693,7 +695,7 @@
           <div class='tile'><h3>1. Execute</h3><p>Run the main loader from your executor.</p></div>
           <div class='tile'><h3>2. Open command bar</h3><p>Press the prefix key. Default is <code>;</code>.</p></div>
           <div class='tile'><h3>3. Run command</h3><p>Try <code>fly 3</code>, <code>noclip</code> or <code>view random</code>.</p></div>
-          <div class='tile'><h3>4. Add plugins</h3><p>Drop plugin files in the right folder and reload plugins.</p></div>
+          <div class='tile'><h3>4. Add plugins</h3><p>Run <code>pluginmaker</code> to build one visually, or drop an existing .na/.iy file in the right plugin folder and reload it.</p></div>
         </div>
       </div>
 
@@ -891,20 +893,121 @@
         <div class='tile'><h3>Command automation</h3><p><code>loop</code>, <code>unloop</code>, <code>repeat</code>, <code>propertychanged</code>, and <code>unpropertychanged</code> can rerun commands or react to instance changes.</p></div>
         <div class='tile'><h3>Custom aliases/buttons</h3><p><code>addalias</code>, <code>removealias</code>, <code>clearaliases</code>, <code>addbutton</code>, and <code>removebutton</code> let users make shortcuts and mobile buttons.</p></div>
         <div class='tile'><h3>Command UI helpers</h3><p><code>cmdbar2</code> opens the HD Admin-style command bar. The docs still pull <code>commands.json</code> for searchable command cards.</p></div>
+        <div class='tile'><h3>Plugin Maker</h3><p><code>pluginmaker</code> / <code>makeplugin</code> opens the visual .na/.iy builder with actions, custom code, ServiceResolver services, preview and install support.</p></div>
       </div>
+    </section>
+
+    <section class='section card pad' id='plugin-maker'>
+      <div class='card-head'>
+        <div>
+          <h2>Plugin Maker</h2>
+          <p>Build native <code>.na</code> or Infinite Yield-style <code>.iy</code> plugins inside Nameless Admin. The builder is aimed at users who do not want to write the entire plugin by hand, but it still exposes raw startup and command code when needed.</p>
+        </div>
+        <div class='tag'>Builder</div>
+      </div>
+
+      <div class='cmd-grid'>
+        <article class='cmd'>
+          <div class='cmd-top'><h3>Open it</h3><span class='tag'>command</span></div>
+          <p>The command opens the resizable Plugin Maker window.</p>
+          <code class='usage'>pluginmaker</code>
+          <div class='chips'>
+            <span>makeplugin</span><span>pluginbuilder</span><span>plugmaker</span><span>pmaker</span>
+          </div>
+        </article>
+
+        <article class='cmd'>
+          <div class='cmd-top'><h3>Output format</h3><span class='tag'>.na / .iy</span></div>
+          <p>Switch the top-right format button between native NA and Infinite Yield-style output.</p>
+          <code class='usage'>.NA ⇄ .IY</code>
+          <div class='chips'>
+            <span>.na → Nameless-Admin/Plugins</span><span>.iy → Nameless-Admin/PluginsIY</span>
+          </div>
+        </article>
+      </div>
+
+      <div class='api-grid' style='margin-top:12px'>
+        <div class='tile'><h3>Multiple commands</h3><p>Add, duplicate, remove and select commands. Each command can have aliases, an argument hint, description, <code>Requires Args</code>, <code>Override Alias</code>, and an optional user button.</p></div>
+        <div class='tile'><h3>Visual actions</h3><p>Stack actions in order without writing the command body yourself. Actions can be moved up/down or removed.</p></div>
+        <div class='tile'><h3>Startup + command code</h3><p><b>Plugin Startup Code</b> runs when the generated plugin loads. <b>Command Code</b> runs inside the selected command after its visual actions.</p></div>
+        <div class='tile'><h3>Service picker</h3><p>Select only the Roblox services the plugin needs. The picker is searchable, supports Common / All / Clear presets and custom service names, and generated service locals resolve through NA's <code>ServiceResolver</code>.</p></div>
+        <div class='tile'><h3>Preview + compile check</h3><p>Preview the complete generated source or copy it before saving. Save operations compile-check the generated Lua/Luau without executing the generated plugin first.</p></div>
+        <div class='tile'><h3>Save + install</h3><p>Save to the executor workspace or write directly to the correct NA plugin folder and reload plugins. Existing filenames prompt for overwrite, copy, backup-and-replace, or cancel.</p></div>
+        <div class='tile'><h3>Edit existing plugins</h3><p>The <code>Edit</code> button lists installed <code>.na</code>/<code>.iy</code> files with search. Existing raw source can be edited, compile-checked, written back and reloaded.</p></div>
+        <div class='tile'><h3>Plugins shortcut</h3><p>The <code>Plugins</code> button opens NA's normal plugin manager so enabled state, reloads and file management stay in the main plugin system.</p></div>
+      </div>
+
+      <div class='code-box' style='margin-top:12px'>
+        <div class='copy-row'><b>Visual action types</b></div>
+        <pre><code>Notify
+Run NA Command
+Load URL / loadstring
+Wait
+Print
+Copy Text
+Run Command - Mobile Only
+Run Command - PC Only
+Notify - Mobile Only
+Notify - PC Only
+Add User Button
+Remove User Button
+Stop Command
+Custom Lua</code></pre>
+      </div>
+
+      <div class='api-grid' style='margin-top:12px'>
+        <div class='tile'>
+          <h3>Action placeholders</h3>
+          <p>Text/command actions can insert command arguments and player/session values without manual string concatenation.</p>
+          <code class='usage'>{1} · {2} · {args} · {user} · {display} · {placeid} · {jobid}</code>
+        </div>
+        <div class='tile'>
+          <h3>User buttons</h3>
+          <p>Commands can create a plugin user button and choose whether the button remembers typed arguments. Actions can also add or remove buttons at runtime.</p>
+        </div>
+      </div>
+
+      <div class='code-box' style='margin-top:12px'>
+        <div class='copy-row'><b>Load a script URL</b><button class='copy' data-copy='plugin-maker-url-code'>Copy</button></div>
+        <pre><code id='plugin-maker-url-code' class='luau'>loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/username/repository/main/script.lua&quot;))()</code></pre>
+      </div>
+
+      <div class='code-box' style='margin-top:12px'>
+        <div class='copy-row'><b>ServiceResolver-backed custom code</b><button class='copy' data-copy='plugin-maker-service-code'>Copy</button></div>
+        <pre><code id='plugin-maker-service-code' class='luau'>-- Select Players, Workspace and TweenService in the Services picker.
+-- Plugin Maker creates these locals through NA's ServiceResolver:
+print(LocalPlayer and LocalPlayer.Name)
+print(Workspace)
+print(TweenService)
+
+-- Lazy access is also available:
+local HttpService = Services.HttpService
+
+-- Native .na command code can access the resolver/context directly:
+local PlayersRaw = ctx.ServiceResolver.gs(&quot;Players&quot;)
+local PlayersResolved = ctx.ServiceResolver.cs(&quot;Players&quot;)
+local PlayersFromContext = ctx.Services.Players</code></pre>
+      </div>
+
+      <ul class='list' style='margin-top:12px'>
+        <li><b>Service selection:</b> the builder combines a large built-in service catalog with services found under the current DataModel and custom names you enter. A listed service can still resolve to <code>nil</code> when it is unavailable in the current client/context.</li>
+        <li><b>Generated locals:</b> only selected services become named locals such as <code>Players</code> or <code>TweenService</code>. Selecting <code>Players</code> also generates <code>LocalPlayer</code>.</li>
+        <li><b>Low-code does not mean locked down:</b> visual actions and raw startup/command code can be mixed in the same generated plugin.</li>
+        <li><b>IY output:</b> the builder emits an Infinite Yield-style command table and creates a small compatibility <code>ctx</code> for its generated/custom command code.</li>
+      </ul>
     </section>
 
     <section class='section card pad' id='plugins'>
       <div class='card-head'>
         <div>
           <h2>Plugins</h2>
-          <p>Full native .na plugin example, including opt-in base command alias overrides.</p>
+          <p>Manual native .na plugin API reference. If you do not want to write the file from scratch, use the <a href='#plugin-maker'>Plugin Maker</a> above.</p>
         </div>
         <div class='tag'>Luau</div>
       </div>
       <div class='code-box'>
         <div class='copy-row'><b>full-example.na</b><button class='copy' data-copy='plugin-code'>Copy</button></div>
-        <pre><code id='plugin-code' class='luau'>local plugin = Plugin.new(&quot;Example&quot;)
+        <pre><code id='plugin-code' class='luau'>local plugin = Plugin.new(&quot;Example&quot;, &quot;Manual plugin example&quot;)
 
 plugin:cmd(&quot;hello&quot;, &quot;hi&quot;)
     -- :args(text) shows the usage hint in command lists and autofill.
@@ -1010,6 +1113,8 @@ plugin:cmd(&quot;makenotebutton&quot;)
 -- NA_GRAB_BODY
 -- getRoot(character), getChar(), getHum(character)
 -- ctx.Services.Players
+-- ctx.ServiceResolver.cs(&quot;Players&quot;) -- resolved/cloneref service
+-- ctx.ServiceResolver.gs(&quot;Players&quot;) -- raw service
 -- ctx.LocalPlayer
 -- ctx.UI
 -- ctx.File
@@ -1019,7 +1124,9 @@ plugin:cmd(&quot;makenotebutton&quot;)
         <div class='tile'><h3>Native folder</h3><p><code>Nameless-Admin/Plugins</code><br>.na plugins use <code>Plugin.new(...)</code>.</p></div>
         <div class='tile'><h3>IY folder</h3><p><code>Nameless-Admin/PluginsIY</code><br>.iy plugins stay in the Infinite Yield style folder.</p></div>
         <div class='tile'><h3>Buttons</h3><p>Plugins can create temporary user buttons, toggle buttons and command-run buttons.</p></div>
-        <div class='tile'><h3>Context</h3><p><code>ctx</code> gives helpers for notifications, command calls, UI, file paths and local player data.</p></div>
+        <div class='tile'><h3>Context</h3><p><code>ctx</code> gives helpers for notifications, command calls, user buttons, UI/file data, device flags, <code>LocalPlayer</code>, <code>Services</code> and <code>ServiceResolver</code>.</p></div>
+        <div class='tile'><h3>ServiceResolver</h3><p>Plugin service access is routed through NA's resolver. Use <code>ctx.Services.Name</code>, <code>ctx.ServiceResolver.cs(name)</code> for the resolved/cloneref service, or <code>ctx.ServiceResolver.gs(name)</code> for the raw service.</p></div>
+        <div class='tile'><h3>Plugin Maker</h3><p>Run <code>pluginmaker</code> for the built-in visual/low-code builder, service picker, source preview, installation and existing-plugin editor.</p></div>
         <div class='tile'><h3>Native alias override</h3><p>Add <code>:OverrideAliases()</code> after <code>plugin:cmd(...)</code> to claim conflicting base NA aliases. Without it, conflicts are renamed to <code>plugin:&lt;alias&gt;</code>.</p></div>
         <div class='tile'><h3>Table / IY override</h3><p>Table and Infinite Yield-style commands use <code>OverrideAliases = true</code>. Plugin-owned aliases and saved user aliases remain protected.</p></div>
         <div class='tile'><h3>Automatic restoration</h3><p>Overridden base aliases are restored when the plugin is disabled, unloaded, removed, or reloaded.</p></div>
@@ -1084,6 +1191,7 @@ return {
       let allCards = [];
 
       const localExtraCommands = [
+        { name: 'pluginmaker', aliases: ['pluginmaker', 'makeplugin', 'pluginbuilder', 'plugmaker', 'pmaker'], usage: 'pluginmaker (makeplugin, pluginbuilder, plugmaker, pmaker)', args: '', desc: 'Open the built-in no-code/low-code .na/.iy Plugin Maker.' },
         { name: 'espall', aliases: ['espall', 'allesp', 'espallplayers'], usage: 'espall (allesp)', args: '', desc: 'ESP all players and clear team filtering.' },
         { name: 'espenemies', aliases: ['espenemies', 'espenemy', 'espnonteam', 'espnonteams', 'espnoteam', 'espnoteams', 'enemyesp', 'enemiesesp', 'nonteamesp', 'noteamesp'], usage: 'espenemies (espnonteam, espnoteam)', args: '', desc: 'ESP players outside your team; no-team games fall back to all others.' },
         { name: 'espallies', aliases: ['espallies', 'espally', 'espteammates', 'espteamates', 'allyesp', 'alliesesp', 'teammateesp'], usage: 'espallies (espteammates)', args: '', desc: 'ESP players on your current team.' },
