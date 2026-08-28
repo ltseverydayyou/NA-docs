@@ -1363,7 +1363,6 @@ body.na-show-top .na-back-top { opacity:1; pointer-events:auto; transform:transl
         <div class='tile'><h3>Plugins</h3><p>Native .na and Infinite Yield-style .iy support, plus a built-in Plugin Maker with visual actions, code editors, ServiceResolver service selection, preview and installation.</p></div>
         <div class='tile'><h3>UI tools</h3><p>Command bar, settings, notifications, user buttons and mobile-aware controls.</p></div>
         <div class='tile'><h3>Integrations</h3><p>Webhook helpers, teleport scripts, server info copying and Bloxstrap RPC text.</p></div>
-        <div class='tile'><h3>Rotector</h3><p>Optional user safety checks with flagged-player details when enabled.</p></div>
       </div>
     </section>
 
@@ -1447,11 +1446,11 @@ body.na-show-top .na-back-top { opacity:1; pointer-events:auto; transform:transl
         </article>
 
         <article class='cmd'>
-          <div class='cmd-top'><h3>Social / safety</h3><span class='tag'>filters</span></div>
-          <p>Target friends, non-friends, or users surfaced by Rotector lookups.</p>
-          <code class='usage'>friends · friend · nonfriends · nonfriend · flagged</code>
+          <div class='cmd-top'><h3>Social</h3><span class='tag'>filters</span></div>
+          <p>Target friends or non-friends.</p>
+          <code class='usage'>friends · friend · nonfriends · nonfriend</code>
           <div class='chips'>
-            <span>friends/friend = Roblox friends</span><span>nonfriends/nonfriend = not friends</span><span>flagged = Rotector surfaced records</span>
+            <span>friends/friend = Roblox friends</span><span>nonfriends/nonfriend = not friends</span>
           </div>
         </article>
 
@@ -1869,7 +1868,6 @@ return {
     (function () {
       const cmdURL = 'https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/commands.json';
       const invite = 'zzjYhtMGFD';
-      const hidden = new Set(['rotectoresp', 'unrotectoresp']);
       let allCards = [];
 
       const localExtraCommands = [
@@ -2017,11 +2015,6 @@ return {
         });
       });
 
-      const validCommand = cmd => {
-        const aliases = Array.isArray(cmd && cmd.aliases) ? cmd.aliases : [];
-        return ![cmd && cmd.name, ...aliases].some(v => hidden.has(String(v || '').trim().toLowerCase()));
-      };
-
       const makeCommand = cmd => {
         const aliases = Array.isArray(cmd.aliases) ? cmd.aliases.filter(Boolean) : [];
         const name = cmd.name || aliases[0] || 'command';
@@ -2087,8 +2080,8 @@ return {
         try {
           const res = await fetch(cmdURL, { cache: 'no-store' });
           const data = await res.json();
-          const commands = mergeCommandDocs((Array.isArray(data.commands) ? data.commands : []), localExtraCommands).filter(validCommand);
-          const patched = (Array.isArray(data.patched_commands) ? data.patched_commands : []).filter(validCommand);
+          const commands = mergeCommandDocs((Array.isArray(data.commands) ? data.commands : []), localExtraCommands);
+          const patched = Array.isArray(data.patched_commands) ? data.patched_commands : [];
           allCards = renderCommands(commands, 'cmds', 'No commands found.');
           renderCommands(patched, 'patched-list', 'No patched commands listed.');
           $('stat-cmds').textContent = String(uniqueCommandCount(commands, patched));
