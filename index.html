@@ -1013,6 +1013,20 @@
     }
   </style>
 
+
+  <style id='na-command-render-fix'>
+    #commands,
+    #patched,
+    #cmds,
+    #patched-list,
+    #commands .cmd,
+    #patched .cmd {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+      animation: none !important;
+    }
+  </style>
 </head>
 <body>
   <header class='topbar'>
@@ -1907,7 +1921,7 @@ return {
         revealNodes.push(node);
       };
 
-      document.querySelectorAll('.section, .footer').forEach((node, index) => addReveal(node, index));
+      document.querySelectorAll('.section:not(#commands):not(#patched), .footer').forEach((node, index) => addReveal(node, index));
 
       const showAll = () => revealNodes.forEach(node => node.classList.add('is-visible'));
 
@@ -1965,25 +1979,6 @@ return {
       window.addEventListener('resize', scheduleScrollUi);
       window.addEventListener('load', scheduleScrollUi, { once: true });
 
-      const decorateCommandCards = () => {
-        const cards = Array.from(document.querySelectorAll('#cmds .cmd, #patched-list .cmd'));
-        cards.forEach((card, index) => {
-          if (card.classList.contains('na-card-reveal')) return;
-          card.classList.add('na-card-reveal');
-          card.style.setProperty('--na-card-delay', (Math.min(index % 12, 11) * 24) + 'ms');
-          if (reduceMotion) {
-            card.classList.add('is-visible');
-          } else {
-            window.requestAnimationFrame(() => card.classList.add('is-visible'));
-          }
-        });
-      };
-
-      const commandObserver = new MutationObserver(decorateCommandCards);
-      const commandLists = [document.getElementById('cmds'), document.getElementById('patched-list')].filter(Boolean);
-      commandLists.forEach(list => commandObserver.observe(list, { childList: true }));
-
-      decorateCommandCards();
       updateScrollUi();
       syncActiveNav();
     })();
