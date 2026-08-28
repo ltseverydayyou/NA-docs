@@ -681,6 +681,7 @@
     }
 
     .nav a {
+      position: relative;
       min-height: 38px;
       border-radius: 999px;
       transition:
@@ -1959,6 +1960,10 @@ return {
           window.setTimeout(syncActiveNav, reduceMotion ? 0 : 260);
         });
       });
+
+      window.addEventListener('scroll', scheduleScrollUi, { passive: true });
+      window.addEventListener('resize', scheduleScrollUi);
+      window.addEventListener('load', scheduleScrollUi, { once: true });
 
       const decorateCommandCards = () => {
         const cards = Array.from(document.querySelectorAll('#cmds .cmd, #patched-list .cmd'));
