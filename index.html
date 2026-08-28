@@ -1232,6 +1232,39 @@ body.na-show-top .na-back-top { opacity:1; pointer-events:auto; transform:transl
 }
 </style>
 
+
+<style id="na-docs-bugfixes">
+:root {
+  --kw:#c586ff;
+  --fn:#7dd3fc;
+  --method:#fde68a;
+  --str:#fca5a5;
+  --var:#93c5fd;
+  --num:#a7f3d0;
+  --prop:#f9a8d4;
+  --com:#6b7280;
+  --pun:#d4d4d8;
+}
+.luau .kw { color:#c586ff !important; font-weight:700; }
+.luau .fn { color:#7dd3fc !important; }
+.luau .method { color:#fde68a !important; }
+.luau .str { color:#fca5a5 !important; }
+.luau .var { color:#93c5fd !important; }
+.luau .num { color:#a7f3d0 !important; }
+.luau .prop { color:#f9a8d4 !important; }
+.luau .com { color:#6b7280 !important; font-style:italic; }
+.luau .pun,.luau .op { color:#d4d4d8 !important; }
+#commands.na-hard-reveal,
+#patched.na-hard-reveal,
+#commands .na-hard-reveal,
+#patched .na-hard-reveal {
+  opacity:1 !important;
+  transform:none !important;
+  filter:none !important;
+  transition:none !important;
+}
+</style>
+
 </head>
 <body>
   <header class='topbar'>
@@ -2223,7 +2256,7 @@ return {
 
   const revealPage = () => {
     const nodes = [];
-    all(".hero-main,.hero-side > *, .section.card,.footer").forEach(node => {
+    all(".hero-main,.hero-side > *, .section.card:not(#commands):not(#patched),.footer").forEach(node => {
       if (!nodes.includes(node)) nodes.push(node);
     });
     nodes.forEach(reveal);
