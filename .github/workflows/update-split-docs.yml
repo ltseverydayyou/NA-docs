@@ -1,0 +1,110 @@
+name: One-shot NA split docs update
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update split runtime documentation
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+          
+          def replace_once(old, new, label):
+              global text
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: expected exactly 1 match, got {count}")
+              text = text.replace(old, new, 1)
+          
+          replace_once(
+              "<a href='#loaders'>Load</a>\n        <a href='#features'>Features</a>",
+              "<a href='#loaders'>Load</a>\n        <a href='#split-runtime'>Split/cache</a>\n        <a href='#features'>Features</a>",
+              "nav"
+          )
+          
+          replace_once(
+              "Load the script, find commands, build .na/.iy plugins with Plugin Maker, check manual plugin examples, and copy useful stuff without digging through walls of text.",
+              "Load the script, understand the split/offline cache, find commands, build .na/.iy plugins with Plugin Maker, check manual plugin examples, and copy useful stuff without digging through walls of text.",
+              "hero"
+          )
+          
+          replace_once(
+              "<a class='quick-link' href='#plugin-maker'><span><b>Plugin Maker</b><br>build .na/.iy plugins in NA</span><span>→</span></a>",
+              "<a class='quick-link' href='#split-runtime'><span><b>Split runtime</b><br>chunk + loader cache and offline fallback</span><span>→</span></a>\n        <a class='quick-link' href='#plugin-maker'><span><b>Plugin Maker</b><br>build .na/.iy plugins in NA</span><span>→</span></a>",
+              "hero split quick-link"
+          )
+          
+          start = text.find("    <section class='section section-grid' id='loaders'>")
+          end = text.find("    <section class='section card pad' id='features'>", start)
+          if start < 0 or end < 0:
+              raise SystemExit("could not locate loader/features boundary")
+          replacement = "    <section class='section section-grid' id='loaders'>\n      <div class='card pad'>\n        <div class='card-head'>\n          <div><h2>Loaders</h2><p>These launchers prefer GitHub, save a validated local loader, and fall back to that copy when GitHub cannot be reached.</p></div>\n          <div class='tag'>Luau</div>\n        </div>\n        <div class='loader-grid'>\n          <div class='tile code-box'>\n            <div class='copy-row'><b>Main · resilient</b><button class='copy' data-copy='main-code'>Copy</button></div>\n            <pre><code id='main-code' class='luau'>local url = &quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua&quot;\nlocal cache = &quot;NA-split/Source.lua&quot;\nlocal ok, source = pcall(game.HttpGet, game, url)\nlocal chunk, compileError\n\nif ok and type(source) == &quot;string&quot; and source ~= &quot;&quot; then\n    chunk, compileError = loadstring(source)\n    if chunk and type(writefile) == &quot;function&quot; then\n        if type(makefolder) == &quot;function&quot; then pcall(makefolder, &quot;NA-split&quot;) end\n        pcall(writefile, cache, source)\n    end\nend\n\nif not chunk and type(readfile) == &quot;function&quot; then\n    local readOk, cached = pcall(readfile, cache)\n    if readOk and type(cached) == &quot;string&quot; and cached ~= &quot;&quot; then\n        chunk, compileError = loadstring(cached)\n    end\nend\n\nassert(chunk, compileError or &quot;Nameless Admin loader unavailable and no local cache exists&quot;)\nchunk()</code></pre>\n          </div>\n          <div class='tile code-box'>\n            <div class='copy-row'><b>Testing · resilient</b><button class='copy' data-copy='test-code'>Copy</button></div>\n            <pre><code id='test-code' class='luau'>local url = &quot;https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua&quot;\nlocal cache = &quot;NA-split/NA testing.lua&quot;\nlocal ok, source = pcall(game.HttpGet, game, url)\nlocal chunk, compileError\n\nif ok and type(source) == &quot;string&quot; and source ~= &quot;&quot; then\n    chunk, compileError = loadstring(source)\n    if chunk and type(writefile) == &quot;function&quot; then\n        if type(makefolder) == &quot;function&quot; then pcall(makefolder, &quot;NA-split&quot;) end\n        pcall(writefile, cache, source)\n    end\nend\n\nif not chunk and type(readfile) == &quot;function&quot; then\n    local readOk, cached = pcall(readfile, cache)\n    if readOk and type(cached) == &quot;string&quot; and cached ~= &quot;&quot; then\n        chunk, compileError = loadstring(cached)\n    end\nend\n\nassert(chunk, compileError or &quot;Nameless Admin testing loader unavailable and no local cache exists&quot;)\nchunk()</code></pre>\n          </div>\n        </div>\n      </div>\n\n      <aside class='card pad'>\n        <div class='card-head'>\n          <div><h2>Quick info</h2><p>Small things that matter.</p></div>\n          <div class='tag'>Basics</div>\n        </div>\n        <ul class='list'>\n          <li>Default prefix is <code>;</code>.</li>\n          <li>The first successful online run seeds the local loader and runtime-chunk cache for later offline use.</li>\n          <li>Executors need file APIs such as <code>readfile</code>/<code>writefile</code> for persistent offline caching.</li>\n          <li>Run <code>pluginmaker</code> to build, preview, save, install, or edit plugins without starting from raw code.</li>\n          <li>Plugins go inside <code>Nameless-Admin/Plugins</code> or <code>Nameless-Admin/PluginsIY</code>.</li>\n          <li>The command list shows what Nameless Admin currently has.</li>\n          <li>Use the search box below to filter commands quickly.</li>\n          <li>Player selectors work anywhere a command accepts <code>&lt;player&gt;</code>, like <code>fling nearest</code>, <code>view alive+closest</code>, <code>hitbox all-me 8</code>, or <code>to %red</code>.</li>\n        </ul>\n      </aside>\n    </section>\n\n    <section class='section card pad' id='split-runtime'>\n      <div class='card-head'>\n        <div>\n          <h2>Split runtime &amp; offline cache</h2>\n          <p>Nameless Admin no longer ships its entire runtime as one huge source unit. The small loader coordinates ordered chunks, version checks, local caching, and outage fallback.</p>\n        </div>\n        <div class='tag'>NA-split</div>\n      </div>\n\n      <div class='feature-grid'>\n        <div class='tile'>\n          <h3>Why it is split</h3>\n          <p><code>Source.lua</code> and <code>NA testing.lua</code> are small bootstraps. They compile and execute the ordered <code>part-XXX.lua</code> files independently in the same private runtime environment instead of feeding the executor one multi-megabyte source unit.</p>\n        </div>\n        <div class='tile'>\n          <h3>Chunk manifest</h3>\n          <p><code>NA-split/common/manifest.lua</code> carries the runtime build <code>version</code> and chunk <code>count</code>. On startup NA fetches the small remote manifest and compares it with the complete local cache.</p>\n        </div>\n        <div class='tile'>\n          <h3>Chunk cache</h3>\n          <p>If the remote runtime version is newer, NA downloads the required chunks, runs them, then writes the chunk files and finally the new manifest. If versions match, it loads the local chunks instead of redownloading them.</p>\n        </div>\n        <div class='tile'>\n          <h3>Loader cache</h3>\n          <p>The active bootstrap is cached too: <code>NA-split/Source.lua</code> or <code>NA-split/NA testing.lua</code>. The manifest exposes a separate <code>loader_version</code>, so loader updates do not require pointless redownloads on every run.</p>\n        </div>\n        <div class='tile'>\n          <h3>GitHub outage fallback</h3>\n          <p>The resilient launcher first tries the remote loader. If that request or compile fails, it reads the matching local loader. That cached loader can then use the already-cached manifest and runtime chunks when the remote manifest is unavailable.</p>\n        </div>\n        <div class='tile'>\n          <h3>First-run rule</h3>\n          <p>Offline fallback cannot exist before anything has been cached. A user needs one successful online run (or a manually supplied local loader + complete chunk cache) before NA can survive a GitHub outage.</p>\n        </div>\n      </div>\n\n      <div class='card-head' style='margin-top:18px'>\n        <div><h3>Workspace layout</h3><p>The normal cache lives in the executor workspace. NA also recognizes the older nested chunk-cache roots for compatibility.</p></div>\n        <div class='tag'>Files</div>\n      </div>\n      <div class='tile code-box'>\n        <pre><code>NA-split/\n├── Source.lua\n├── .Source_lua.version\n├── NA testing.lua\n├── .NA_testing_lua.version\n└── common/\n    ├── manifest.lua\n    ├── part-001.lua\n    ├── part-002.lua\n    └── ...</code></pre>\n      </div>\n\n      <div class='workflow-grid' style='margin-top:12px'>\n        <div class='tile'><h3>1. Loader</h3><p>Try GitHub. Compile-check the response. Save a usable loader locally.</p></div>\n        <div class='tile'><h3>2. Manifest</h3><p>Read any complete local cache, then check the remote manifest when available.</p></div>\n        <div class='tile'><h3>3. Runtime</h3><p>Use matching local chunks, or fetch the newer remote set when the runtime version changed.</p></div>\n        <div class='tile'><h3>4. Commit cache</h3><p>After a successful remote load, write chunk files first and the new manifest last so an interrupted update does not advertise an incomplete cache.</p></div>\n      </div>\n\n      <div class='tile' style='margin-top:12px'>\n        <h3>Recognized chunk-cache roots</h3>\n        <p><code>NA-split/common/</code>, <code>Nameless-Admin/NA-split/common/</code>, and <code>Nameless Admin/NA-split/common/</code>. The matching loader cache is stored one directory above <code>common/</code> for the selected root.</p>\n      </div>\n    </section>\n"
+          text = text[:start] + replacement + "\n" + text[end:]
+          
+          replace_once(
+              "<div class='tile'><h3>Integrations</h3><p>Webhook helpers, teleport scripts, server info copying and Bloxstrap RPC text.</p></div>",
+              "<div class='tile'><h3>Split runtime</h3><p>Versioned runtime chunks plus a persistent loader/chunk cache reduce giant compile units and provide a local fallback when GitHub is unavailable.</p></div>\n        <div class='tile'><h3>Integrations</h3><p>Webhook helpers, teleport scripts, server info copying and Bloxstrap RPC text.</p></div>",
+              "feature tile"
+          )
+          
+          checks = {
+              "split runtime section": "id='split-runtime'",
+              "main resilient cache": 'local cache = &quot;NA-split/Source.lua&quot;',
+              "testing resilient cache": 'local cache = &quot;NA-split/NA testing.lua&quot;',
+              "loader version docs": "<code>loader_version</code>",
+              "first-run docs": "First-run rule",
+          }
+          for label, needle in checks.items():
+              if needle not in text:
+                  raise SystemExit(f"validation failed: {label}")
+          
+          if text.count("id='split-runtime'") != 1:
+              raise SystemExit("validation failed: split-runtime ID count")
+          if text.count("id='main-code'") != 1 or text.count("id='test-code'") != 1:
+              raise SystemExit("validation failed: loader code ID count")
+          
+          path.write_text(text, encoding="utf-8", newline="\n")
+          PY
+
+      - name: Validate and commit
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          from collections import Counter
+          from pathlib import Path
+
+          text = Path("index.html").read_text(encoding="utf-8")
+          ids = re.findall(r"\\bid=['\"]([^'\"]+)['\"]", text)
+          duplicates = [key for key, value in Counter(ids).items() if value > 1]
+          if duplicates:
+              raise SystemExit(f"duplicate IDs: {duplicates}")
+
+          anchors = set(re.findall(r"\\bid=['\"]([^'\"]+)['\"]", text))
+          local_hrefs = re.findall(r"\\bhref=['\"]#([^'\"]+)['\"]", text)
+          missing = sorted({href for href in local_hrefs if href and href not in anchors})
+          if missing:
+              raise SystemExit(f"missing anchors: {missing}")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/update-split-docs.yml
+          git add index.html
+          git diff --cached --check
+          git commit -m "Document NA split runtime and offline loader cache"
+          git push
