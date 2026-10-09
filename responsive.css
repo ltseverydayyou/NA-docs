@@ -1,0 +1,74 @@
+/* Responsive layout layer: intentionally loaded after the historical inline themes. */
+:root { --page: 1240px; --nav-h: 74px; }
+html { scroll-padding-top: calc(var(--nav-h) + 14px); }
+body { min-width: 0; }
+.page, .topbar-inner { width: min(100%, var(--page)); }
+.page > *, .hero > *, .section-grid > *, .card > *, .tile, .cmd, .dc-card { min-width: 0; }
+.page { padding-inline: clamp(14px, 3vw, 30px); }
+.topbar-inner { min-height: var(--nav-h); padding-inline: clamp(14px, 3vw, 30px); }
+.nav { max-width: min(780px, 67vw); }
+.nav a { white-space: nowrap; }
+.nav-toggle { display: none; align-items: center; justify-content: center; gap: 9px; min-height: 44px; border: 1px solid var(--line2); background: var(--panel2); color: var(--text); border-radius: 8px; padding: 0 14px; font-size: 13px; font-weight: 750; }
+.nav-toggle svg { width: 18px; height: 18px; }
+.nav-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+pre, code, .usage { max-width: 100%; }
+pre { overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; }
+code { overflow-wrap: anywhere; }
+pre code { overflow-wrap: normal; }
+.card-head, .cmd-top { min-width: 0; }
+.card-head > *, .cmd-top > * { min-width: 0; }
+.card-head h2, .cmd h3, .tile h3 { overflow-wrap: anywhere; }
+img, iframe, video, svg { max-width: 100%; }
+.hero, .section-grid { align-items: stretch; }
+.searchbar { top: calc(var(--nav-h) + 10px); }
+@media (max-width: 1080px) {
+  .topbar-inner { grid-template-columns: minmax(0,1fr) auto; }
+  .nav-toggle { display: inline-flex; }
+  .nav { display: none; grid-column: 1 / -1; max-width: none; width: 100%; max-height: min(65dvh, 470px); overflow: auto; padding: 9px 0 6px; border-top: 1px solid var(--line); grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; scrollbar-width: thin; }
+  .topbar.nav-open .nav { display: grid; }
+  .nav a { width: 100%; justify-content: flex-start; min-height: 44px; padding-inline: 12px; }
+  .topbar { position: sticky; top: 0; }
+  .hero, .section-grid { grid-template-columns: minmax(0,1fr); }
+  .searchbar { top: calc(var(--nav-h) + 10px); }
+}
+@media (max-width: 720px) {
+  :root { --nav-h: 66px; }
+  .topbar-inner { grid-template-columns: minmax(0,1fr) auto !important; gap: 10px; padding-block: 10px !important; }
+  .brand-icon { width: 38px; height: 38px; }
+  .brand-main { font-size: 14px; }
+  .nav { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .page { padding-top: 16px; padding-inline: 12px; }
+  .hero, .section-grid, .loader-grid, .feature-grid, .workflow-grid, .api-grid, .cmd-grid { grid-template-columns: minmax(0,1fr) !important; }
+  .searchbar { grid-template-columns: minmax(0,1fr) !important; top: calc(var(--nav-h) + 8px); }
+  .count { justify-content: flex-start; white-space: normal; }
+  .pad { padding: clamp(14px,4vw,21px); }
+  .actions { display: flex; flex-wrap: wrap; }
+  .actions .btn { min-width: 0; flex: 1 1 170px; }
+  .card-head { flex-wrap: wrap; }
+  .na-toast { max-width: calc(100vw - 28px); }
+}
+@media (max-width: 380px) {
+  .nav-toggle { padding-inline: 10px; }
+  .nav-toggle .nav-toggle-label { display: none; }
+  .nav { grid-template-columns: minmax(0,1fr); }
+  .brand-sub { display: none; }
+  h1 { font-size: clamp(30px, 10vw, 39px); }
+  .actions .btn { flex-basis: 100%; }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  :root { --nav-h: 58px; }
+  .topbar { position: sticky !important; }
+  .topbar-inner { min-height: 58px; padding-block: 7px !important; }
+  .topbar.nav-open .nav { max-height: calc(100dvh - 76px); }
+  .hero { grid-template-columns: minmax(0,1fr) !important; }
+  .hero-main { min-height: 0; }
+  .searchbar { position: relative; top: auto; }
+}
+@media (hover: none), (pointer: coarse) {
+  .na-tilt, .card:hover, .tile:hover, .quick-link:hover, .cmd:hover { transform: none !important; }
+  .na-cursor-orb { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .na-hard-reveal { opacity: 1 !important; filter: none !important; transform: none !important; }
+}

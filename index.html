@@ -1265,6 +1265,7 @@ body.na-show-top .na-back-top { opacity:1; pointer-events:auto; transform:transl
 }
 </style>
 
+  <link rel='stylesheet' href='./responsive.css'>
 </head>
 <body>
   <header class='topbar'>
@@ -1276,7 +1277,8 @@ body.na-show-top .na-back-top { opacity:1; pointer-events:auto; transform:transl
           <span class='brand-sub'>Docs, commands, plugins</span>
         </span>
       </a>
-      <nav class='nav' aria-label='Page navigation'>
+      <button class='nav-toggle' type='button' aria-controls='main-nav' aria-expanded='false' aria-label='Toggle navigation'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' aria-hidden='true'><path d='M4 7h16M4 12h16M4 17h16'/></svg><span class='nav-toggle-label'>Menu</span></button>
+      <nav class='nav' id='main-nav' aria-label='Page navigation'>
         <a href='#loaders'>Load</a>
         <a href='#split-runtime'>Split/cache</a>
         <a href='#features'>Features</a>
@@ -2526,5 +2528,22 @@ return {
 })();
 </script>
 
+<script id="na-responsive-nav">
+(() => {
+  const bar = document.querySelector('.topbar');
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('main-nav');
+  if (!bar || !toggle || !nav) return;
+  const close = () => { bar.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', 'false'); };
+  toggle.addEventListener('click', () => {
+    const open = bar.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  nav.addEventListener('click', e => { if (e.target.closest('a')) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.addEventListener('pointerdown', e => { if (!bar.contains(e.target)) close(); });
+  window.matchMedia('(min-width: 1081px)').addEventListener('change', e => { if (e.matches) close(); });
+})();
+</script>
 </body>
 </html>
